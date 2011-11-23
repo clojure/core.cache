@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>core.cache</artifactId>
+  <version>0.5.0-SNAPSHOT</version>
+  <name>${artifactId}</name>
+  <description>A cache library for Clojure</description>
+  <packaging>jar</packaging>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License 1.0</name>
+      <url>http://opensource.org/licenses/eclipse-1.0.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <parent>
+    <groupId>org.clojure</groupId>
+    <artifactId>pom.contrib</artifactId>
+    <version>0.0.24</version>
+  </parent>
+
+  <developers>
+    <developer>
+      <id>fogus</id>
+      <name>Fogus</name>
+      <url>http://fogus.me</url>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>test.generative</artifactId>
+      <version>0.1.4-SNAPSHOT</version>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>http://dev.clojure.org/jira/browse/CACHE</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git://github.com/clojure/core.cache.git</connection>
+    <url>http://github.com/clojure/core.cache</url>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>sonatype-oss-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+  </repositories>
+</project>
