@@ -240,7 +240,7 @@
 
 (defn lu-cache-factory
   "Returns a pluggable LU cache with the cache and usage-table initialied to `base`."
-  [f limit base]
+  [limit base]
   {:pre [(number? limit) (< 0 limit)
          (map? base)]}
   (clojure.core.cache/seed (LUCache. {} {} limit) base))
