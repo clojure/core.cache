@@ -204,3 +204,43 @@
   (toString [_]
     (str cache \, \space lu \, \space limit)))
 
+;; Factories
+
+(defn- basic-cache-factory
+  "Returns a pluggable basic cache initialied to `base`"
+  [base]
+  {:pre [(map? base)]}
+  (BasicCache. base))
+
+(defn- fifo-cache-factory
+  "Returns a pluggable FIFO cache with the cache and FIFO queue initialied to `base` --
+   the queue is filled as the values are pulled out of `seq`. (maybe this should be
+   randomized?)"
+  [limit base]
+  {:pre [(number? limit) (< 0 limit)
+         (map? base)]}
+  (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY limit) base))
+
+(defn- lru-cache-factory
+  "Returns a pluggable LRU cache with the cache and usage-table initialied to `base` --
+   each entry is initialized with the same usage value. (maybe this should be
+   randomized?)"
+  [limit base]
+  {:pre [(number? limit) (< 0 limit)
+         (map? base)]}
+  (clojure.core.cache/seed (LRUCache. {} {} 0 limit) base))
+
+(defn- ttl-cache-factory
+  "Returns a pluggable TTL cache with the cache and expiration-table initialied to `base` --
+   each with the same time-to-live."
+  [ttl base]
+  {:pre [(number? ttl) (<= 0 ttl)
+         (map? base)]}
+  (TTLCache. base {} ttl))
+
+(defn- lu-cache-factory
+  "Returns a pluggable LU cache with the cache and usage-table initialied to `base`."
+  [f limit base]
+  {:pre [(number? limit) (< 0 limit)
+         (map? base)]}
+  (clojure.core.cache/seed (LUCache. {} {} limit) base))

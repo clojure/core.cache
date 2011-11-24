@@ -40,7 +40,7 @@
 
   <issueManagement>
     <system>jira</system>
-    <url>http://dev.clojure.org/jira/browse/CACHE</url>
+    <url>http://dev.clojure.org/jira/browse/CCACHE</url>
   </issueManagement>
 
   <scm>
