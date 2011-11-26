@@ -24,6 +24,8 @@
   (miss    [cache e ret]
    "Is meant to be called if the cache is determined to **not** contain a
    value associated with `e`")
+  (evict  [cache e]
+   "Removes an entry from the cache")
   (seed    [cache base]
    "Is used to signal that the cache should be created with a seed.
    The contract is that said cache should return an instance of its
