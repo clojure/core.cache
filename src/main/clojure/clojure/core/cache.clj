@@ -87,6 +87,8 @@
   (hit [this item] this)
   (miss [_ item result]
     (BasicCache. (assoc cache item result)))
+  (evict [_ key]
+    (BasicCache. (dissoc cache key)))
   (seed [_ base]
     (BasicCache. base))
   (-base [_] cache)
