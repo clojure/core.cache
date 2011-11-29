@@ -13,7 +13,7 @@
   (:use [clojure.test.generative])
   (:import [clojure.core.cache BasicCache FIFOCache LRUCache TTLCache LUCache]))
 
-(defspec put-in-is-get-out
+#_(defspec put-in-is-get-out
   (let [bc (BasicCache. {})]
     (fn [k v] (assoc bc k v)))
   [^keyword k ^string v]
