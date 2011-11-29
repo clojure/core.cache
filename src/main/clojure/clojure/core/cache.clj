@@ -43,8 +43,8 @@
      (valAt [this# key#]
        (lookup this# key#))
      (valAt [this# key# not-found#]
-       (if-let [res# (lookup this# key#)]
-         res#
+       (if (has? this# key#)
+         (lookup this# key#)
          not-found#))
 
      clojure.lang.IPersistentMap

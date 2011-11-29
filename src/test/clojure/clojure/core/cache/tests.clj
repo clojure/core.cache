@@ -34,7 +34,7 @@
        (get c :e) nil
        (get c :e 0) 0
        (get c :b 0) 2
-;;       (get c :f 0) nil
+       (get c :f 0) nil
        
        (get-in c [:c :e]) 4
        (get-in c '(:c :e)) 4
@@ -49,8 +49,8 @@
        (get-in c '(:c :e) 0) 4
        (get-in c [:c :x] 0) 0
        (get-in c [:b] 0) 2
-;;       (get-in c [:f] 0) nil
-;;       (get-in c [:g] 0) false
+       (get-in c [:f] 0) nil
+       (get-in c [:g] 0) false
        (get-in c [:h] 0) 0
        (get-in c [:x :y] {:y 1}) {:y 1}
        (get-in c [] 0) c
