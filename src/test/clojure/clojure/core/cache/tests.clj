@@ -22,14 +22,20 @@
        1   (:a c)
        2   (:b c)
        42  (:X c 42)
-       nil (:X c)
-       1   (get c :a)
-       2   (get c :b)
-       42  (get c :X 42)
-       nil (get c :X)))
+       nil (:X c)))
+
+(defn do-assoc [c]
+  (are [expect actual] (= expect actual)
+       1   (:a (assoc c :a 1))
+       nil (:a (assoc c :b 1))))
+
+(defn do-dissoc [c]
+  (are [expect actual] (= expect actual)
+       2   (:b (dissoc c :a))
+       nil (:a (dissoc c :a))))
 
 (defn do-getting [c]
-  (are [expect actual] (= expect actual)
+  (are [actual expect] (= expect actual)
        (get c :a) 1
        (get c :e) nil
        (get c :e 0) 0
@@ -75,8 +81,14 @@
 (def small-map {:a 1 :b 2})
 
 (deftest test-basic-cache-ilookup
+  (testing "counts"
+    (is (= 0 (count (BasicCache. {}))))
+    (is (= 1 (count (BasicCache. {:a 1})))))
   (testing "that the BasicCache can lookup via keywords"
     (do-ilookup-tests (BasicCache. small-map)))
+  (testing "assoc and dissoc for BasicCache"
+    (do-assoc (BasicCache. {}))
+    (do-dissoc (BasicCache. {:a 1 :b 2})))
   (testing "that get and cascading gets work for BasicCache"
     (do-getting (BasicCache. big-map)))
   (testing "that finding works for BasicCache"
@@ -87,6 +99,9 @@
 (deftest test-fifo-cache-ilookup
   (testing "that the FifoCache can lookup via keywords"
     (do-ilookup-tests (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
+  (testing "assoc and dissoc for FifoCache"
+    (do-assoc (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY 2))
+    #_(do-dissoc (FIFOCache. {:a 1 :b 2} clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "that get and cascading gets work for FifoCache"
     (do-getting (FIFOCache. big-map clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "that finding works for FifoCache"

@@ -35,47 +35,51 @@
 
 
 (defmacro defcache
-  [cache-name fields & specifics]
-  `(deftype ~cache-name [~@fields]
-     ~@specifics
+  [type-name fields & specifics]
+  (let [[base-field & _] fields]
+    `(deftype ~type-name [~@fields]
+       ~@specifics
      
-     clojure.lang.ILookup
-     (valAt [this# key#]
-       (lookup this# key#))
-     (valAt [this# key# not-found#]
-       (if (has? this# key#)
-         (lookup this# key#)
-         not-found#))
+       clojure.lang.ILookup
+       (valAt [this# key#]
+              (lookup this# key#))
+       (valAt [this# key# not-found#]
+              (if (has? this# key#)
+                (lookup this# key#)
+                not-found#))
 
-     clojure.lang.IPersistentMap
-     (assoc [this# k# v#]
-       (seed this#
-             (clojure.core/assoc (-base this#) k# v#)))
-     (without [this# k#]
-       (seed this#
-             (dissoc (-base this#) k#)))
+       clojure.lang.IPersistentMap
+       (assoc [this# k# v#]
+         (miss this# k# v#))
+       (without [this# k#]
+         (evict this# k#))
 
-     clojure.lang.Counted
-     (count [this#]
-       (clojure.core/count (-base this#)))
+       clojure.lang.Associative
+       (containsKey [this# k#]
+         (has? this# k#))
+       (entryAt [this# k#]
+         (when (has? this# k#)
+           (clojure.lang.MapEntry. k# (lookup this# k#))))
 
-     clojure.lang.Associative
-     (containsKey [this# k#]
-       (contains? (-base this#) k#))
-     (entryAt [this# k#]
-       (find (-base this#) k#))
+       clojure.lang.Counted
+       (count [this#]
+         (clojure.core/count ~base-field))
 
-     clojure.lang.IPersistentCollection
-     (cons [this# elem#] (cons (-base this#) elem#))
-     (empty [this#] (seed this# (empty (-base this#))))
-     (equiv [this# other#] (.equiv (-base this#) other#))
+       clojure.lang.IPersistentCollection
+       (cons [_# elem#]
+         (clojure.core/cons ~base-field elem#))
+       (empty [this#]
+         (seed this# (empty ~base-field)))
+       (equiv [_# other#]
+         (.equiv ~base-field other#))
 
-     clojure.lang.Seqable
-     (seq [this#] (seq (-base this#)))
+       clojure.lang.Seqable
+       (seq [_#]
+         (seq ~base-field))
 
-     ;; Java interfaces
-     java.lang.Iterable
-     (iterator [this#] (.iterator (-base this#)))))
+       ;; Java interfaces
+       java.lang.Iterable
+       (iterator [this#] (.iterator ~base-field)))))
 
 
 (defcache BasicCache [cache]
@@ -91,7 +95,6 @@
     (BasicCache. (dissoc cache key)))
   (seed [_ base]
     (BasicCache. base))
-  (-base [_] cache)
   Object
   (toString [_] (str cache)))
 
@@ -109,12 +112,14 @@
       (FIFOCache. (-> cache (dissoc k) (assoc item result))
                   (-> q pop (conj item))
                   limit)))
+  (evict [_ key]
+    (let [v (get cache key ::miss)]
+      nil))
   (seed [_ base]
     (FIFOCache. base
                 (into clojure.lang.PersistentQueue/EMPTY
-                      (repeat limit :free))
+                      (repeat limit ::free))
                 limit))
-  (-base [_] cache)
   Object
   (toString [_]
     (str cache \, \space (pr-str q))))
@@ -144,7 +149,6 @@
                (into {} (for [x (range (- limit) 0)] [x x]))
                0
                limit))
-  (-base [_] cache)
   Object
   (toString [_]
     (str cache \, \space lru \, \space tick \, \space limit)))
@@ -173,7 +177,6 @@
       (TTLCache. base
                  (into {} (for [x base] [(key x) now]))
                  limit)))
-  (-base [_] cache)
   Object
   (toString [_]
     (str cache \, \space ttl \, \space limit)))
@@ -203,7 +206,6 @@
     (LUCache. base
               (into {} (for [x (range (- limit) 0)] [x x]))
               limit))
-  (-base [_] cache)
   Object
   (toString [_]
     (str cache \, \space lu \, \space limit)))
