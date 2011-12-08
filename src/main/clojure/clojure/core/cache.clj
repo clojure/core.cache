@@ -29,9 +29,7 @@
   (seed    [cache base]
    "Is used to signal that the cache should be created with a seed.
    The contract is that said cache should return an instance of its
-   own type.")
-  (-base   [cache]
-   "Used to grab the underlying storage struct."))
+   own type."))
 
 
 (defmacro defcache
@@ -374,7 +372,7 @@
   (BasicCache. base))
 
 (defn fifo-cache-factory
-  "Returns a pluggable FIFO cache with the cache and FIFO queue initialied to `base` --
+  "Returns a FIFO cache with the cache and FIFO queue initialied to `base` --
    the queue is filled as the values are pulled out of `seq`. (maybe this should be
    randomized?)"
   [limit base]
@@ -383,7 +381,7 @@
   (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY limit) base))
 
 (defn lru-cache-factory
-  "Returns a pluggable LRU cache with the cache and usage-table initialied to `base` --
+  "Returns an LRU cache with the cache and usage-table initialied to `base` --
    each entry is initialized with the same usage value. (maybe this should be
    randomized?)"
   [limit base]
@@ -392,7 +390,7 @@
   (clojure.core.cache/seed (LRUCache. {} {} 0 limit) base))
 
 (defn ttl-cache-factory
-  "Returns a pluggable TTL cache with the cache and expiration-table initialied to `base` --
+  "Returns a TTL cache with the cache and expiration-table initialied to `base` --
    each with the same time-to-live."
   [ttl base]
   {:pre [(number? ttl) (<= 0 ttl)
@@ -400,8 +398,18 @@
   (TTLCache. base {} ttl))
 
 (defn lu-cache-factory
-  "Returns a pluggable LU cache with the cache and usage-table initialied to `base`."
+  "Returns an LU cache with the cache and usage-table initialied to `base`."
   [limit base]
   {:pre [(number? limit) (< 0 limit)
          (map? base)]}
   (clojure.core.cache/seed (LUCache. {} {} limit) base))
+
+(defn lirs-cache-factory
+  "Returns an LIRS cache with the S & R LRU lists set to the indicated
+   limts."
+  [s-history-limit q-history-limit base]
+  {:pre [(number? s-history-limit) (< 0 s-history-limit)
+         (number? q-history-limit) (< 0 q-history-limit)
+         (map? base)]}
+  (seed (LIRSCache. {} {} {} 0 s-history-limit q-history-limit) base))
+
