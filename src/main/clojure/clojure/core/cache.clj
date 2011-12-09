@@ -113,6 +113,10 @@
     (recur (dissoc m (first ks)) (next ks))
     m))
 
+(defn- prune-queue [q ks]
+  (into clojure.lang.PersistentQueue/EMPTY
+        (filter (complement (set ks)) q)))
+
 (defcache FIFOCache [cache q limit]
   CacheProtocol
   (lookup [_ item]
@@ -126,9 +130,13 @@
       (FIFOCache. (-> cache (dissoc k) (assoc item result))
                   (-> q pop (conj item))
                   limit)))
-  (evict [_ key]
+  (evict [this key]
     (let [v (get cache key ::miss)]
-      nil))
+      (if (= v ::miss)
+        this
+        (FIFOCache. (dissoc cache key)
+                    (prune-queue q [key])
+                    limit))))
   (seed [_ base]
     (let [{dropping :dropping
            q :queue} (describe-layout base limit)]

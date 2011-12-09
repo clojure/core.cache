@@ -101,7 +101,7 @@
     (do-ilookup-tests (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "assoc and dissoc for FifoCache"
     (do-assoc (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY 2))
-    #_(do-dissoc (FIFOCache. {:a 1 :b 2} clojure.lang.PersistentQueue/EMPTY 2)))
+    (do-dissoc (FIFOCache. {:a 1 :b 2} clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "that get and cascading gets work for FifoCache"
     (do-getting (FIFOCache. big-map clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "that finding works for FifoCache"
