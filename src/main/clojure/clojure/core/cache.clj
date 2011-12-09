@@ -161,12 +161,17 @@
                  tick+
                  limit)))
   (miss [_ item result]
-    (let [tick+ (inc tick)
-          k (apply min-key lru (keys lru))]
-      (LRUCache. (-> cache (dissoc k) (assoc item result))
-                 (-> lru (dissoc k) (assoc item tick+))
-                 tick+
-                 limit)))
+    (let [tick+ (inc tick)]
+      (if-let [ks (keys lru)]
+        (let [k (apply min-key lru ks)]
+          (LRUCache. (-> cache (dissoc k) (assoc item result))  ;; expulsion case
+                     (-> lru (dissoc k) (assoc item tick+))
+                     tick+
+                     limit))
+        (LRUCache. (assoc cache item result)  ;; no change case
+                   (assoc lru item tick+)
+                   tick+
+                   limit))))
   (seed [_ base]
     (LRUCache. base
                (into {} (for [x (range (- limit) 0)] [x x]))

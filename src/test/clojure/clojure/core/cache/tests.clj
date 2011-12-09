@@ -111,7 +111,10 @@
 
 (deftest test-lru-cache-ilookup
   (testing "that the LRUCache can lookup via keywords"
-    (do-ilookup-tests (LRUCache. small-map {} 0 2))))
+    (do-ilookup-tests (LRUCache. small-map {} 0 2)))
+  (testing "assoc and dissoc for LRUCache"
+    (do-assoc (LRUCache. {} {} 0 2))
+    #_(do-dissoc (LRUCache. {:a 1 :b 2} clojure.lang.PersistentQueue/EMPTY 0 2))))
 
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
