@@ -96,6 +96,22 @@
   Object
   (toString [_] (str cache)))
 
+;; # FIFO
+
+(defn- describe-layout [mappy limit]
+  (let [q clojure.lang.PersistentQueue/EMPTY 
+        ks (keys mappy)
+        [dropping keeping] (split-at (- (count ks) limit) ks)]
+    {:dropping dropping
+     :keeping  keeping
+     :queue
+     (into q (concat (repeat (- limit (count keeping)) ::free)
+                     (take limit keeping)))}))
+
+(defn- dissoc-keys [m ks]
+  (if ks
+    (recur (dissoc m (first ks)) (next ks))
+    m))
 
 (defcache FIFOCache [cache q limit]
   CacheProtocol
@@ -114,10 +130,11 @@
     (let [v (get cache key ::miss)]
       nil))
   (seed [_ base]
-    (FIFOCache. base
-                (into clojure.lang.PersistentQueue/EMPTY
-                      (repeat limit ::free))
-                limit))
+    (let [{dropping :dropping
+           q :queue} (describe-layout base limit)]
+      (FIFOCache. (dissoc-keys base dropping)
+                  q
+                  limit)))
   Object
   (toString [_]
     (str cache \, \space (pr-str q))))
@@ -372,12 +389,21 @@
   (BasicCache. base))
 
 (defn fifo-cache-factory
-  "Returns a FIFO cache with the cache and FIFO queue initialied to `base` --
-   the queue is filled as the values are pulled out of `seq`. (maybe this should be
-   randomized?)"
+  "Returns a FIFO cache with the cache and FIFO queue initialized to `base` --
+   the queue is filled as the values are pulled out of `base`.  If the associative
+   structure can guarantee ordering, then the said ordering will define the
+   eventual eviction order.  Otherwise, there are no guarantees for the eventual
+   eviction ordering.
+
+   If the number of elements in `base` is greater than the limit then some items
+   in `base` will be dropped from the resulting cache.  If the associative
+   structure used as `base` can guarantee sorting, then the last `limit` elements
+   will be used as the cache seed values.  Otherwise, there are no guarantees about
+   the elements in the resulting cache."
   [limit base]
   {:pre [(number? limit) (< 0 limit)
-         (map? base)]}
+         (map? base)]
+   :post [(== limit (count (.q %)))]}
   (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY limit) base))
 
 (defn lru-cache-factory
