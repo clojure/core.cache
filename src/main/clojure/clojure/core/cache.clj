@@ -172,6 +172,14 @@
                    (assoc lru item tick+)
                    tick+
                    limit))))
+  (evict [this key]
+    (let [v (get cache key ::miss)]
+      (if (= v ::miss)
+        this
+        (LRUCache. (dissoc cache key)
+                   (dissoc lru key)
+                   tick
+                   limit))))
   (seed [_ base]
     (LRUCache. base
                (into {} (for [x (range (- limit) 0)] [x x]))

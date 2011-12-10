@@ -32,7 +32,9 @@
 (defn do-dissoc [c]
   (are [expect actual] (= expect actual)
        2   (:b (dissoc c :a))
-       nil (:a (dissoc c :a))))
+       nil (:a (dissoc c :a))
+       nil (:b (-> c (dissoc :a) (dissoc :b)))
+       0   (count (-> c (dissoc :a) (dissoc :b)))))
 
 (defn do-getting [c]
   (are [actual expect] (= expect actual)
@@ -114,7 +116,7 @@
     (do-ilookup-tests (LRUCache. small-map {} 0 2)))
   (testing "assoc and dissoc for LRUCache"
     (do-assoc (LRUCache. {} {} 0 2))
-    #_(do-dissoc (LRUCache. {:a 1 :b 2} clojure.lang.PersistentQueue/EMPTY 0 2))))
+    (do-dissoc (LRUCache. {:a 1 :b 2} {}  0 2))))
 
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
