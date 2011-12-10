@@ -212,6 +212,10 @@
       (TTLCache. base
                  (into {} (for [x base] [(key x) now]))
                  limit)))
+  (evict [_ key]
+    (TTLCache. (dissoc cache key)
+               (dissoc cache key)
+               limit))
   Object
   (toString [_]
     (str cache \, \space ttl \, \space limit)))

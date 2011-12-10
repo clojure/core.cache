@@ -120,7 +120,10 @@
 
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
-    (do-ilookup-tests (TTLCache. small-map 10 2))))
+    (do-ilookup-tests (TTLCache. small-map {} 2)))
+  (testing "assoc and dissoc for LRUCache"
+    (do-assoc (TTLCache. {} {} 2))
+    (do-dissoc (TTLCache. {:a 1 :b 2} {} 2))))
 
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"
