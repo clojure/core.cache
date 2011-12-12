@@ -237,10 +237,14 @@
   (hit [_ item]
     (LUCache. cache (update-in lu [item] inc) limit))
   (miss [_ item result]
-    (let [k (apply min-key lu (keys lu))]
-      (LUCache. (-> cache (dissoc k) (assoc item result))
-                (-> lu (dissoc k) (assoc item 0))
-                limit)))
+    (if-let [ks (keys lu)]
+      (let [k (apply min-key lu ks)]
+        (LUCache. (-> cache (dissoc k) (assoc item result))  ;; expulsion case
+                  (-> lu (dissoc k) (assoc item 0))
+                  limit))
+      (LUCache. (assoc cache item result)  ;; no change case
+                (assoc lu item 0)
+                limit))) 
   (seed [_ base]
     (LUCache. base
               (into {} (for [x (range (- limit) 0)] [x x]))
