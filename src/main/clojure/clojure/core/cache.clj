@@ -244,7 +244,14 @@
                   limit))
       (LUCache. (assoc cache item result)  ;; no change case
                 (assoc lu item 0)
-                limit))) 
+                limit)))
+  (evict [this key]
+    (let [v (get cache key ::miss)]
+      (if (= v ::miss)
+        this
+        (LUCache. (dissoc cache key)
+                   (dissoc lu key)
+                   limit))))
   (seed [_ base]
     (LUCache. base
               (into {} (for [x (range (- limit) 0)] [x x]))

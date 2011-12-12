@@ -128,9 +128,9 @@
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"
     (do-ilookup-tests (LUCache. small-map {} 2)))
-  (testing "assoc and dissoc for LRUCache"
+  (testing "assoc and dissoc for LUCache"
     (do-assoc (LUCache. {} {}  2))
-    #_(do-dissoc (LUCache. {:a 1 :b 2} {} 2))))
+    (do-dissoc (LUCache. {:a 1 :b 2} {} 2))))
 
 ;; # LIRS
 
