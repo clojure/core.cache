@@ -349,72 +349,72 @@
 (defcache LIRSCache [cache lruS lruQ tick limitS limitQ]
   CacheProtocol
   (lookup [_ item]
-          (get cache item))
+    (get cache item))
   (has? [_ item]
-        (contains? cache item))
+    (contains? cache item))
   (hit [_ item]
-       (let [tick+ (inc tick)]
-         (if (not (contains? lruS item))
+    (let [tick+ (inc tick)]
+      (if (not (contains? lruS item))
                                         ; (2.3) item ∉ S ∧ item ∈ Q
-           (LIRSCache. cache (assoc lruS item tick+) (assoc lruQ item tick+) tick+ limitS limitQ)
-           (let [k (apply min-key lruS (keys lruS))]
-             (if (contains? lruQ item)
+        (LIRSCache. cache (assoc lruS item tick+) (assoc lruQ item tick+) tick+ limitS limitQ)
+        (let [k (apply min-key lruS (keys lruS))]
+          (if (contains? lruQ item)
                                         ; (2.2) item ∈ S ∧ item ∈ Q
-               (let [new-lruQ (-> lruQ (dissoc item) (assoc k tick+))]
-                 (LIRSCache. cache
-                             (-> lruS (dissoc k) (assoc item tick+) (prune-stack new-lruQ cache))
-                             new-lruQ
-                             tick+
-                             limitS
-                             limitQ))
-                                        ; (2.1) item ∈ S ∧ item ∉ Q
-               (LIRSCache. cache
-                           (-> lruS (assoc item tick+) (prune-stack lruQ cache))
-                           lruQ
-                           tick+
-                           limitS
-                           limitQ))))))
-
-  (miss [_ item result]
-        (let [tick+ (inc tick)]
-          (if (< (count cache) limitS)
-                                        ; (1.1)
-            (let [k (apply min-key lruS (keys lruS))]
-              (LIRSCache. (assoc cache item result)
-                          (-> lruS (dissoc k) (assoc item tick+))
-                          lruQ
+            (let [new-lruQ (-> lruQ (dissoc item) (assoc k tick+))]
+              (LIRSCache. cache
+                          (-> lruS (dissoc k) (assoc item tick+) (prune-stack new-lruQ cache))
+                          new-lruQ
                           tick+
                           limitS
                           limitQ))
-            (let [k (apply min-key lruQ (keys lruQ))
-                  new-lruQ (dissoc lruQ k)
-                  new-cache (-> cache  (dissoc k) (assoc item result))]
-              (if (contains? lruS item)
+                                        ; (2.1) item ∈ S ∧ item ∉ Q
+            (LIRSCache. cache
+                        (-> lruS (assoc item tick+) (prune-stack lruQ cache))
+                        lruQ
+                        tick+
+                        limitS
+                        limitQ))))))
+
+  (miss [_ item result]
+    (let [tick+ (inc tick)]
+      (if (< (count cache) limitS)
+                                        ; (1.1)
+        (let [k (apply min-key lruS (keys lruS))]
+          (LIRSCache. (assoc cache item result)
+                      (-> lruS (dissoc k) (assoc item tick+))
+                      lruQ
+                      tick+
+                      limitS
+                      limitQ))
+        (let [k (apply min-key lruQ (keys lruQ))
+              new-lruQ (dissoc lruQ k)
+              new-cache (-> cache  (dissoc k) (assoc item result))]
+          (if (contains? lruS item)
                                         ; (1.3)
-                (let [lastS (apply min-key lruS (keys lruS))]
-                  (LIRSCache. new-cache
-                              (-> lruS (dissoc lastS) (assoc item tick+) (prune-stack new-lruQ new-cache))
-                              (assoc new-lruQ lastS tick+)
-                              tick+
-                              limitS
-                              limitQ))
+            (let [lastS (apply min-key lruS (keys lruS))]
+              (LIRSCache. new-cache
+                          (-> lruS (dissoc lastS) (assoc item tick+) (prune-stack new-lruQ new-cache))
+                          (assoc new-lruQ lastS tick+)
+                          tick+
+                          limitS
+                          limitQ))
                                         ; (1.2)
-                (LIRSCache. new-cache
-                            (assoc lruS item tick+)
-                            (assoc new-lruQ item tick+)
-                            tick+
-                            limitS
-                            limitQ))))))
+            (LIRSCache. new-cache
+                        (assoc lruS item tick+)
+                        (assoc new-lruQ item tick+)
+                        tick+
+                        limitS
+                        limitQ))))))
   (seed [_ base]
-        (LIRSCache. base
-                    (into {} (for [x (range (- limitS) 0)] [x x]))
-                    (into {} (for [x (range (- limitQ) 0)] [x x]))
-                    0
-                    limitS
-                    limitQ))
+    (LIRSCache. base
+                (into {} (for [x (range (- limitS) 0)] [x x]))
+                (into {} (for [x (range (- limitQ) 0)] [x x]))
+                0
+                limitS
+                limitQ))
   Object
   (toString [_]
-            (str cache \, \space lruS \, \space lruQ \, \space tick \, \space limitS \, \space limitQ)))
+    (str cache \, \space lruS \, \space lruQ \, \space tick \, \space limitS \, \space limitQ)))
 
 ;; Factories
 
