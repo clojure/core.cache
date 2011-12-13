@@ -14,17 +14,37 @@ core.cache is a new Clojure contrib library providing the following features:
   - Time-to-live (TTLCache)
   - Naive cache (BasicCache)
 
-* Implementation of an efficient buffer replacement policy based on the *low inter-reference recency set* algorithm (LIRSCache)
+* Implementation of an efficient buffer replacement policy based on the *low inter-reference recency set* algorithm (LIRSCache) described in the [LIRS](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.116.2184) paper
 
 * Factory functions for each existing cache type
 
 core.cache is based on a library named Clache, found at http://github.com/fogus/clache that is planned for deprecation.
+
+
+Absorb
+------
+
+You can use core.cache in your [Leiningen](https://github.com/technomancy/leiningen) and [Cake](https://github.com/flatland/cake) projects with the following `:dependencies` directive in your `project.clj` file:
+
+    [org.clojure/core.cache "0.5.0"]
+
+For Maven-driven projects, use the following slice of XML in your `pom.xml`'s `<dependencies>` section:
+
+    <dependency>
+	  <groupId>org.clojure</groupId>
+	  <artifactId>core.cache</artifactId>
+	  <version>0.5.0</version>
+	</dependency>
+
+Enjoy!
+
 
 Places
 ------
 
 * [Source code](https://github.com/clojure/core.cache)
 * [Ticket system](http://dev.clojure.org/jira/browse/CCACHE)
+* [Announcement](http://groups.google.com/group/clojure/browse_frm/thread/69d08572ab265dc7)
 * Examples and documentation -- in progress
 
 Changes from Clache
