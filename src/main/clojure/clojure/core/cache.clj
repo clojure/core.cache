@@ -214,7 +214,7 @@
                  limit)))
   (evict [_ key]
     (TTLCache. (dissoc cache key)
-               (dissoc cache key)
+               (dissoc ttl key)
                limit))
   Object
   (toString [_]
