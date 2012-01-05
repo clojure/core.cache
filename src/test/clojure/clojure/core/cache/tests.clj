@@ -17,6 +17,13 @@
   (testing "that the BasicCache can lookup as expected"
     (is (= :robot (lookup (miss (BasicCache. {}) '(servo) :robot) '(servo))))))
 
+(defn do-dot-lookup-tests [c]
+  (are [expect actual] (= expect actual)
+       1   (.lookup c :a)
+       2   (.lookup c :b)
+       42  (.lookup c :c 42)
+       nil (.lookup c :c)))
+
 (defn do-ilookup-tests [c]
   (are [expect actual] (= expect actual)
        1   (:a c)
@@ -88,6 +95,8 @@
     (is (= 1 (count (BasicCache. {:a 1})))))
   (testing "that the BasicCache can lookup via keywords"
     (do-ilookup-tests (BasicCache. small-map)))
+  (testing "that the BasicCache can .lookup"
+    (do-dot-lookup-tests (BasicCache. small-map)))
   (testing "assoc and dissoc for BasicCache"
     (do-assoc (BasicCache. {}))
     (do-dissoc (BasicCache. {:a 1 :b 2})))
@@ -101,6 +110,8 @@
 (deftest test-fifo-cache-ilookup
   (testing "that the FifoCache can lookup via keywords"
     (do-ilookup-tests (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
+  (testing "that the FifoCache can lookup via keywords"
+    (do-dot-lookup-tests (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "assoc and dissoc for FifoCache"
     (do-assoc (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY 2))
     (do-dissoc (FIFOCache. {:a 1 :b 2} clojure.lang.PersistentQueue/EMPTY 2)))
@@ -114,6 +125,8 @@
 (deftest test-lru-cache-ilookup
   (testing "that the LRUCache can lookup via keywords"
     (do-ilookup-tests (LRUCache. small-map {} 0 2)))
+  (testing "that the LRUCache can lookup via keywords"
+    (do-dot-lookup-tests (LRUCache. small-map {} 0 2)))
   (testing "assoc and dissoc for LRUCache"
     (do-assoc (LRUCache. {} {} 0 2))
     (do-dissoc (LRUCache. {:a 1 :b 2} {}  0 2))))
@@ -121,6 +134,8 @@
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
     (do-ilookup-tests (TTLCache. small-map {} 2)))
+  (testing "that the TTLCache can lookup via keywords"
+    (do-dot-lookup-tests (TTLCache. small-map {} 2)))  
   (testing "assoc and dissoc for LRUCache"
     (do-assoc (TTLCache. {} {} 2))
     (do-dissoc (TTLCache. {:a 1 :b 2} {} 2))))
@@ -128,6 +143,8 @@
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"
     (do-ilookup-tests (LUCache. small-map {} 2)))
+  (testing "that the LUCache can lookup via keywords"
+    (do-dot-lookup-tests (LUCache. small-map {} 2)))
   (testing "assoc and dissoc for LUCache"
     (do-assoc (LUCache. {} {}  2))
     (do-dissoc (LUCache. {:a 1 :b 2} {} 2))))
@@ -260,3 +277,4 @@ N non-resident HIR block
                 :lruS {:5 14 :9 13 :7 12 :3 10 :4 9}
                 :lruQ {:8 14 :9 13}
                 :tick 14 :limitS 3 :limitQ 2}))))))
+

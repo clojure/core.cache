@@ -14,8 +14,11 @@
 
 (defprotocol CacheProtocol
   "This is the protocol describing the basic cache capability."
-  (lookup  [cache e]
-   "Retrieve the value associated with `e` if it exists")
+  (lookup [cache e]
+          [cache e not-found]
+   "Retrieve the value associated with `e` if it exists, else `nil` in
+   the 2-arg case.  Retrieve the value associated with `e` if it exists,
+   else `not-found` in the 3-arg case.")
   (has?    [cache e]
    "Checks if the cache contains a value associtaed with `e`")
   (hit     [cache e]
@@ -84,6 +87,8 @@
   CacheProtocol
   (lookup [_ item]
     (get cache item))
+  (lookup [_ item not-found]
+    (get cache item not-found))
   (has? [_ item]
     (contains? cache item))
   (hit [this item] this)
@@ -121,6 +126,8 @@
   CacheProtocol
   (lookup [_ item]
     (get cache item))
+  (lookup [_ item not-found]
+    (get cache item not-found))
   (has? [_ item]
     (contains? cache item))
   (hit [this item]
@@ -152,6 +159,8 @@
   CacheProtocol
   (lookup [_ item]
     (get cache item))
+  (lookup [_ item not-found]
+    (get cache item not-found))
   (has? [_ item]
     (contains? cache item))
   (hit [_ item]
@@ -195,6 +204,8 @@
   CacheProtocol
   (lookup [_ item]
     (get cache item))
+  (lookup [_ item not-found]
+    (get cache item not-found))
   (has? [_ item]
     (when-let [t (get ttl item)]
       (< (- (System/currentTimeMillis)
@@ -232,6 +243,8 @@
   CacheProtocol
   (lookup [_ item]
     (get cache item))
+  (lookup [_ item not-found]
+    (get cache item not-found))
   (has? [_ item]
     (contains? cache item))
   (hit [_ item]
@@ -350,6 +363,8 @@
   CacheProtocol
   (lookup [_ item]
     (get cache item))
+  (lookup [_ item not-found]
+    (get cache item not-found))
   (has? [_ item]
     (contains? cache item))
   (hit [_ item]
