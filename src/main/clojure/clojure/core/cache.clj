@@ -82,13 +82,33 @@
        java.lang.Iterable
        (iterator [this#] (.iterator ~base-field)))))
 
-
 (defcache BasicCache [cache]
   CacheProtocol
   (lookup [_ item]
     (get cache item))
   (lookup [_ item not-found]
     (get cache item not-found))
+  (has? [_ item]
+    (contains? cache item))
+  (hit [this item] this)
+  (miss [_ item result]
+    (BasicCache. (assoc cache item result)))
+  (evict [_ key]
+    (BasicCache. (dissoc cache key)))
+  (seed [_ base]
+    (BasicCache. base))
+  Object
+  (toString [_] (str cache)))
+
+(defcache FnCache [cache f]
+  CacheProtocol
+  (lookup [_ item]
+    (f (get cache item)))
+  (lookup [_ item not-found]
+    (let [ret (get cache item not-found)]
+      (if (= ret not-found)
+        not-found
+        (f ret))))
   (has? [_ item]
     (contains? cache item))
   (hit [this item] this)

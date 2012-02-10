@@ -54,4 +54,12 @@
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
   </repositories>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/test/clojure</directory>
+      </resource>
+    </resources>
+  </build>
 </project>
