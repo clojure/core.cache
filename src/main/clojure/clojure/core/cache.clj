@@ -100,6 +100,8 @@
   Object
   (toString [_] (str cache)))
 
+;; FnCache
+
 (defcache FnCache [cache f]
   CacheProtocol
   (lookup [_ item]
@@ -492,7 +494,7 @@
   [ttl base]
   {:pre [(number? ttl) (<= 0 ttl)
          (map? base)]}
-  (TTLCache. base {} ttl))
+  (clojure.core.cache/seed (TTLCache. {} {} ttl) base))
 
 (defn lu-cache-factory
   "Returns an LU cache with the cache and usage-table initialied to `base`."
