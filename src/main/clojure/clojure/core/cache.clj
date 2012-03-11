@@ -473,7 +473,7 @@
    structure used as `base` can guarantee sorting, then the last `limit` elements
    will be used as the cache seed values.  Otherwise, there are no guarantees about
    the elements in the resulting cache."
-  [limit base]
+  [base & {limit :limit :or {limit 32}}]
   {:pre [(number? limit) (< 0 limit)
          (map? base)]
    :post [(== limit (count (.q %)))]}
@@ -483,7 +483,7 @@
   "Returns an LRU cache with the cache and usage-table initialied to `base` --
    each entry is initialized with the same usage value. (maybe this should be
    randomized?)"
-  [limit base]
+  [base & {limit :limit :or {limit 32}}]
   {:pre [(number? limit) (< 0 limit)
          (map? base)]}
   (clojure.core.cache/seed (LRUCache. {} {} 0 limit) base))
@@ -491,14 +491,14 @@
 (defn ttl-cache-factory
   "Returns a TTL cache with the cache and expiration-table initialied to `base` --
    each with the same time-to-live."
-  [ttl base]
+  [base & {ttl :ttl :or {ttl 2000}}]
   {:pre [(number? ttl) (<= 0 ttl)
          (map? base)]}
   (clojure.core.cache/seed (TTLCache. {} {} ttl) base))
 
 (defn lu-cache-factory
   "Returns an LU cache with the cache and usage-table initialied to `base`."
-  [limit base]
+  [base & {limit :limit :or {limit 32}}]
   {:pre [(number? limit) (< 0 limit)
          (map? base)]}
   (clojure.core.cache/seed (LUCache. {} {} limit) base))
@@ -506,7 +506,9 @@
 (defn lirs-cache-factory
   "Returns an LIRS cache with the S & R LRU lists set to the indicated
    limts."
-  [s-history-limit q-history-limit base]
+  [base & {:keys [s-history-limit q-history-limit]
+           :or {s-history-limit 32
+                q-history-limit 32}}]
   {:pre [(number? s-history-limit) (< 0 s-history-limit)
          (number? q-history-limit) (< 0 q-history-limit)
          (map? base)]}

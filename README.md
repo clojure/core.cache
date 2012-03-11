@@ -44,7 +44,7 @@ Places
 * [Source code](https://github.com/clojure/core.cache)
 * [Ticket system](http://dev.clojure.org/jira/browse/CCACHE)
 * [Announcement](http://groups.google.com/group/clojure/browse_frm/thread/69d08572ab265dc7)
-* Examples and documentation -- in progress
+* [Examples and documentation](http://github.com/clojure/core.cache/wiki)
 
 
 Changes from Clache
