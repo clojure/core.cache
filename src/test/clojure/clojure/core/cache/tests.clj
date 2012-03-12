@@ -131,6 +131,12 @@
     (do-assoc (LRUCache. {} {} 0 2))
     (do-dissoc (LRUCache. {:a 1 :b 2} {}  0 2))))
 
+(deftest test-lru-cache
+  (testing "LRU-ness"
+    (let [C (lru-cache-factory {} :limit 2)]
+      (are [x y] (= x y)
+           {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)))))
+
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
     (do-ilookup-tests (TTLCache. small-map {} 2)))

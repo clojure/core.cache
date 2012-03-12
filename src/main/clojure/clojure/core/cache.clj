@@ -72,7 +72,7 @@
        (empty [this#]
          (seed this# (empty ~base-field)))
        (equiv [_# other#]
-         (.equiv ~base-field other#))
+         (.equiv other# ~base-field))
 
        clojure.lang.Seqable
        (seq [_#]
