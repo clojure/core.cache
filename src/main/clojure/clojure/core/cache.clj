@@ -72,7 +72,7 @@
        (empty [this#]
          (seed this# (empty ~base-field)))
        (equiv [_# other#]
-         (.equiv other# ~base-field))
+         (.equiv ~base-field other#))
 
        clojure.lang.Seqable
        (seq [_#]
@@ -193,9 +193,9 @@
                  limit)))
   (miss [_ item result]
     (let [tick+ (inc tick)]
-      (if-let [ks (keys lru)]
-        (let [k (apply min-key lru ks)]
-          (LRUCache. (-> cache (dissoc k) (assoc item result))  ;; expulsion case
+      (if (>= (count cache) limit)
+        (let [k (apply min-key lru (keys lru))]
+          (LRUCache. (-> cache (dissoc k) (assoc item result))  ;; eviction case
                      (-> lru (dissoc k) (assoc item tick+))
                      tick+
                      limit))
@@ -209,11 +209,11 @@
         this
         (LRUCache. (dissoc cache key)
                    (dissoc lru key)
-                   tick
+                   (inc tick)
                    limit))))
   (seed [_ base]
     (LRUCache. base
-               (into {} (for [x (range (- limit) 0)] [x x]))
+               (into {} (for [k (keys base)] [k 0]))
                0
                limit))
   Object

@@ -132,10 +132,17 @@
     (do-dissoc (LRUCache. {:a 1 :b 2} {}  0 2))))
 
 (deftest test-lru-cache
-  (testing "LRU-ness"
+  (testing "LRU-ness with empty cache"
     (let [C (lru-cache-factory {} :limit 2)]
       (are [x y] (= x y)
-           {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)))))
+           {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
+           {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (assoc :c 3) .cache)
+           {:a 1, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :a) (assoc :c 3) .cache))))
+  (testing "LRU-ness with seeded cache"
+    (let [C (lru-cache-factory {:a 1, :b 2} :limit 4)]
+      (are [x y] (= x y)
+           {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
+           {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :a) (assoc :e 5) .cache)))))
 
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
