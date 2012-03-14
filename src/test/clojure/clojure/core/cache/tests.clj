@@ -142,7 +142,9 @@
     (let [C (lru-cache-factory {:a 1, :b 2} :limit 4)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
-           {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :a) (assoc :e 5) .cache)))))
+           {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :c) (.hit :a) (assoc :e 5) .cache)))))
+
+(defn sleepy [e t] (Thread/sleep t) e)
 
 (deftest test-ttl-cache-ilookup
   (testing "that the TTLCache can lookup via keywords"
@@ -153,6 +155,13 @@
     (do-assoc (TTLCache. {} {} 2))
     (do-dissoc (TTLCache. {:a 1 :b 2} {} 2))))
 
+(deftest test-ttl-cache
+  (testing "TTL-ness with empty cache"
+    (let [C (ttl-cache-factory {} :ttl 500)]
+      (are [x y] (= x y)
+           {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
+           {:c 3} (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3) .cache)))))
+
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"
     (do-ilookup-tests (LUCache. small-map {} 2)))
@@ -161,6 +170,20 @@
   (testing "assoc and dissoc for LUCache"
     (do-assoc (LUCache. {} {}  2))
     (do-dissoc (LUCache. {:a 1 :b 2} {} 2))))
+
+(deftest test-lu-cache
+  (testing "LU-ness with empty cache"
+    (let [C (lu-cache-factory {} :limit 2)]
+      (are [x y] (= x y)
+           {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
+           {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (assoc :c 3) .cache)
+           {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :b) (.hit :b) (.hit :a) (assoc :c 3) .cache))))
+  (testing "LU-ness with seeded cache"
+    (let [C (lu-cache-factory {:a 1, :b 2} :limit 4)]
+      (are [x y] (= x y)
+           {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
+           {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :a) (assoc :e 5) .cache)
+           {:b 2, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4)  (.hit :b) (.hit :c) (.hit :d) (assoc :e 5) .cache)))))
 
 ;; # LIRS
 

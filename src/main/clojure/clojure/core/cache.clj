@@ -176,6 +176,11 @@
   (toString [_]
     (str cache \, \space (pr-str q))))
 
+(defn- build-leastness-queue
+  [base limit start-at]
+  (merge
+   (into {} (take (- limit (count base)) (for [k (range (- limit) 0)] [k k])))
+   (into {} (for [[k _] base] [k start-at]))))
 
 (defcache LRUCache [cache lru tick limit]
   CacheProtocol
@@ -193,8 +198,8 @@
                  limit)))
   (miss [_ item result]
     (let [tick+ (inc tick)]
-      (if (>= (count cache) limit)
-        (let [k (apply min-key lru (keys lru))]
+      (if-let [ks (keys lru)]
+        (let [k (apply min-key lru ks)]
           (LRUCache. (-> cache (dissoc k) (assoc item result))  ;; eviction case
                      (-> lru (dissoc k) (assoc item tick+))
                      tick+
@@ -213,7 +218,7 @@
                    limit))))
   (seed [_ base]
     (LRUCache. base
-               (into {} (for [k (keys base)] [k 0]))
+               (build-leastness-queue base limit 0)
                0
                limit))
   Object
@@ -289,7 +294,7 @@
                    limit))))
   (seed [_ base]
     (LUCache. base
-              (into {} (for [x (range (- limit) 0)] [x x]))
+              (build-leastness-queue base limit 0)
               limit))
   Object
   (toString [_]
