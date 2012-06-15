@@ -225,7 +225,12 @@
   (toString [_]
     (str cache \, \space lru \, \space tick \, \space limit)))
 
-(declare key-killer)
+
+(defn- key-killer
+  [ttl limit now]
+  (let [ks (map key (filter #(> (- now (val %)) limit) ttl))]
+    #(apply dissoc % ks)))
+
 
 (defcache TTLCache [cache ttl ttl-ms]
   CacheProtocol
@@ -257,13 +262,6 @@
   Object
   (toString [_]
     (str cache \, \space ttl \, \space ttl-ms)))
-
-
-(defn- key-killer
-  [ttl limit now]
-  (let [ks (map key (filter #(> (- now (val %)) limit)
-                            ttl))]
-    #(apply dissoc % ks)))
 
 
 (defcache LUCache [cache lu limit]
