@@ -204,7 +204,7 @@ own type.</pre>
     </div>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L15" id="proto-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L15" id="proto-source">Source</a>
   </div>
 </div>
 <div id="type-section">
@@ -288,19 +288,22 @@ own type.</pre>
     <pre id="var-docstr">Returns a pluggable basic cache initialied to `base`</pre>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L463" id="var-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L463" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="clojure.core.cache/fifo-cache-factory">fifo-cache-factory</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (fifo-cache-factory base &amp; {limit :limit, :or {limit 32}})
+    <pre id="var-usage">Usage: (fifo-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
 </pre>
     <pre id="var-docstr">Returns a FIFO cache with the cache and FIFO queue initialized to `base` --
 the queue is filled as the values are pulled out of `base`.  If the associative
 structure can guarantee ordering, then the said ordering will define the
 eventual eviction order.  Otherwise, there are no guarantees for the eventual
 eviction ordering.
+
+This function takes an optional `:threshold` argument that defines the maximum number
+of elements in the cache before the FIFO semantics apply (default is 32).
 
 If the number of elements in `base` is greater than the limit then some items
 in `base` will be dropped from the resulting cache.  If the associative
@@ -309,7 +312,7 @@ will be used as the cache seed values.  Otherwise, there are no guarantees about
 the elements in the resulting cache.</pre>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L469" id="var-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L469" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -318,34 +321,39 @@ the elements in the resulting cache.</pre>
     <pre id="var-usage">Usage: (lirs-cache-factory base &amp; {:keys [s-history-limit q-history-limit], :or {s-history-limit 32, q-history-limit 32}})
 </pre>
     <pre id="var-docstr">Returns an LIRS cache with the S &amp; R LRU lists set to the indicated
-limts.</pre>
+limits.</pre>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L511" id="var-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L522" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="clojure.core.cache/lru-cache-factory">lru-cache-factory</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (lru-cache-factory base &amp; {limit :limit, :or {limit 32}})
+    <pre id="var-usage">Usage: (lru-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
 </pre>
     <pre id="var-docstr">Returns an LRU cache with the cache and usage-table initialied to `base` --
-each entry is initialized with the same usage value. (maybe this should be
-randomized?)</pre>
+each entry is initialized with the same usage value.
+
+This function takes an optional `:threshold` argument that defines the maximum number
+of elements in the cache before the LRU semantics apply (default is 32).</pre>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L487" id="var-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L490" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="clojure.core.cache/lu-cache-factory">lu-cache-factory</h2>
     <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (lu-cache-factory base &amp; {limit :limit, :or {limit 32}})
+    <pre id="var-usage">Usage: (lu-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
 </pre>
-    <pre id="var-docstr">Returns an LU cache with the cache and usage-table initialied to `base`.</pre>
+    <pre id="var-docstr">Returns an LU cache with the cache and usage-table initialied to `base`.
+
+This function takes an optional `:threshold` argument that defines the maximum number
+of elements in the cache before the LU semantics apply (default is 32).</pre>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L504" id="var-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L512" id="var-source">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -354,10 +362,13 @@ randomized?)</pre>
     <pre id="var-usage">Usage: (ttl-cache-factory base &amp; {ttl :ttl, :or {ttl 2000}})
 </pre>
     <pre id="var-docstr">Returns a TTL cache with the cache and expiration-table initialied to `base` --
-each with the same time-to-live.</pre>
+each with the same time-to-live.
+
+This function also allows an optional `:ttl` argument that defines the default
+time in milliseconds that entries are allowed to reside in the cache.</pre>
     
     
-    <a href="https://github.com/clojure/core.cache/blob/5751b7e8d8d2f10c87b8a79c8ed9b0324368514d/src/main/clojure/clojure/core/cache.clj#L496" id="var-source">Source</a>
+    <a href="https://github.com/clojure/core.cache/blob/cc0aeaf90750d9716ce20042282673727da20988/src/main/clojure/clojure/core/cache.clj#L501" id="var-source">Source</a>
   </div>
 </div>
 
