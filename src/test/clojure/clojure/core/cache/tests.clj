@@ -129,17 +129,23 @@
     (do-dot-lookup-tests (LRUCache. small-map {} 0 2)))
   (testing "assoc and dissoc for LRUCache"
     (do-assoc (LRUCache. {} {} 0 2))
-    (do-dissoc (LRUCache. {:a 1 :b 2} {}  0 2))))
+    (do-dissoc (LRUCache. {:a 1 :b 2} {} 0 2)))
+  (testing "that get and cascading gets work for LRUCache"
+    (do-getting (LRUCache. big-map {} 0 2)))
+  (testing "that finding works for LRUCache"
+    (do-finding (LRUCache. small-map {} 0 2)))
+  (testing "that contains? works for LRUCache"
+    (do-contains (LRUCache. small-map {} 0 2))))
 
 (deftest test-lru-cache
   (testing "LRU-ness with empty cache"
-    (let [C (lru-cache-factory {} :limit 2)]
+    (let [C (lru-cache-factory {} :threshold 2)]
       (are [x y] (= x y)
            {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
            {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (assoc :c 3) .cache)
            {:a 1, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :a) (assoc :c 3) .cache))))
   (testing "LRU-ness with seeded cache"
-    (let [C (lru-cache-factory {:a 1, :b 2} :limit 4)]
+    (let [C (lru-cache-factory {:a 1, :b 2} :threshold 4)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
            {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :c) (.hit :a) (assoc :e 5) .cache)))))
@@ -147,13 +153,22 @@
 (defn sleepy [e t] (Thread/sleep t) e)
 
 (deftest test-ttl-cache-ilookup
-  (testing "that the TTLCache can lookup via keywords"
-    (do-ilookup-tests (TTLCache. small-map {} 2)))
-  (testing "that the TTLCache can lookup via keywords"
-    (do-dot-lookup-tests (TTLCache. small-map {} 2)))  
-  (testing "assoc and dissoc for LRUCache"
-    (do-assoc (TTLCache. {} {} 2))
-    (do-dissoc (TTLCache. {:a 1 :b 2} {} 2))))
+  (let [five-secs (+ 5000 (System/currentTimeMillis))
+        big-time   (into {} (for [[k _] big-map] [k five-secs]))
+        small-time (into {} (for [[k _] small-map] [k five-secs]))]
+    (testing "that the TTLCache can lookup via keywords"
+      (do-ilookup-tests (TTLCache. small-map small-time 2000)))
+    (testing "that the TTLCache can lookup via keywords"
+      (do-dot-lookup-tests (TTLCache. small-map small-time 2000)))
+    (testing "assoc and dissoc for TTLCache"
+      (do-assoc (TTLCache. {} {} 2000))
+      (do-dissoc (TTLCache. {:a 1 :b 2} {:a five-secs :b five-secs} 2000)))
+    (testing "that get and cascading gets work for TTLCache"
+      (do-getting (TTLCache. big-map big-time 2000)))
+    (testing "that finding works for TTLCache"
+        (do-finding (TTLCache. small-map small-time 2000)))
+    (testing "that contains? works for TTLCache"
+        (do-contains (TTLCache. small-map small-time 2000)))))
 
 (deftest test-ttl-cache
   (testing "TTL-ness with empty cache"
@@ -173,13 +188,13 @@
 
 (deftest test-lu-cache
   (testing "LU-ness with empty cache"
-    (let [C (lu-cache-factory {} :limit 2)]
+    (let [C (lu-cache-factory {} :threshold 2)]
       (are [x y] (= x y)
            {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
            {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (assoc :c 3) .cache)
            {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :b) (.hit :b) (.hit :a) (assoc :c 3) .cache))))
   (testing "LU-ness with seeded cache"
-    (let [C (lu-cache-factory {:a 1, :b 2} :limit 4)]
+    (let [C (lu-cache-factory {:a 1, :b 2} :threshold 4)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
            {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :a) (assoc :e 5) .cache)

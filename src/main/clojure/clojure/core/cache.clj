@@ -234,7 +234,7 @@
   (lookup [_ item not-found]
     (get cache item not-found))
   (has? [_ item]
-    (when-let [t (get ttl item)]
+    (let [t (get ttl item (- limit))]
       (< (- (System/currentTimeMillis)
             t)
          limit)))
@@ -473,44 +473,55 @@
    eventual eviction order.  Otherwise, there are no guarantees for the eventual
    eviction ordering.
 
+   This function takes an optional `:threshold` argument that defines the maximum number
+   of elements in the cache before the FIFO semantics apply (default is 32).
+
    If the number of elements in `base` is greater than the limit then some items
    in `base` will be dropped from the resulting cache.  If the associative
    structure used as `base` can guarantee sorting, then the last `limit` elements
    will be used as the cache seed values.  Otherwise, there are no guarantees about
    the elements in the resulting cache."
-  [base & {limit :limit :or {limit 32}}]
-  {:pre [(number? limit) (< 0 limit)
+  [base & {threshold :threshold :or {threshold 32}}]
+  {:pre [(number? threshold) (< 0 threshold)
          (map? base)]
-   :post [(== limit (count (.q %)))]}
-  (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY limit) base))
+   :post [(== threshold (count (.q %)))]}
+  (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY threshold) base))
 
 (defn lru-cache-factory
   "Returns an LRU cache with the cache and usage-table initialied to `base` --
-   each entry is initialized with the same usage value. (maybe this should be
-   randomized?)"
-  [base & {limit :limit :or {limit 32}}]
-  {:pre [(number? limit) (< 0 limit)
+   each entry is initialized with the same usage value.
+
+   This function takes an optional `:threshold` argument that defines the maximum number
+   of elements in the cache before the LRU semantics apply (default is 32)."
+  [base & {threshold :threshold :or {threshold 32}}]
+  {:pre [(number? threshold) (< 0 threshold)
          (map? base)]}
-  (clojure.core.cache/seed (LRUCache. {} {} 0 limit) base))
+  (clojure.core.cache/seed (LRUCache. {} {} 0 threshold) base))
 
 (defn ttl-cache-factory
   "Returns a TTL cache with the cache and expiration-table initialied to `base` --
-   each with the same time-to-live."
+   each with the same time-to-live.
+
+   This function also allows an optional `:ttl` argument that defines the default
+   time in milliseconds that entries are allowed to reside in the cache."
   [base & {ttl :ttl :or {ttl 2000}}]
   {:pre [(number? ttl) (<= 0 ttl)
          (map? base)]}
   (clojure.core.cache/seed (TTLCache. {} {} ttl) base))
 
 (defn lu-cache-factory
-  "Returns an LU cache with the cache and usage-table initialied to `base`."
-  [base & {limit :limit :or {limit 32}}]
-  {:pre [(number? limit) (< 0 limit)
+  "Returns an LU cache with the cache and usage-table initialied to `base`.
+
+   This function takes an optional `:threshold` argument that defines the maximum number
+   of elements in the cache before the LU semantics apply (default is 32)."
+  [base & {threshold :threshold :or {threshold 32}}]
+  {:pre [(number? threshold) (< 0 threshold)
          (map? base)]}
-  (clojure.core.cache/seed (LUCache. {} {} limit) base))
+  (clojure.core.cache/seed (LUCache. {} {} threshold) base))
 
 (defn lirs-cache-factory
   "Returns an LIRS cache with the S & R LRU lists set to the indicated
-   limts."
+   limits."
   [base & {:keys [s-history-limit q-history-limit]
            :or {s-history-limit 32
                 q-history-limit 32}}]
