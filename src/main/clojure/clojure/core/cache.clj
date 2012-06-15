@@ -227,36 +227,36 @@
 
 (declare key-killer)
 
-(defcache TTLCache [cache ttl limit]
+(defcache TTLCache [cache ttl ttl-ms]
   CacheProtocol
   (lookup [_ item]
     (get cache item))
   (lookup [_ item not-found]
     (get cache item not-found))
   (has? [_ item]
-    (let [t (get ttl item (- limit))]
+    (let [t (get ttl item (- ttl-ms))]
       (< (- (System/currentTimeMillis)
             t)
-         limit)))
+         ttl-ms)))
   (hit [this item] this)
   (miss [this item result]
     (let [now  (System/currentTimeMillis)
-          kill-old (key-killer ttl limit now)]
+          kill-old (key-killer ttl ttl-ms now)]
       (TTLCache. (assoc (kill-old cache) item result)
                  (assoc (kill-old ttl) item now)
-                 limit)))
+                 ttl-ms)))
   (seed [_ base]
     (let [now (System/currentTimeMillis)]
       (TTLCache. base
                  (into {} (for [x base] [(key x) now]))
-                 limit)))
+                 ttl-ms)))
   (evict [_ key]
     (TTLCache. (dissoc cache key)
                (dissoc ttl key)
-               limit))
+               ttl-ms))
   Object
   (toString [_]
-    (str cache \, \space ttl \, \space limit)))
+    (str cache \, \space ttl \, \space ttl-ms)))
 
 
 (defn- key-killer
