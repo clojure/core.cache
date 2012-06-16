@@ -599,7 +599,10 @@
 (defn soft-cache-factory
   "Returns a SoftReference cache.  Cached values will be referred to with
   SoftReferences, allowing the values to be garbage collected when there is
-  memory pressure on the JVM."
+  memory pressure on the JVM.
+
+  SoftCache is a mutable cache, since it is always based on a
+  ConcurrentHashMap."
   [base]
   {:pre [(map? base)]}
   (seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
