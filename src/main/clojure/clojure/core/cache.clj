@@ -8,7 +8,9 @@
 
 (ns ^{:doc "A caching library for Clojure."
       :author "Fogus"}
-  clojure.core.cache)
+  clojure.core.cache
+  (:import (java.lang.ref ReferenceQueue SoftReference)
+           (java.util.concurrent ConcurrentHashMap)))
 
 ;; # Protocols and Types
 
@@ -456,6 +458,72 @@
   (toString [_]
     (str cache \, \space lruS \, \space lruQ \, \space tick \, \space limitS \, \space limitQ)))
 
+(defn clear-soft-cache! [cache rcache rq]
+  (loop [r (.poll rq)]
+    (when r
+      (.remove cache (get rcache r))
+      (.remove rcache r)
+      (recur (.poll rq)))))
+
+(defn make-reference [v rq]
+  (if (nil? v)
+    (SoftReference. ::nil rq)
+    (SoftReference. v rq)))
+
+(defcache SoftCache [cache rcache rq]
+  CacheProtocol
+  (lookup [_ item]
+    (when-let [r (get cache (or item ::nil))]
+      (if (= ::nil (.get r))
+        nil
+        (.get r))))
+  (lookup [_ item not-found]
+    (if-let [r (get cache (or item ::nil))]
+      (if-let [v (.get r)]
+        (if (= ::nil v)
+          nil
+          v)
+        not-found)
+      not-found))
+  (has? [_ item]
+    (let [item (or item ::nil)]
+      (and (contains? cache item)
+           (not (nil? (.get (get cache item)))))))
+  (hit [this item]
+    (clear-soft-cache! cache rcache rq)
+    this)
+  (miss [this item result]
+    (let [item (or item ::nil)
+          r (make-reference result rq)]
+      (.put cache item r)
+      (.put rcache r item)
+      (clear-soft-cache! cache rcache rq)
+      this))
+  (evict [this key]
+    (let [key (or key ::nil)
+          r (get cache key)]
+      (when r
+        (.remove cache key)
+        (.remove rcache r))
+      (clear-soft-cache! cache rcache rq)
+      this))
+  (seed [_ base]
+    (let [soft-cache? (instance? SoftCache base)
+          cache (ConcurrentHashMap.)
+          rcache (ConcurrentHashMap.)
+          rq (ReferenceQueue.)]
+      (if (seq base)
+        (doseq [[k v] base]
+          (let [k (or k ::nil)
+                r (if soft-cache?
+                    (make-reference (.get v) rq)
+                    (make-reference v rq))]
+            (.put cache k r)
+            (.put rcache r k))))
+      (SoftCache. cache rcache rq)))
+  Object
+  (toString [_] (str cache)))
+
 ;; Factories
 
 (defn basic-cache-factory
@@ -528,3 +596,11 @@
          (map? base)]}
   (seed (LIRSCache. {} {} {} 0 s-history-limit q-history-limit) base))
 
+(defn soft-cache-factory
+  "Returns a SoftReference cache.  Cached values will be referred to with
+  SoftReferences, allowing the values to be garbage collected when there is
+  memory pressure on the JVM."
+  [base]
+  {:pre [(map? base)]}
+  (seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
+        base))

@@ -11,7 +11,10 @@
   clojure.core.cache.tests
   (:use [clojure.core.cache] :reload-all)
   (:use [clojure.test])
-  (:import [clojure.core.cache BasicCache FIFOCache LRUCache TTLCache LUCache LIRSCache]))
+  (:import (clojure.core.cache BasicCache FIFOCache LRUCache TTLCache LUCache
+                               LIRSCache)
+           (java.lang.ref ReferenceQueue SoftReference)
+           (java.util.concurrent ConcurrentHashMap)))
 
 (deftest test-basic-cache-lookup
   (testing "that the BasicCache can lookup as expected"
@@ -329,3 +332,55 @@ N non-resident HIR block
                 :lruQ {:8 14 :9 13}
                 :tick 14 :limitS 3 :limitQ 2}))))))
 
+(deftest test-soft-cache-ilookup
+  (testing "counts"
+    (is (= 0 (count (soft-cache-factory {}))))
+    (is (= 1 (count (soft-cache-factory {:a 1})))))
+  (testing "that the SoftCache can lookup via keywords"
+    (do-ilookup-tests (soft-cache-factory small-map)))
+  (testing "that the SoftCache can .lookup"
+    (do-dot-lookup-tests (soft-cache-factory small-map)))
+  (testing "that get and cascading gets work for SoftCache"
+    (do-getting (soft-cache-factory big-map)))
+  (testing "that finding works for SoftCache"
+    (do-finding (soft-cache-factory small-map)))
+  (testing "that contains? works for SoftCache"
+    (do-contains (soft-cache-factory small-map))))
+
+(deftest test-clear-soft-cache!
+  (let [rq (ReferenceQueue.)
+        ref (SoftReference. :bar rq)
+        cache (doto (ConcurrentHashMap.)
+                (.put :foo ref))
+        rcache (doto (ConcurrentHashMap.)
+                 (.put ref :foo))
+        soft-cache (clear-soft-cache! cache rcache rq)]
+    (is (contains? cache :foo) (str cache))
+    (is (contains? rcache ref) (str rcache))
+    (.clear ref)
+    (.enqueue ref)
+    (is (not (.get ref)))
+    (let [soft-cache (clear-soft-cache! cache rcache rq)]
+      (is (not (contains? cache :foo)))
+      (is (not (contains? rcache ref))))))
+
+(deftest test-soft-cache
+  (let [ref (atom nil)
+        old-make-reference make-reference]
+    (with-redefs [make-reference (fn [& args]
+                                   (reset! ref (apply old-make-reference args))
+                                   @ref)]
+      (let [old-soft-cache (soft-cache-factory {:foo1 :bar})
+            r @ref
+            soft-cache (assoc old-soft-cache :foo2 :baz)]
+        (is (and r (= :bar (.get r))))
+        (.clear r)
+        (.enqueue r)
+        (is (nil? (.lookup soft-cache :foo1)))
+        (is (nil? (.lookup old-soft-cache :foo1)))
+        (is (= :quux (.lookup soft-cache :foo1 :quux)))
+        (is (= :quux (.lookup old-soft-cache :foo1 :quux)))
+        (is (= :quux (.lookup soft-cache :foo3 :quux)))
+        (is (= :quux (.lookup old-soft-cache :foo3 :quux)))
+        (is (not (.has? soft-cache :foo1)))
+        (is (not (.has? old-soft-cache :foo1)))))))
