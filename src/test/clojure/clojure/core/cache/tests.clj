@@ -151,7 +151,23 @@
     (let [C (lru-cache-factory {:a 1, :b 2} :threshold 4)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
-           {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :c) (.hit :a) (assoc :e 5) .cache)))))
+           {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :c) (.hit :a) (assoc :e 5) .cache))))
+  (testing "regressions against LRU eviction before threshold met"
+    (is (= (-> (clojure.core.cache/lru-cache-factory {} :threshold 2)
+               (assoc :a 1)
+               (assoc :b 2)
+               (assoc :b 3)
+               (assoc :a 4))
+           {:b 3 :a 4}))
+
+    (is (= (-> (clojure.core.cache/lru-cache-factory {} :threshold 3)
+               (assoc :a 1)
+               (assoc :b 2)
+               (assoc :b 3)
+               (assoc :c 4)
+               (assoc :d 5)
+               (assoc :e 6))
+           {:e 6, :d 5, :c 4}))))
 
 (defn sleepy [e t] (Thread/sleep t) e)
 
@@ -201,7 +217,23 @@
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
            {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :a) (assoc :e 5) .cache)
-           {:b 2, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4)  (.hit :b) (.hit :c) (.hit :d) (assoc :e 5) .cache)))))
+           {:b 2, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4)  (.hit :b) (.hit :c) (.hit :d) (assoc :e 5) .cache))))
+  (testing "regressions against LRU eviction before threshold met"
+    (is (= (-> (clojure.core.cache/lu-cache-factory {} :threshold 2)
+               (assoc :a 1)
+               (assoc :b 2)
+               (assoc :b 3)
+               (assoc :a 4))
+           {:b 3 :a 4}))
+
+    (is (= (-> (clojure.core.cache/lu-cache-factory {} :threshold 3)
+               (assoc :a 1)
+               (assoc :b 2)
+               (assoc :b 3)
+               (assoc :c 4)
+               (assoc :d 5)
+               (assoc :e 6))
+           {:e 6, :d 5, :b 3}))))
 
 ;; # LIRS
 
@@ -367,9 +399,9 @@ N non-resident HIR block
 (deftest test-soft-cache
   (let [ref (atom nil)
         old-make-reference make-reference]
-    (with-redefs [make-reference (fn [& args]
-                                   (reset! ref (apply old-make-reference args))
-                                   @ref)]
+    (binding [make-reference (fn [& args]
+                               (reset! ref (apply old-make-reference args))
+                               @ref)]
       (let [old-soft-cache (soft-cache-factory {:foo1 :bar})
             r @ref
             soft-cache (assoc old-soft-cache :foo2 :baz)]
