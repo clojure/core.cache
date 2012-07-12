@@ -201,11 +201,15 @@
   (miss [_ item result]
     (let [tick+ (inc tick)]
       (if-let [ks (keys lru)]
-        (let [k (apply min-key lru ks)]
-          (LRUCache. (-> cache (dissoc k) (assoc item result))  ;; eviction case
-                     (-> lru (dissoc k) (assoc item tick+))
-                     tick+
-                     limit))
+        (let [k (apply min-key lru ks)        ;; maybe evict case
+              sz (count ks)
+              c (if (>= sz limit)
+                  (-> cache (dissoc k) (assoc item result))
+                  (assoc cache item result))
+              l (if (>= sz limit)
+                  (-> lru (dissoc k) (assoc item tick+))
+                  (assoc lru item tick+))]
+          (LRUCache. c l tick+ limit))
         (LRUCache. (assoc cache item result)  ;; no change case
                    (assoc lru item tick+)
                    tick+
@@ -278,10 +282,15 @@
     (LUCache. cache (update-in lu [item] inc) limit))
   (miss [_ item result]
     (if-let [ks (keys lu)]
-      (let [k (apply min-key lu ks)]
-        (LUCache. (-> cache (dissoc k) (assoc item result))  ;; expulsion case
-                  (-> lu (dissoc k) (assoc item 0))
-                  limit))
+      (let [k (apply min-key lu ks)        ;; maybe evict case
+            sz (count ks)
+            c (if (>= sz limit)
+                (-> cache (dissoc k) (assoc item result))
+                (assoc cache item result))
+            l (if (>= sz limit)
+                (-> lu (dissoc k) (update-in [item] (fnil inc 0)))
+                (assoc lu item 0))]
+        (LUCache. c l limit))
       (LUCache. (assoc cache item result)  ;; no change case
                 (assoc lu item 0)
                 limit)))
@@ -465,7 +474,7 @@
       (.remove rcache r)
       (recur (.poll rq)))))
 
-(defn make-reference [v rq]
+(defn ^{:dynamic true} make-reference [v rq]
   (if (nil? v)
     (SoftReference. ::nil rq)
     (SoftReference. v rq)))
