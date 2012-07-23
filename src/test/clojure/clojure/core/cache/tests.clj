@@ -141,33 +141,42 @@
     (do-contains (LRUCache. small-map {} 0 2))))
 
 (deftest test-lru-cache
-  (testing "LRU-ness with empty cache"
+  (testing "LRU-ness with empty cache and threshold 2"
     (let [C (lru-cache-factory {} :threshold 2)]
       (are [x y] (= x y)
            {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
            {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (assoc :c 3) .cache)
            {:a 1, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :a) (assoc :c 3) .cache))))
-  (testing "LRU-ness with seeded cache"
+  (testing "LRU-ness with seeded cache and threshold 4"
     (let [C (lru-cache-factory {:a 1, :b 2} :threshold 4)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
            {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :c) (.hit :a) (assoc :e 5) .cache))))
   (testing "regressions against LRU eviction before threshold met"
-    (is (= (-> (clojure.core.cache/lru-cache-factory {} :threshold 2)
+    (is (= {:b 3 :a 4}
+           (-> (clojure.core.cache/lru-cache-factory {} :threshold 2)
                (assoc :a 1)
                (assoc :b 2)
                (assoc :b 3)
-               (assoc :a 4))
-           {:b 3 :a 4}))
+               (assoc :a 4)
+               .cache)))
 
-    (is (= (-> (clojure.core.cache/lru-cache-factory {} :threshold 3)
+    (is (= {:e 6, :d 5, :c 4}
+           (-> (clojure.core.cache/lru-cache-factory {} :threshold 3)
                (assoc :a 1)
                (assoc :b 2)
                (assoc :b 3)
                (assoc :c 4)
                (assoc :d 5)
-               (assoc :e 6))
-           {:e 6, :d 5, :c 4}))))
+               (assoc :e 6)
+               .cache)))
+
+    (is (= {:a 1 :b 3}
+           (-> (clojure.core.cache/lru-cache-factory {} :threshold 2)
+               (assoc :a 1)
+               (assoc :b 2)
+               (assoc :b 3)
+               .cache)))))
 
 (defn sleepy [e t] (Thread/sleep t) e)
 

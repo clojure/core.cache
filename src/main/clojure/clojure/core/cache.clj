@@ -12,6 +12,8 @@
   (:import (java.lang.ref ReferenceQueue SoftReference)
            (java.util.concurrent ConcurrentHashMap)))
 
+(set! *warn-on-reflection* true)
+
 ;; # Protocols and Types
 
 (defprotocol CacheProtocol
@@ -74,15 +76,11 @@
        (empty [this#]
          (seed this# (empty ~base-field)))
        (equiv [_# other#]
-         (.equiv ~base-field other#))
+         (clojure.lang.Util/equiv ~base-field other#))
 
        clojure.lang.Seqable
        (seq [_#]
-         (seq ~base-field))
-
-       ;; Java interfaces
-       java.lang.Iterable
-       (iterator [this#] (.iterator ~base-field)))))
+         (seq ~base-field)))))
 
 (defcache BasicCache [cache]
   CacheProtocol
@@ -467,7 +465,7 @@
   (toString [_]
     (str cache \, \space lruS \, \space lruQ \, \space tick \, \space limitS \, \space limitQ)))
 
-(defn clear-soft-cache! [cache rcache rq]
+(defn clear-soft-cache! [^java.util.Map cache ^java.util.Map rcache ^ReferenceQueue rq]
   (loop [r (.poll rq)]
     (when r
       (.remove cache (get rcache r))
@@ -479,15 +477,15 @@
     (SoftReference. ::nil rq)
     (SoftReference. v rq)))
 
-(defcache SoftCache [cache rcache rq]
+(defcache SoftCache [^java.util.Map cache ^java.util.Map rcache rq]
   CacheProtocol
   (lookup [_ item]
-    (when-let [r (get cache (or item ::nil))]
+    (when-let [^SoftReference r (get cache (or item ::nil))]
       (if (= ::nil (.get r))
         nil
         (.get r))))
   (lookup [_ item not-found]
-    (if-let [r (get cache (or item ::nil))]
+    (if-let [^SoftReference r (get cache (or item ::nil))]
       (if-let [v (.get r)]
         (if (= ::nil v)
           nil
@@ -495,9 +493,10 @@
         not-found)
       not-found))
   (has? [_ item]
-    (let [item (or item ::nil)]
+    (let [item (or item ::nil)
+          ^SoftReference cell (get cache item)]
       (and (contains? cache item)
-           (not (nil? (.get (get cache item)))))))
+           (not (nil? (.get cell))))))
   (hit [this item]
     (clear-soft-cache! cache rcache rq)
     this)
@@ -522,7 +521,7 @@
           rcache (ConcurrentHashMap.)
           rq (ReferenceQueue.)]
       (if (seq base)
-        (doseq [[k v] base]
+        (doseq [[k ^SoftReference v] base]
           (let [k (or k ::nil)
                 r (if soft-cache?
                     (make-reference (.get v) rq)
@@ -559,7 +558,7 @@
   [base & {threshold :threshold :or {threshold 32}}]
   {:pre [(number? threshold) (< 0 threshold)
          (map? base)]
-   :post [(== threshold (count (.q %)))]}
+   :post [(== threshold (count %))]}
   (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY threshold) base))
 
 (defn lru-cache-factory
