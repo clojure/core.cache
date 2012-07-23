@@ -203,7 +203,10 @@
     (let [C (ttl-cache-factory {} :ttl 500)]
       (are [x y] (= x y)
            {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
-           {:c 3} (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3) .cache)))))
+           {:c 3} (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3) .cache))))
+  (testing "TTL cache does not return a value that has expired."
+    (let [C (ttl-cache-factory {} :ttl 500)]
+      (is (nil? (-> C (assoc :a 1) (sleepy 700) (lookup :a)))))))
 
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"
@@ -242,7 +245,14 @@
                (assoc :c 4)
                (assoc :d 5)
                (assoc :e 6))
-           {:e 6, :d 5, :b 3}))))
+           {:e 6, :d 5, :b 3}))
+
+    (is (= {:a 1 :b 3}
+           (-> (clojure.core.cache/lu-cache-factory {} :threshold 2)
+               (assoc :a 1)
+               (assoc :b 2)
+               (assoc :b 3)
+               .cache)))))
 
 ;; # LIRS
 

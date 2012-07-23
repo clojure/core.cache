@@ -231,17 +231,20 @@
 
 
 (defn- key-killer
-  [ttl limit now]
-  (let [ks (map key (filter #(> (- now (val %)) limit) ttl))]
+  [ttl expiry now]
+  (let [ks (map key (filter #(> (- now (val %)) expiry) ttl))]
     #(apply dissoc % ks)))
 
 
 (defcache TTLCache [cache ttl ttl-ms]
   CacheProtocol
-  (lookup [_ item]
-    (get cache item))
-  (lookup [_ item not-found]
-    (get cache item not-found))
+  (lookup [this item]
+    (let [ret (lookup this item ::nope)]
+      (when-not (= ret ::nope) ret)))
+  (lookup [this item not-found]
+    (if (has? this item)
+      (get cache item)
+      not-found))
   (has? [_ item]
     (let [t (get ttl item (- ttl-ms))]
       (< (- (System/currentTimeMillis)
