@@ -182,15 +182,6 @@
    (into {} (take (- limit (count base)) (for [k (range (- limit) 0)] [k k])))
    (into {} (for [[k _] base] [k start-at]))))
 
-(comment
-
-  (-> (clojure.core.cache/lru-cache-factory {} :threshold 2)
-      (assoc :a 1)
-      (assoc :b 2)
-      (assoc :b 3)
-      )
-
-)
 
 (defcache LRUCache [cache lru tick limit]
   CacheProtocol
@@ -281,21 +272,6 @@
   Object
   (toString [_]
     (str cache \, \space ttl \, \space ttl-ms)))
-
-
-(comment
-
-  (-> (clojure.core.cache/lu-cache-factory {} :threshold 3)
-      (assoc :a 1)
-      (assoc :b 2)
-      (assoc :b 3)
-      (assoc :c 4)
-      (assoc :d 5)
-      (assoc :e 6)
-      ((juxt #(.cache %) #(.lu %) #(.limit %))))
-
-
-)
 
 
 (defcache LUCache [cache lu limit]
