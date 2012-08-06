@@ -155,9 +155,12 @@
   (hit [this item]
     this)
   (miss [_ item result]
-    (let [k (peek q)]
-      (FIFOCache. (-> cache (dissoc k) (assoc item result))
-                  (-> q pop (conj item))
+    (let [[cache q] (if (>= (count cache) limit)
+                      (let [k (peek q)]
+                        [(dissoc cache k) (pop q)])
+                      [cache q])]
+      (FIFOCache. (assoc cache item result)
+                  (conj q item)
                   limit)))
   (evict [this key]
     (let [v (get cache key ::miss)]
@@ -566,7 +569,7 @@
   [base & {threshold :threshold :or {threshold 32}}]
   {:pre [(number? threshold) (< 0 threshold)
          (map? base)]
-   :post [(== threshold (count %))]}
+   :post [(== threshold (count (.q ^FIFOCache %)))]}
   (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY threshold) base))
 
 (defn lru-cache-factory
