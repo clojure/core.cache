@@ -33,7 +33,7 @@ Latest stable release: 0.6.2
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/data.json "0.6.2"]
+    [org.clojure/core.cache "0.6.2"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
