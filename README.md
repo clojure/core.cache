@@ -29,7 +29,7 @@ Latest stable release: 0.6.2
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
-* [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure.cache~~~)
+* [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.cache~~~)
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
@@ -49,7 +49,7 @@ Example Usage
 ========================================
 
 ```clojure
-    (require [clojure.core.cache :as cache])
+    (require '[clojure.core.cache :as cache])
 	
     (def C (cache/fifo-cache-factory {:a 1, :b 2})
 	
