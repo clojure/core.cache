@@ -25,7 +25,7 @@ core.cache is based on a library named Clache, found at http://github.com/fogus/
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.6.2
+Latest stable release: 0.6.1
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -33,14 +33,14 @@ Latest stable release: 0.6.2
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "0.6.2"]
+    [org.clojure/core.cache "0.6.1"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>0.6.2</version>
+      <version>0.6.1</version>
     </dependency>
 
 
