@@ -123,7 +123,12 @@
   (testing "that finding works for FifoCache"
     (do-finding (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "that contains? works for FifoCache"
-    (do-contains (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2))))
+    (do-contains (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
+  (testing "that FIFO caches starting with less elements than the threshold work"
+    (let [C (fifo-cache-factory {:a 1, :b 2} :threshold 3)]
+      (are [x y] (= x y)
+           {:a 1, :b 2, :c 3} (.cache (assoc C :c 3))
+           {:d 4, :b 2, :c 3} (.cache (assoc C :c 3 :d 4))))))
 
 (deftest test-lru-cache-ilookup
   (testing "that the LRUCache can lookup via keywords"

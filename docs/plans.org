@@ -1,0 +1,10 @@
+* Plans for core.cache
+
+** Asynchronous caching protocol
+** LIRSCache evict
+** Adaptive eviction caching
+** Function-backed cache
+** Random eviction cache
+** test.generative usage
+** Explore Arc impl.
+** More documentation and examples

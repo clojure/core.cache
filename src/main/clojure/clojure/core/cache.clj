@@ -155,12 +155,12 @@
   (hit [this item]
     this)
   (miss [_ item result]
-    (let [[cache q] (if (>= (count cache) limit)
-                      (let [k (peek q)]
-                        [(dissoc cache k) (pop q)])
-                      [cache q])]
-      (FIFOCache. (assoc cache item result)
-                  (conj q item)
+    (let [[kache qq] (let [k (peek q)]
+                       (if (>= (count cache) limit)
+                         [(dissoc cache k) (pop q)]
+                         [cache (pop q)]))]
+      (FIFOCache. (assoc kache item result)
+                  (conj qq item)
                   limit)))
   (evict [this key]
     (let [v (get cache key ::miss)]
