@@ -9,6 +9,7 @@
 (ns ^{:doc "A caching library for Clojure."
       :author "Fogus"}
   clojure.core.cache
+  (:require [clojure.data.priority-map :refer (priority-map)])
   (:import (java.lang.ref ReferenceQueue SoftReference)
            (java.util.concurrent ConcurrentHashMap)))
 
@@ -181,9 +182,9 @@
 
 (defn- build-leastness-queue
   [base limit start-at]
-  (merge
-   (into {} (take (- limit (count base)) (for [k (range (- limit) 0)] [k k])))
-   (into {} (for [[k _] base] [k start-at]))))
+  (into (priority-map)
+        (concat (take (- limit (count base)) (for [k (range (- limit) 0)] [k k]))
+                (for [[k _] base] [k start-at]))))
 
 
 (defcache LRUCache [cache lru tick limit]
@@ -202,17 +203,12 @@
                  limit)))
   (miss [_ item result]
     (let [tick+ (inc tick)]
-      (if-let [ks (keys lru)]
+      (if (>= (count lru) limit)
         (let [k (if (contains? lru item)
                   item
-                  (apply min-key lru ks))        ;; maybe evict case
-              sz (count ks)
-              c (if (>= sz limit)
-                  (-> cache (dissoc k) (assoc item result))
-                  (assoc cache item result))
-              l (if (>= sz limit)
-                  (-> lru (dissoc k) (assoc item tick+))
-                  (assoc lru item tick+))]
+                  (first (peek lru))) ;; minimum-key, maybe evict case
+              c (-> cache (dissoc k) (assoc item result))
+              l (-> lru (dissoc k) (assoc item tick+))]
           (LRUCache. c l tick+ limit))
         (LRUCache. (assoc cache item result)  ;; no change case
                    (assoc lru item tick+)
@@ -288,17 +284,12 @@
   (hit [_ item]
     (LUCache. cache (update-in lu [item] inc) limit))
   (miss [_ item result]
-    (if-let [ks (keys lu)]
-      (let [k (if (contains? lu item)
-                  ::nope
-                  (apply min-key lu ks)) ;; maybe evict case
-            sz (count ks)
-            c (if (>= sz limit)
-                (-> cache (dissoc k) (assoc item result))
-                (assoc cache item result))
-            l (if (>= sz limit)
-                (-> lu (dissoc k) (update-in [item] (fnil inc 0)))
-                (assoc lu item 0))]
+    (if (>= (count lu) limit) ;; need to evict?
+      (let [min-key (if (contains? lu item)
+                    ::nope
+                    (first (peek lu))) ;; maybe evict case
+            c (-> cache (dissoc min-key) (assoc item result))
+            l (-> lu (dissoc min-key) (update-in [item] (fnil inc 0)))]
         (LUCache. c l limit))
       (LUCache. (assoc cache item result)  ;; no change case
                 (assoc lu item 0)
@@ -581,7 +572,7 @@
   [base & {threshold :threshold :or {threshold 32}}]
   {:pre [(number? threshold) (< 0 threshold)
          (map? base)]}
-  (clojure.core.cache/seed (LRUCache. {} {} 0 threshold) base))
+  (clojure.core.cache/seed (LRUCache. {} (priority-map) 0 threshold) base))
 
 (defn ttl-cache-factory
   "Returns a TTL cache with the cache and expiration-table initialied to `base` --
@@ -602,7 +593,7 @@
   [base & {threshold :threshold :or {threshold 32}}]
   {:pre [(number? threshold) (< 0 threshold)
          (map? base)]}
-  (clojure.core.cache/seed (LUCache. {} {} threshold) base))
+  (clojure.core.cache/seed (LUCache. {} (priority-map) threshold) base))
 
 (defn lirs-cache-factory
   "Returns an LIRS cache with the S & R LRU lists set to the indicated
