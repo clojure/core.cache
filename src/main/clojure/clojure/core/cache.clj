@@ -626,3 +626,19 @@
   {:pre [(map? base)]}
   (seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
         base))
+
+(comment
+
+  (def C (-> {:a 1 :b 2}
+             (fifo-cache-factory :threshold 2)
+             (ttl-cache-factory  :ttl 5000)))
+
+  (assoc C :c 42)
+  ;;=> {:b 2, :c 42}
+
+  ;; wait 5 seconds
+  
+  (assoc C :d 138)
+  ;;=> {:d 138}
+  
+)
