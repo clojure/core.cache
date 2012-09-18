@@ -1,7 +1,7 @@
 (defproject core.cache "0.6.3-SNAPSHOT"
   :description "Cache library for Clojure."
   :dependencies [[org.clojure/clojure "1.5.0-master-SNAPSHOT"]
-                 [org.clojure/data.priority-map "0.0.2-SNAPSHOT"]]
+                 [org.clojure/data.priority-map "0.0.2"]]
   :dev-dependencies [[jline "0.9.94"]
                      [lein-marginalia "0.7.1"]
                      [lein-multi "1.1.0"]]
