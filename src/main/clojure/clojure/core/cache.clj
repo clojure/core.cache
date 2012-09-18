@@ -9,7 +9,7 @@
 (ns ^{:doc "A caching library for Clojure."
       :author "Fogus"}
   clojure.core.cache
-  (:require [clojure.data.priority-map :refer (priority-map)])
+  (:require clojure.data.priority-map)
   (:import (java.lang.ref ReferenceQueue SoftReference)
            (java.util.concurrent ConcurrentHashMap)))
 
@@ -182,7 +182,7 @@
 
 (defn- build-leastness-queue
   [base limit start-at]
-  (into (priority-map)
+  (into (clojure.data.priority-map/priority-map)
         (concat (take (- limit (count base)) (for [k (range (- limit) 0)] [k k]))
                 (for [[k _] base] [k start-at]))))
 
@@ -572,7 +572,7 @@
   [base & {threshold :threshold :or {threshold 32}}]
   {:pre [(number? threshold) (< 0 threshold)
          (map? base)]}
-  (clojure.core.cache/seed (LRUCache. {} (priority-map) 0 threshold) base))
+  (clojure.core.cache/seed (LRUCache. {} (clojure.data.priority-map/priority-map) 0 threshold) base))
 
 (defn ttl-cache-factory
   "Returns a TTL cache with the cache and expiration-table initialied to `base` --
@@ -593,7 +593,7 @@
   [base & {threshold :threshold :or {threshold 32}}]
   {:pre [(number? threshold) (< 0 threshold)
          (map? base)]}
-  (clojure.core.cache/seed (LUCache. {} (priority-map) threshold) base))
+  (clojure.core.cache/seed (LUCache. {} (clojure.data.priority-map/priority-map) threshold) base))
 
 (defn lirs-cache-factory
   "Returns an LIRS cache with the S & R LRU lists set to the indicated
