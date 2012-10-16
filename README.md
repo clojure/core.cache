@@ -10,7 +10,7 @@ core.cache is a new Clojure contrib library providing the following features:
 * Implementations of some basic caching strategies
   - First-in-first-out (FIFOCache)
   - Least-recently-used (LRUCache)
-  - Least-used (LUCache)
+  - Least-used (LUCache -- sometimes called Least Frequently Used)
   - Time-to-live (TTLCache)
   - Naive cache (BasicCache)
   - Naive cache backed with soft references (SoftCache)
