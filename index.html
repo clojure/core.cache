@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>clojure.core.cache - A caching library implementing various cache strategies 0.6.2 API documentation</title>
+    <title>clojure.core.cache - A caching library implementing various cache strategies 0.6.3 API documentation</title>
     <link href="static/favicon.png" rel="icon" />
     <link href="static/favicon.png" rel="shortcut icon" />
     <link media="all" type="text/css" href="static/clojure.css" rel="stylesheet" />
@@ -25,7 +25,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">A caching library implementing various cache strategies</span> <span id="version">0.6.2</span> API</span><br />
+    <span class="toc-header"><span id="project-name">A caching library implementing various cache strategies</span> <span id="version">0.6.3</span> API</span><br />
     <ul>
       <li><a class="wiki_link" href="index.html">Overview</a></li>
       <li><a class="wiki_link" href="api-index.html">API Index</a></li>
@@ -46,79 +46,19 @@ namespace.
     <a href="#toc0" style="margin-top: 3px;">Overview</a>
     
   </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#proto-section" style="margin-top: 3px;">Protocols</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/CacheProtocol">CacheProtocol</a>
-      <div style="margin-left: 1em;" class="toc-subentry">
-        <a class="toc-subentry-anchor" href="#clojure.core.cache/evict">evict</a>
-      </div><div style="margin-left: 1em;" class="toc-subentry">
-        <a class="toc-subentry-anchor" href="#clojure.core.cache/has?">has?</a>
-      </div><div style="margin-left: 1em;" class="toc-subentry">
-        <a class="toc-subentry-anchor" href="#clojure.core.cache/hit">hit</a>
-      </div><div style="margin-left: 1em;" class="toc-subentry">
-        <a class="toc-subentry-anchor" href="#clojure.core.cache/lookup">lookup</a>
-      </div><div style="margin-left: 1em;" class="toc-subentry">
-        <a class="toc-subentry-anchor" href="#clojure.core.cache/miss">miss</a>
-      </div><div style="margin-left: 1em;" class="toc-subentry">
-        <a class="toc-subentry-anchor" href="#clojure.core.cache/seed">seed</a>
-      </div>
-    </div>
+    <a href="#" style="margin-top: 3px;"></a>
+    
   </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#type-section" style="margin-top: 3px;">Types</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/BasicCache">BasicCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/FIFOCache">FIFOCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/FnCache">FnCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/LIRSCache">LIRSCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/LRUCache">LRUCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/LUCache">LUCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/SoftCache">SoftCache</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/TTLCache">TTLCache</a>
-      
-    </div>
+    <a href="#" style="margin-top: 3px;"></a>
+    
   </div><div style="margin-left: 1em;" class="toc-section">
-    <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
-    <div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/basic-cache-factory">basic-cache-factory</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/fifo-cache-factory">fifo-cache-factory</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/lirs-cache-factory">lirs-cache-factory</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/lru-cache-factory">lru-cache-factory</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/lu-cache-factory">lu-cache-factory</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/soft-cache-factory">soft-cache-factory</a>
-      
-    </div><div style="margin-left: 1em;" class="toc-entry">
-      <a class="toc-entry-anchor" href="#clojure.core.cache/ttl-cache-factory">ttl-cache-factory</a>
-      
-    </div>
+    <a href="#" style="margin-top: 3px;"></a>
+    
   </div>
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="clojure.core.cache">clojure.core.cache</span>
-  - <span id="header-project">A caching library implementing various cache strategies</span> <span id="header-version">0.6.2</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
+  - <span id="header-project">A caching library implementing various cache strategies</span> <span id="header-version">0.6.3</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">Fogus</span><br /></span>
 <br />Full namespace name: <span id="long-name">clojure.core.cache</span>
@@ -130,278 +70,9 @@ namespace.
 
 <br />
 
-<div id="proto-section">
-  <p></p>
-  <h2>Protocols</h2>
-  <div id="proto-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/CacheProtocol">CacheProtocol</h2>
-    <span id="proto-type">Protocol</span><br />
-    <pre id="proto-docstr">This is the protocol describing the basic cache capability.</pre>
-    Known implementations: <span id="proto-impls"><a href="#clojure.core.cache/BasicCache">BasicCache</a>, <a href="#clojure.core.cache/FIFOCache">FIFOCache</a>, <a href="#clojure.core.cache/FnCache">FnCache</a>, <a href="#clojure.core.cache/LIRSCache">LIRSCache</a>, <a href="#clojure.core.cache/LRUCache">LRUCache</a>, <a href="#clojure.core.cache/LUCache">LUCache</a>, <a href="#clojure.core.cache/SoftCache">SoftCache</a>, <a href="#clojure.core.cache/TTLCache">TTLCache</a></span>
-    <div id="proto-var-entry">
-      <br />
-      <h3 id="clojure.core.cache/evict">evict</h3>
-      <span id="var-type">function</span><br />
-      <pre id="var-usage">Usage: (evict cache e)
-</pre>
-      <pre id="var-docstr">Removes an entry from the cache</pre>
-      
-      
-      
-    </div><div id="proto-var-entry">
-      <br />
-      <h3 id="clojure.core.cache/has?">has?</h3>
-      <span id="var-type">function</span><br />
-      <pre id="var-usage">Usage: (has? cache e)
-</pre>
-      <pre id="var-docstr">Checks if the cache contains a value associtaed with `e`</pre>
-      
-      
-      
-    </div><div id="proto-var-entry">
-      <br />
-      <h3 id="clojure.core.cache/hit">hit</h3>
-      <span id="var-type">function</span><br />
-      <pre id="var-usage">Usage: (hit cache e)
-</pre>
-      <pre id="var-docstr">Is meant to be called if the cache is determined to contain a value
-associated with `e`</pre>
-      
-      
-      
-    </div><div id="proto-var-entry">
-      <br />
-      <h3 id="clojure.core.cache/lookup">lookup</h3>
-      <span id="var-type">function</span><br />
-      <pre id="var-usage">Usage: (lookup cache e)
-       (lookup cache e not-found)
-</pre>
-      <pre id="var-docstr">Retrieve the value associated with `e` if it exists, else `nil` in
-the 2-arg case.  Retrieve the value associated with `e` if it exists,
-else `not-found` in the 3-arg case.</pre>
-      
-      
-      
-    </div><div id="proto-var-entry">
-      <br />
-      <h3 id="clojure.core.cache/miss">miss</h3>
-      <span id="var-type">function</span><br />
-      <pre id="var-usage">Usage: (miss cache e ret)
-</pre>
-      <pre id="var-docstr">Is meant to be called if the cache is determined to **not** contain a
-value associated with `e`</pre>
-      
-      
-      
-    </div><div id="proto-var-entry">
-      <br />
-      <h3 id="clojure.core.cache/seed">seed</h3>
-      <span id="var-type">function</span><br />
-      <pre id="var-usage">Usage: (seed cache base)
-</pre>
-      <pre id="var-docstr">Is used to signal that the cache should be created with a seed.
-The contract is that said cache should return an instance of its
-own type.</pre>
-      
-      
-      
-    </div>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L19" id="proto-source">Source</a>
-  </div>
-</div>
-<div id="type-section">
-  <p></p>
-  <h2>Types</h2>
-  <div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/BasicCache">BasicCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/FIFOCache">FIFOCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache q limit]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/FnCache">FnCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache f]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/LIRSCache">LIRSCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache lruS lruQ tick limitS limitQ]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/LRUCache">LRUCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache lru tick limit]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/LUCache">LUCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache lu limit]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/SoftCache">SoftCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache rcache rq]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div><div id="type-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/TTLCache">TTLCache</h2>
-    <span id="type-type">type</span><br />
-    <pre id="type-docstr"></pre>
-    Fields: <span id="type-fields">[cache ttl ttl-ms]</span><br />
-    Protocols: <span id="type-protocols"><a href="#clojure.core.cache/CacheProtocol">CacheProtocol</a></span><br />
-    Interfaces: <span id="type-interfaces">clojure.lang.Associative, clojure.lang.Counted, clojure.lang.ILookup, clojure.lang.IPersistentCollection, clojure.lang.IPersistentMap, clojure.lang.Seqable</span><br />
-  </div>
-</div>
-<div id="var-section">
-  <p></p>
-  <h2>Public Variables and Functions</h2>
-  <div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/basic-cache-factory">basic-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (basic-cache-factory base)
-</pre>
-    <pre id="var-docstr">Returns a pluggable basic cache initialied to `base`</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L548" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/fifo-cache-factory">fifo-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (fifo-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
-</pre>
-    <pre id="var-docstr">Returns a FIFO cache with the cache and FIFO queue initialized to `base` --
-the queue is filled as the values are pulled out of `base`.  If the associative
-structure can guarantee ordering, then the said ordering will define the
-eventual eviction order.  Otherwise, there are no guarantees for the eventual
-eviction ordering.
 
-This function takes an optional `:threshold` argument that defines the maximum number
-of elements in the cache before the FIFO semantics apply (default is 32).
 
-If the number of elements in `base` is greater than the limit then some items
-in `base` will be dropped from the resulting cache.  If the associative
-structure used as `base` can guarantee sorting, then the last `limit` elements
-will be used as the cache seed values.  Otherwise, there are no guarantees about
-the elements in the resulting cache.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L554" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/lirs-cache-factory">lirs-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (lirs-cache-factory base &amp; {:keys [s-history-limit q-history-limit], :or {s-history-limit 32, q-history-limit 32}})
-</pre>
-    <pre id="var-docstr">Returns an LIRS cache with the S &amp; R LRU lists set to the indicated
-limits.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L607" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/lru-cache-factory">lru-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (lru-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
-</pre>
-    <pre id="var-docstr">Returns an LRU cache with the cache and usage-table initialied to `base` --
-each entry is initialized with the same usage value.
 
-This function takes an optional `:threshold` argument that defines the maximum number
-of elements in the cache before the LRU semantics apply (default is 32).</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L575" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/lu-cache-factory">lu-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (lu-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
-</pre>
-    <pre id="var-docstr">Returns an LU cache with the cache and usage-table initialied to `base`.
-
-This function takes an optional `:threshold` argument that defines the maximum number
-of elements in the cache before the LU semantics apply (default is 32).</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L597" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/soft-cache-factory">soft-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (soft-cache-factory base)
-</pre>
-    <pre id="var-docstr">Returns a SoftReference cache.  Cached values will be referred to with
-SoftReferences, allowing the values to be garbage collected when there is
-memory pressure on the JVM.
-
-SoftCache is a mutable cache, since it is always based on a
-ConcurrentHashMap.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L618" id="var-source">Source</a>
-  </div><div id="var-entry">
-    <br />
-    <hr />
-    <h2 id="clojure.core.cache/ttl-cache-factory">ttl-cache-factory</h2>
-    <span id="var-type">function</span><br />
-    <pre id="var-usage">Usage: (ttl-cache-factory base &amp; {ttl :ttl, :or {ttl 2000}})
-</pre>
-    <pre id="var-docstr">Returns a TTL cache with the cache and expiration-table initialied to `base` --
-each with the same time-to-live.
-
-This function also allows an optional `:ttl` argument that defines the default
-time in milliseconds that entries are allowed to reside in the cache.</pre>
-    
-    
-    <a href="https://github.com/clojure/core.cache/blob/8c22ef153b7825b33e73cea41607d106fd3d0268/src/main/clojure/clojure/core/cache.clj#L586" id="var-source">Source</a>
-  </div>
-</div>
 
 
 </div>
