@@ -39,7 +39,9 @@
    The contract is that said cache should return an instance of its
    own type."))
 
-(defn- through
+(def ^:private default-wrapper-fn #(%1 %2))
+
+(defn through
   "The basic hit/miss logic for the cache system.  Expects a wrap function and
   value function.  The wrap function takes the value function and the item in question
   and is expected to run the value function with the item whenever a cache
@@ -48,7 +50,7 @@
   ([wrap-fn value-fn cache item]
     (if (clojure.core.cache/has? cache item)
       (clojure.core.cache/hit cache item)
-      (clojure.core.cache/miss cache item (wrap-fn #(apply value-fn %) item)))))
+      (clojure.core.cache/miss cache item (wrap-fn #(value-fn %) item)))))
 
 (defmacro defcache
   [type-name fields & specifics]
