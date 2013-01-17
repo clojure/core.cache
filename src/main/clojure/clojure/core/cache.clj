@@ -39,7 +39,7 @@
    The contract is that said cache should return an instance of its
    own type."))
 
-(def ^:private default-wrapper-fn #(%1 %2))
+(def ^{:private true} default-wrapper-fn #(%1 %2))
 
 (defn through
   "The basic hit/miss logic for the cache system.  Expects a wrap function and
