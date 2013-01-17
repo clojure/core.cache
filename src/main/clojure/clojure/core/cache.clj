@@ -39,13 +39,20 @@
    The contract is that said cache should return an instance of its
    own type."))
 
+(defn- through
+  "The basic hit/miss logic for the cache system.  Clojure delays are used
+   to hold the cache value."
+  ([wrap-fn value-fn cache item]
+    (if (clojure.core.cache/has? cache item)
+      (clojure.core.cache/hit cache item)
+      (clojure.core.cache/miss cache item (wrap-fn (apply value-fn item))))))
 
 (defmacro defcache
   [type-name fields & specifics]
   (let [[base-field & _] fields]
     `(deftype ~type-name [~@fields]
        ~@specifics
-     
+
        clojure.lang.ILookup
        (valAt [this# key#]
               (lookup this# key#))
@@ -127,7 +134,7 @@
 ;; # FIFO
 
 (defn- describe-layout [mappy limit]
-  (let [q clojure.lang.PersistentQueue/EMPTY 
+  (let [q clojure.lang.PersistentQueue/EMPTY
         ks (keys mappy)
         [dropping keeping] (split-at (- (count ks) limit) ks)]
     {:dropping dropping
@@ -628,8 +635,8 @@
   ;;=> {:b 2, :c 42}
 
   ;; wait 5 seconds
-  
+
   (assoc C :d 138)
   ;;=> {:d 138}
-  
+
 )
