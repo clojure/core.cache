@@ -47,6 +47,7 @@
   and is expected to run the value function with the item whenever a cache
   miss occurs.  The intent is to hide any cache-specific cells from leaking
   into the cache logic itelf."
+  ([cache item] (through default-wrapper-fn identity cache item))
   ([value-fn cache item] (through default-wrapper-fn value-fn cache item))
   ([wrap-fn value-fn cache item]
     (if (clojure.core.cache/has? cache item)
