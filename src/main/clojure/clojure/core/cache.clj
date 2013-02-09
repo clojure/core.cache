@@ -509,8 +509,7 @@
   (has? [_ item]
     (let [item (or item ::nil)
           ^SoftReference cell (get cache item)]
-      (and (contains? cache item)
-           (not (nil? (.get cell))))))
+      (and cell (.get cell))))
   (hit [this item]
     (clear-soft-cache! cache rcache rq)
     this)
