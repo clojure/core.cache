@@ -93,6 +93,30 @@ namespace.
   </div><div style="margin-left: 1em;" class="toc-section">
     <a href="#var-section" style="margin-top: 3px;">Vars and Functions</a>
     <div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;BasicCache">-&gt;BasicCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;FIFOCache">-&gt;FIFOCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;FnCache">-&gt;FnCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;LIRSCache">-&gt;LIRSCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;LRUCache">-&gt;LRUCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;LUCache">-&gt;LUCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;SoftCache">-&gt;SoftCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
+      <a class="toc-entry-anchor" href="#clojure.core.cache/-&gt;TTLCache">-&gt;TTLCache</a>
+      
+    </div><div style="margin-left: 1em;" class="toc-entry">
       <a class="toc-entry-anchor" href="#clojure.core.cache/basic-cache-factory">basic-cache-factory</a>
       
     </div><div style="margin-left: 1em;" class="toc-entry">
@@ -297,6 +321,94 @@ own type.</pre>
   <p></p>
   <h2>Public Variables and Functions</h2>
   <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;BasicCache">-&gt;BasicCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;BasicCache cache)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.BasicCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L100" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;FIFOCache">-&gt;FIFOCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;FIFOCache cache q limit)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.FIFOCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L162" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;FnCache">-&gt;FnCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;FnCache cache f)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.FnCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L120" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;LIRSCache">-&gt;LIRSCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;LIRSCache cache lruS lruQ tick limitS limitQ)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.LIRSCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L412" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;LRUCache">-&gt;LRUCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;LRUCache cache lru tick limit)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.LRUCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L204" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;LUCache">-&gt;LUCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;LUCache cache lu limit)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.LUCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L290" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;SoftCache">-&gt;SoftCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;SoftCache cache rcache rq)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.SoftCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L496" id="var-source">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache/-&gt;TTLCache">-&gt;TTLCache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (-&gt;TTLCache cache ttl ttl-ms)
+</pre>
+    <pre id="var-docstr">Positional factory function for class clojure.core.cache.TTLCache.</pre>
+    
+    
+    <a href="https://github.com/clojure/core.cache/blob/06e1a6654dd75a81a29286752704429ac97e8a8f/src/main/clojure/clojure/core/cache.clj#L255" id="var-source">Source</a>
+  </div><div id="var-entry">
     <br />
     <hr />
     <h2 id="clojure.core.cache/basic-cache-factory">basic-cache-factory</h2>
