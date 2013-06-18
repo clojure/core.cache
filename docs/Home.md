@@ -9,6 +9,7 @@ core.cache
 * [Composing caches](./wiki/Composing)
 * [Creating custom caches](./wiki/Extending)
 * [Building core.cache](./wiki/Building)
+* [Plans for core.cache](./wiki/Plans)
 
 ## The problem
 
