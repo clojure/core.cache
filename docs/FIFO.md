@@ -4,7 +4,7 @@ A First-In-First-Out cache is one that uses queuing logic for its backing store,
 
 > In simple terms, the FIFO cache will remove the element that has been in the cache the longest.
 
-*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using).*
+*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using.md).*
 
 ## General use
 
@@ -33,7 +33,7 @@ Likewise, adding two more elements should evict two values:
     ;=> {:z 138, :x 36, :b 2}
 ```
 
-Like all of the implementations in core.cache, `FIFOCache` instances operate like regular maps and are immutable. All caveats apply regarding the [proper usage patterns](./Using).
+Like all of the implementations in core.cache, `FIFOCache` instances operate like regular maps and are immutable. All caveats apply regarding the [proper usage patterns](./Using.md).
 
 ## FIFO cache use cases
 

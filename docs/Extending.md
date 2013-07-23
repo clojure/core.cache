@@ -44,7 +44,7 @@ The defcache convenience macro
 
 The core.cache library provides a convenience macro for defining cache implementations called `defcache`.  The advantage that `defcache` provides is that by implementing the `CacheProtocol` protocol your caches will automatically implement Clojure's associative data structure protocols as well.  The `defcache` does this by implementing the associative behaviors in terms of the `CacheProtocol`.  
 
-*All caveats apply regarding the [proper usage patterns](./Using).*
+*All caveats apply regarding the [proper usage patterns](./Using.md).*
 
 Implementing a custom cache
 ---------------------------
@@ -127,4 +127,3 @@ The `seed` function is meant to populate the cache with a set of known values.  
 ```
 
 Finally, `LameCache` is given a lame `toString` method.
-
