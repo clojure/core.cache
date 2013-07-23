@@ -5,7 +5,7 @@ The least-recently-used cache is one that evicts items that are accessed least f
 
 > In simple terms, the LRU cache will remove the element in the cache that has not been accessed in the longest time.
 
-*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using).*
+*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using.md).*
 
 General usage
 -------------
@@ -44,7 +44,7 @@ At this point the operation of the LRU cache looks exactly the same at the FIFO 
 
 As you see, hitting the element at the key `:a` will expose the LRU nature of the underlying cache.  That is, when the threshold is passed, the cache will expel the **L**east **R**ecently **U**sed element in favor of the new.  In this base case the items accessed most recetly were `:c` and `:a`.
 
-Like all of the implementations in core.cache, `LRUCache` instances operate like regular maps and are immutable. All caveats apply regarding the [proper usage patterns](./Using).
+Like all of the implementations in core.cache, `LRUCache` instances operate like regular maps and are immutable. All caveats apply regarding the [proper usage patterns](./Using.md).
 
 LRU cache use case
 ------------------

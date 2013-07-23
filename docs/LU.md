@@ -1,11 +1,11 @@
 LU cache
 =========
 
-The least-used cache (sometimes called "Least Frequently Used") is a [variant of LRU](./LRU) that evicts items that are used least frequently once its threshold has been exceeded.
+The least-used cache (sometimes called "Least Frequently Used") is a [variant of LRU](./LRU.md) that evicts items that are used least frequently once its threshold has been exceeded.
 
 > In simple terms, the LU cache will remove the element in the cache that has been accessed the least, regardless of time.
 
-*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using).*
+*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using.md).*
 
 General usage
 -------------
@@ -46,7 +46,7 @@ At this point the operation of the LU cache looks exactly the same at the FIFO c
 
 As you see, hitting the key `:b` twice marks it as more important that `:a` even though the latter was "touched" more recently.  That is, when the threshold is passed, the cache will expel the **L**east **U**sed element in favor of the element accessed most often.
 
-All caveats apply regarding the [proper usage patterns](./Using).
+All caveats apply regarding the [proper usage patterns](./Using.md).
 
 LU cache use cases
 ------------------
