@@ -3,7 +3,7 @@ TTL cache
 
 The time-to-live cache is one that evicts items that are older than a time-to-live threshold (in milliseconds).
 
-*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using).*
+*Before reading this page please make sure that you've read and understand the [Basic Usage patterns](./Using.md).*
 
 General usage
 -------------
@@ -36,7 +36,7 @@ At this point the cache is fresh and younger than one second (that is, depending
 
 At this point the operation of the TTL cache is exposed.  As you see, sleeping in between adding the keys `:a` and `:b` causes them to be evicted on the next insertion.
 
-All caveats apply regarding the [proper usage patterns](./Using).
+All caveats apply regarding the [proper usage patterns](./Using.md).
 
 TTL cache use cases
 --------------------

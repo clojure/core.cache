@@ -1,6 +1,6 @@
 # Using core.cache
 
-*note: see the page on [[Including]] core.cache before you begin this section*
+*note: see the page on [including core.cache](./Including.md) before you begin this section*
 
 ## Basic usage pattern
 
@@ -52,11 +52,11 @@ For specific information about eviction policies and thresholds, view the specif
 
 core.cache comes with a number of builtin immutable cache implementations, including (*click through for specific information*):
 
-* [FIFO cache](./FIFO)
-* [LRU cache](./LRU)
-* [LU cache](./LU)
-* [TTL cache](./TTL)
-* [LIRS cache](./LIRS)
+* [FIFO cache](./FIFO.md)
+* [LRU cache](./LRU.md)
+* [LU cache](./LU.md)
+* [TTL cache](./TTL.md)
+* [LIRS cache](./LIRS.md)
 * Function-backed cache (work in progress)
 * Soft-reference cache (work in progress)
 
@@ -64,8 +64,8 @@ The core.cache implementations are backed by any map-like object.  Additionally,
 
 ## Extending core.cache
 
-See the section [on creating custom caches](./Extending) for more information.
+See the section [on creating custom caches](./Extending.md) for more information.
 
 ## Nesting cache types
 
-See the section [on composing caches](./Composing) for more information.
+See the section [on composing caches](./Composing.md) for more information.
