@@ -5,11 +5,11 @@ core.cache
 
 * Overview (this page)
 * [Including core.cache in your projects](./Including.md)
-* [Example usages of core.cache](./wiki/Using)
-* [Composing caches](./wiki/Composing)
-* [Creating custom caches](./wiki/Extending)
-* [Building core.cache](./wiki/Building)
-* [Plans for core.cache](./wiki/Plans)
+* [Example usages of core.cache](./Using.md)
+* [Composing caches](./Composing.md)
+* [Creating custom caches](./Extending.md)
+* [Building core.cache](./Building.md)
+* [Plans for core.cache](./Plans.md)
 
 ## The problem
 
@@ -26,12 +26,12 @@ core.cache is a Clojure contrib library providing the following features:
 * A `defcache` macro for hooking your `CacheProtocol` implementations into the Clojure associative data capabilities.
 
 * Implementations of some common caching strategies, including:
-  - [First-in-first-out](./wiki/FIFO)
-  - [Least-recently-used](./wiki/LRU)
-  - [Least-used](./wiki/LU)
-  - [Time-to-live](./wiki/TTL)
+  - [First-in-first-out](./FIFO.md)
+  - [Least-recently-used](./LRU.md)
+  - [Least-used](./LU.md)
+  - [Time-to-live](./TTL.md)
 
-* Implementation of an efficient buffer replacement policy based on the *low inter-reference recency set* algorithm ([LIRSCache](./wiki/LIRS)) described in the [LIRS](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.116.2184) paper
+* Implementation of an efficient buffer replacement policy based on the *low inter-reference recency set* algorithm ([LIRSCache](./LIRS.md)) described in the [LIRS](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.116.2184) paper
 
 * Factory functions for each existing cache type
 
