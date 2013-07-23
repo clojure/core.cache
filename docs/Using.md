@@ -26,7 +26,7 @@ To find a value in a map by its key you have a couple choices:
 ;=> 2
 ```
 
-To ensure the proper cache policies are followed for each specific type, the following `has?->hit,miss` pattern should be used:
+To ensure the proper cache policies are followed for each specific type, the following `has?/hit/miss` pattern should be used:
 
 ```clojure
 (if (cache/has? C :c)     ;; has? checks that the cache contains an item
