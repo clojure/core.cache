@@ -30,6 +30,8 @@ core.cache is a Clojure contrib library providing the following features:
   - [Least-recently-used](./LRU.md)
   - [Least-used](./LU.md)
   - [Time-to-live](./TTL.md)
+  - Function-backed cache (work in progress)
+  - Soft-reference cache (work in progress)
 
 * Implementation of an efficient buffer replacement policy based on the *low inter-reference recency set* algorithm ([LIRSCache](./LIRS.md)) described in the [LIRS](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.116.2184) paper
 
