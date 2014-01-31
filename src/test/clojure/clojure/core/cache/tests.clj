@@ -125,7 +125,7 @@
   (testing "that contains? works for FifoCache"
     (do-contains (FIFOCache. small-map clojure.lang.PersistentQueue/EMPTY 2)))
   (testing "that FIFO caches starting with less elements than the threshold work"
-    (let [C (fifo-cache-factory {:a 1, :b 2} :threshold 3)]
+    (let [C (fifo-cache-factory (sorted-map :a 1, :b 2) :threshold 3)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3} (.cache (assoc C :c 3))
            {:d 4, :b 2, :c 3} (.cache (assoc C :c 3 :d 4))))))
@@ -227,7 +227,7 @@
     (let [C (lu-cache-factory {} :threshold 2)]
       (are [x y] (= x y)
            {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
-           {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (assoc :c 3) .cache)
+           {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :b) (assoc :c 3) .cache)
            {:b 2, :c 3} (-> C (assoc :a 1) (assoc :b 2) (.hit :b) (.hit :b) (.hit :a) (assoc :c 3) .cache))))
   (testing "LU-ness with seeded cache"
     (let [C (lu-cache-factory {:a 1, :b 2} :threshold 4)]
@@ -248,6 +248,9 @@
                (assoc :b 2)
                (assoc :b 3)
                (assoc :c 4)
+               (assoc :d -5)
+               ;; ensure that the test result does not rely on
+               ;; arbitrary tie-breakers in number of hits
                (assoc :d 5)
                (assoc :e 6))
            {:e 6, :d 5, :b 3}))
