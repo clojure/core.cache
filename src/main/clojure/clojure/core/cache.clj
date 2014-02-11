@@ -313,8 +313,8 @@
       (if (= v ::miss)
         this
         (LUCache. (dissoc cache key)
-                   (dissoc lu key)
-                   limit))))
+                  (dissoc lu key)
+                  limit))))
   (seed [_ base]
     (LUCache. base
               (build-leastness-queue base limit 0)
