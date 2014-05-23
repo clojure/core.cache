@@ -25,7 +25,7 @@
    the 2-arg case.  Retrieve the value associated with `e` if it exists,
    else `not-found` in the 3-arg case.")
   (has?    [cache e]
-   "Checks if the cache contains a value associtaed with `e`")
+   "Checks if the cache contains a value associated with `e`")
   (hit     [cache e]
    "Is meant to be called if the cache is determined to contain a value
    associated with `e`")
