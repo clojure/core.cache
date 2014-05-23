@@ -141,23 +141,21 @@
 ;; # FIFO
 
 (defn- describe-layout [mappy limit]
-  (let [q clojure.lang.PersistentQueue/EMPTY
-        ks (keys mappy)
+  (let [ks (keys mappy)
         [dropping keeping] (split-at (- (count ks) limit) ks)]
     {:dropping dropping
      :keeping  keeping
      :queue
-     (into q (concat (repeat (- limit (count keeping)) ::free)
-                     (take limit keeping)))}))
+     (concat (repeat (- limit (count keeping)) ::free)
+             (take limit keeping))}))
 
 (defn- dissoc-keys [m ks]
   (if ks
     (recur (dissoc m (first ks)) (next ks))
     m))
 
-(defn- prune-queue [q ks]
-  (into clojure.lang.PersistentQueue/EMPTY
-        (filter (complement (set ks)) q)))
+(defn- prune-queue [q k]
+  (remove #{k} q))
 
 (defcache FIFOCache [cache q limit]
   CacheProtocol
@@ -170,24 +168,24 @@
   (hit [this item]
     this)
   (miss [_ item result]
-    (let [[kache qq] (let [k (peek q)]
+    (let [[kache qq] (let [k (first q)]
                        (if (>= (count cache) limit)
-                         [(dissoc cache k) (pop q)]
-                         [cache (pop q)]))]
+                         [(dissoc cache k) (rest q)]
+                         [cache (rest q)]))]
       (FIFOCache. (assoc kache item result)
-                  (conj qq item)
+                  (concat qq [item])
                   limit)))
   (evict [this key]
     (let [v (get cache key ::miss)]
       (if (= v ::miss)
         this
         (FIFOCache. (dissoc cache key)
-                    (prune-queue q [key])
+                    (prune-queue q key)
                     limit))))
   (seed [_ base]
     (let [{dropping :dropping
            q :queue} (describe-layout base limit)]
-      (FIFOCache. (dissoc-keys base dropping)
+      (FIFOCache. (apply dissoc base dropping)
                   q
                   limit)))
   Object
