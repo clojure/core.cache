@@ -24,6 +24,13 @@
     <artifactId>pom.contrib</artifactId>
     <version>0.1.2</version>
   </parent>
+  <developers>
+    <developer>
+      <id>fogus</id>
+      <name>Michael Fogus</name>
+      <url>http://www.fogus.me</url>
+    </developer>
+  </developers>
   <build>
     <sourceDirectory>src/main/clojure</sourceDirectory>
     <testSourceDirectory>src/test/clojure</testSourceDirectory>
