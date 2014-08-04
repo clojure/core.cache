@@ -4,7 +4,7 @@
   <artifactId>core.cache</artifactId>
   <packaging>jar</packaging>
   <version>0.6.4-SNAPSHOT</version>
-  <name>core.cache</name>
+  <name>${artifactId}</name>
   <description>Cache library for Clojure.</description>
   <scm>
     <connection>scm:git:git://github.com/clojure/core.cache.git</connection>
