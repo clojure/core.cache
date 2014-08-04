@@ -1,7 +1,7 @@
 (defproject core.cache "0.6.4-SNAPSHOT"
   :description "Cache library for Clojure."
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/data.priority-map "0.0.2"]]
+                 [org.clojure/data.priority-map "0.0.4"]]
   :profiles {:1.2   {:dependencies [[org.clojure/clojure "1.2.0"]]}
              :1.2.1 {:dependencies [[org.clojure/clojure "1.2.1"]]}
              :1.3   {:dependencies [[org.clojure/clojure "1.3.0"]]}
