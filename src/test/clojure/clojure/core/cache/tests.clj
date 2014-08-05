@@ -181,7 +181,19 @@
                (assoc :a 1)
                (assoc :b 2)
                (assoc :b 3)
-               .cache)))))
+               .cache))))
+
+  (is (= {:d 4 :e 5}
+         (-> (lru-cache-factory {} :threshold 2)
+             (hit :x)
+             (hit :y)
+             (hit :z)
+             (assoc :a 1)
+             (assoc :b 2)
+             (assoc :c 3)
+             (assoc :d 4)
+             (assoc :e 5)
+             .cache))))
 
 (defn sleepy [e t] (Thread/sleep t) e)
 

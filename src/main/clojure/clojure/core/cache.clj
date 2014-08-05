@@ -210,7 +210,9 @@
   (hit [_ item]
     (let [tick+ (inc tick)]
       (LRUCache. cache
-                 (assoc lru item tick+)
+                 (if (contains? cache item)
+                   (assoc lru item tick+)
+                   lru)
                  tick+
                  limit)))
   (miss [_ item result]
