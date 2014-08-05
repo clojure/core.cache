@@ -86,8 +86,8 @@
          (clojure.core/count ~base-field))
 
        clojure.lang.IPersistentCollection
-       (cons [_# elem#]
-         (clojure.core/cons ~base-field elem#))
+       (cons [this# elem#]
+         (seed this# (conj ~base-field elem#)))
        (empty [this#]
          (seed this# (empty ~base-field)))
        (equiv [this# other#]

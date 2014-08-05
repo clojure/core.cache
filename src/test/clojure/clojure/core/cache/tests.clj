@@ -447,3 +447,9 @@ N non-resident HIR block
 (deftest test-equiv
   (is (= (fifo-cache-factory {:a 1 :c 3} :threshold 3)
          (fifo-cache-factory {:a 1 :c 3} :threshold 3))))
+
+(deftest test-persistent-cons
+  (is (let [starts-with-a (fifo-cache-factory {:a 1} :threshold 3)]
+        (= (fifo-cache-factory {:a 1 :c 3} :threshold 3)
+           (conj starts-with-a [:c 3])
+           (conj starts-with-a {:c 3})))))
