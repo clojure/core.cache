@@ -3,7 +3,7 @@
   <groupId>core.cache</groupId>
   <artifactId>core.cache</artifactId>
   <packaging>jar</packaging>
-  <version>0.6.4-SNAPSHOT</version>
+  <version>0.7.0-SNAPSHOT</version>
   <name>${artifactId}</name>
   <description>Cache library for Clojure.</description>
   <scm>
