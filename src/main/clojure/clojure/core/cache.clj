@@ -83,7 +83,7 @@
 
        clojure.lang.Counted
        (count [this#]
-         (clojure.core/count ~base-field))
+         (count ~base-field))
 
        clojure.lang.IPersistentCollection
        (cons [this# elem#]
