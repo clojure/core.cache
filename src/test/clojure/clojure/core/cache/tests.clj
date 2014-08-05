@@ -443,3 +443,7 @@ N non-resident HIR block
         (is (= :quux (.lookup old-soft-cache :foo3 :quux)))
         (is (not (.has? soft-cache :foo1)))
         (is (not (.has? old-soft-cache :foo1)))))))
+
+(deftest test-equiv
+  (is (= (fifo-cache-factory {:a 1 :c 3} :threshold 3)
+         (fifo-cache-factory {:a 1 :c 3} :threshold 3))))

@@ -90,8 +90,8 @@
          (clojure.core/cons ~base-field elem#))
        (empty [this#]
          (seed this# (empty ~base-field)))
-       (equiv [_# other#]
-         (clojure.lang.Util/equiv ~base-field other#))
+       (equiv [this# other#]
+         (= other# ~base-field))
 
        clojure.lang.Seqable
        (seq [_#]
