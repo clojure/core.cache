@@ -88,6 +88,7 @@ Change Log
   * [CCACHE-34](http://dev.clojure.org/jira/browse/CCACHE-34) bump tools.priority-map dependency to 0.0.4
   * [CCACHE-28](http://dev.clojure.org/jira/browse/CCACHE-28) concurrency bug in has? for SoftCache
   * [CCACHE-29](http://dev.clojure.org/jira/browse/CCACHE-29) fix conj implementation for caches
+  * [CCACHE-30](http://dev.clojure.org/jira/browse/CCACHE-30) make-reference need not be dynamic
 * Release 0.6.3 on 2013.03.15
   * Added through to encapsulate check logic
 * Release 0.6.2 on 2012.08.07 [more information](http://blog.fogus.me/?p=4527)

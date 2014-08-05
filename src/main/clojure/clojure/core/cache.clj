@@ -486,7 +486,7 @@
       (.remove rcache r)
       (recur (.poll rq)))))
 
-(defn ^{:dynamic true} make-reference [v rq]
+(defn make-reference [v rq]
   (if (nil? v)
     (SoftReference. ::nil rq)
     (SoftReference. v rq)))

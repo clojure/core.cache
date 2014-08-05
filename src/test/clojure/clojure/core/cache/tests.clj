@@ -426,9 +426,9 @@ N non-resident HIR block
 (deftest test-soft-cache
   (let [ref (atom nil)
         old-make-reference make-reference]
-    (binding [make-reference (fn [& args]
-                               (reset! ref (apply old-make-reference args))
-                               @ref)]
+    (with-redefs [make-reference (fn [& args]
+                                   (reset! ref (apply old-make-reference args))
+                                   @ref)]
       (let [old-soft-cache (soft-cache-factory {:foo1 :bar})
             r @ref
             soft-cache (assoc old-soft-cache :foo2 :baz)]
