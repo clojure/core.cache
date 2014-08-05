@@ -1,6 +1,6 @@
 {:namespaces
  ({:source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache/clojure.core.cache-api.html",
    :name "clojure.core.cache",
@@ -11,9 +11,9 @@
    :name "->BasicCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L100",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L100",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->BasicCache",
    :doc
@@ -25,9 +25,9 @@
    :name "->FIFOCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L160",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L160",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->FIFOCache",
    :doc
@@ -39,9 +39,9 @@
    :name "->FnCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L120",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L120",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->FnCache",
    :doc
@@ -53,9 +53,9 @@
    :name "->LIRSCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L410",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L410",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->LIRSCache",
    :doc
@@ -67,9 +67,9 @@
    :name "->LRUCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L202",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L202",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->LRUCache",
    :doc
@@ -81,9 +81,9 @@
    :name "->LUCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L288",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L288",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->LUCache",
    :doc
@@ -95,9 +95,9 @@
    :name "->SoftCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L494",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L494",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->SoftCache",
    :doc
@@ -109,9 +109,9 @@
    :name "->TTLCache",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L253",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L253",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/->TTLCache",
    :doc
@@ -123,9 +123,9 @@
    :name "basic-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L552",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L552",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/basic-cache-factory",
    :doc "Returns a pluggable basic cache initialied to `base`",
@@ -136,9 +136,9 @@
    :name "fifo-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L558",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L558",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/fifo-cache-factory",
    :doc
@@ -154,9 +154,9 @@
    :name "lirs-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L611",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L611",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/lirs-cache-factory",
    :doc
@@ -168,9 +168,9 @@
    :name "lru-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L579",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L579",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/lru-cache-factory",
    :doc
@@ -182,9 +182,9 @@
    :name "lu-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L601",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L601",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/lu-cache-factory",
    :doc
@@ -196,9 +196,9 @@
    :name "soft-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L622",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L622",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/soft-cache-factory",
    :doc
@@ -211,9 +211,9 @@
    :name "through",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L44",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L44",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/through",
    :doc
@@ -225,9 +225,9 @@
    :name "ttl-cache-factory",
    :namespace "clojure.core.cache",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L590",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L590",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/ttl-cache-factory",
    :doc
@@ -301,9 +301,9 @@
    :name "TTLCache"}
   {:file "src/main/clojure/clojure/core/cache.clj",
    :raw-source-url
-   "https://github.com/clojure/core.cache/raw/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj",
+   "https://github.com/clojure/core.cache/raw/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj",
    :source-url
-   "https://github.com/clojure/core.cache/blob/d56ff677caa680ec08114f9d7d126562b24e7882/src/main/clojure/clojure/core/cache.clj#L20",
+   "https://github.com/clojure/core.cache/blob/ce63e6a9cbec64d10c65ffa8d11716c533396094/src/main/clojure/clojure/core/cache.clj#L20",
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/CacheProtocol",
    :namespace "clojure.core.cache",
