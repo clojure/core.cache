@@ -84,7 +84,7 @@ Developer Information
 Change Log
 ====================
 
-* Release 0.6.4-SNAPSHOT
+* Release 0.6.4 on 2014.08.06
   * Thanks to Paul Stadig and Nicola Mometto who contributed patches for this release
   * [CCACHE-34](http://dev.clojure.org/jira/browse/CCACHE-34) bump tools.priority-map dependency to 0.0.4
   * [CCACHE-28](http://dev.clojure.org/jira/browse/CCACHE-28) concurrency bug in has? for SoftCache
