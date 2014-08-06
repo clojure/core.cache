@@ -1,4 +1,4 @@
-(defproject core.cache "0.6.4-SNAPSHOT"
+(defproject core.cache "0.6.5-SNAPSHOT"
   :description "Cache library for Clojure."
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/data.priority-map "0.0.4"]]
