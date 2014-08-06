@@ -85,6 +85,7 @@ Change Log
 ====================
 
 * Release 0.6.4-SNAPSHOT
+  * Thanks to Paul Stadig and Nicola Mometto who contributed patches for this release
   * [CCACHE-34](http://dev.clojure.org/jira/browse/CCACHE-34) bump tools.priority-map dependency to 0.0.4
   * [CCACHE-28](http://dev.clojure.org/jira/browse/CCACHE-28) concurrency bug in has? for SoftCache
   * [CCACHE-29](http://dev.clojure.org/jira/browse/CCACHE-29) fix conj implementation for caches
