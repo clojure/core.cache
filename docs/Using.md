@@ -13,7 +13,7 @@ To use the cache implementations or extend the core.cache protocols you first ne
 Next you should create an instance of a specific cache type, optionally seeded:
 
 ```clojure
-(def C (cache/fifo-cache-factory {:a 1, :b 2})
+(def C (cache/fifo-cache-factory {:a 1, :b 2}))
 ```
 
 To find a value in a map by its key you have a couple choices:
