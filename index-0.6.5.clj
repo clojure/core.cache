@@ -238,6 +238,7 @@
   {:name "BasicCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/BasicCache",
    :source-url nil,
@@ -246,6 +247,7 @@
   {:name "FIFOCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/FIFOCache",
    :source-url nil,
@@ -254,6 +256,7 @@
   {:name "FnCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/FnCache",
    :source-url nil,
@@ -262,6 +265,7 @@
   {:name "LIRSCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/LIRSCache",
    :source-url nil,
@@ -270,6 +274,7 @@
   {:name "LRUCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/LRUCache",
    :source-url nil,
@@ -278,6 +283,7 @@
   {:name "LUCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/LUCache",
    :source-url nil,
@@ -286,6 +292,7 @@
   {:name "SoftCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/SoftCache",
    :source-url nil,
@@ -294,28 +301,30 @@
   {:name "TTLCache",
    :var-type "type",
    :namespace "clojure.core.cache",
+   :arglists nil,
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/TTLCache",
    :source-url nil,
    :raw-source-url nil,
    :file nil}
-  {:name "CacheProtocol",
-   :doc "This is the protocol describing the basic cache capability.",
-   :var-type "protocol",
-   :line 20,
-   :namespace "clojure.core.cache",
-   :wiki-url
-   "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/CacheProtocol",
+  {:raw-source-url
+   "https://github.com/clojure/core.cache/raw/a77b003d6593f7bde2f27f03ec52310b68aa0ea6/src/main/clojure/clojure/core/cache.clj",
+   :name "CacheProtocol",
+   :file "src/main/clojure/clojure/core/cache.clj",
    :source-url
    "https://github.com/clojure/core.cache/blob/a77b003d6593f7bde2f27f03ec52310b68aa0ea6/src/main/clojure/clojure/core/cache.clj#L20",
-   :raw-source-url
-   "https://github.com/clojure/core.cache/raw/a77b003d6593f7bde2f27f03ec52310b68aa0ea6/src/main/clojure/clojure/core/cache.clj",
-   :file "src/main/clojure/clojure/core/cache.clj"}
+   :line 20,
+   :var-type "protocol",
+   :arglists nil,
+   :doc "This is the protocol describing the basic cache capability.",
+   :namespace "clojure.core.cache",
+   :wiki-url
+   "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/CacheProtocol"}
   {:name "evict",
    :doc "Removes an entry from the cache",
-   :arglists ([cache e]),
    :var-type "function",
    :namespace "clojure.core.cache",
+   :arglists ([cache e]),
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/evict",
    :source-url nil,
@@ -323,9 +332,9 @@
    :file nil}
   {:name "has?",
    :doc "Checks if the cache contains a value associated with `e`",
-   :arglists ([cache e]),
    :var-type "function",
    :namespace "clojure.core.cache",
+   :arglists ([cache e]),
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/has?",
    :source-url nil,
@@ -334,9 +343,9 @@
   {:name "hit",
    :doc
    "Is meant to be called if the cache is determined to contain a value\nassociated with `e`",
-   :arglists ([cache e]),
    :var-type "function",
    :namespace "clojure.core.cache",
+   :arglists ([cache e]),
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/hit",
    :source-url nil,
@@ -345,9 +354,9 @@
   {:name "lookup",
    :doc
    "Retrieve the value associated with `e` if it exists, else `nil` in\nthe 2-arg case.  Retrieve the value associated with `e` if it exists,\nelse `not-found` in the 3-arg case.",
-   :arglists ([cache e] [cache e not-found]),
    :var-type "function",
    :namespace "clojure.core.cache",
+   :arglists ([cache e] [cache e not-found]),
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/lookup",
    :source-url nil,
@@ -356,9 +365,9 @@
   {:name "miss",
    :doc
    "Is meant to be called if the cache is determined to **not** contain a\nvalue associated with `e`",
-   :arglists ([cache e ret]),
    :var-type "function",
    :namespace "clojure.core.cache",
+   :arglists ([cache e ret]),
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/miss",
    :source-url nil,
@@ -367,9 +376,9 @@
   {:name "seed",
    :doc
    "Is used to signal that the cache should be created with a seed.\nThe contract is that said cache should return an instance of its\nown type.",
-   :arglists ([cache base]),
    :var-type "function",
    :namespace "clojure.core.cache",
+   :arglists ([cache base]),
    :wiki-url
    "http://clojure.github.com/core.cache//clojure.core.cache-api.html#clojure.core.cache/seed",
    :source-url nil,
