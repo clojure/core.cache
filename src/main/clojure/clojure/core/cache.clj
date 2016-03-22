@@ -590,7 +590,7 @@
   (clojure.core.cache/seed (LRUCache. {} (clojure.data.priority-map/priority-map) 0 threshold) base))
 
 (defn ttl-cache-factory
-  "Returns a TTL cache with the cache and expiration-table initialied to `base` --
+  "Returns a TTL cache with the cache and expiration-table initialized to `base` --
    each with the same time-to-live.
 
    This function also allows an optional `:ttl` argument that defines the default
