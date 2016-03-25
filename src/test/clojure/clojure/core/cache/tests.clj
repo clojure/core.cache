@@ -465,3 +465,11 @@ N non-resident HIR block
         (= (fifo-cache-factory {:a 1 :c 3} :threshold 3)
            (conj starts-with-a [:c 3])
            (conj starts-with-a {:c 3})))))
+
+(deftest evict-with-object-exception
+  (let [thing (proxy [Object] []
+                (equals [obj] (throw (new Exception "Boom!"))))]
+    (are [x y] (= x y)
+      {:b 2} (-> (lru-cache-factory {:a thing, :b 2}) (evict :a) (.cache))
+      {:b 2} (-> (lu-cache-factory {:a thing, :b 2}) (evict :a) (.cache))
+      {:b 2} (-> (fifo-cache-factory {:a thing, :b 2}) (evict :a) (.cache)))))
