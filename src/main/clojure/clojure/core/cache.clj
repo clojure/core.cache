@@ -56,7 +56,8 @@
 
 (defmacro defcache
   [type-name fields & specifics]
-  (let [[base-field & _] fields]
+  (let [[base & _] fields
+        base-field (with-meta base {:tag 'clojure.lang.IPersistentMap})]
     `(deftype ~type-name [~@fields]
        ~@specifics
 
@@ -67,6 +68,10 @@
               (if (has? this# key#)
                 (lookup this# key#)
                 not-found#))
+
+       java.lang.Iterable
+       (iterator [_#]
+         (.iterator ~base-field))
 
        clojure.lang.IPersistentMap
        (assoc [this# k# v#]

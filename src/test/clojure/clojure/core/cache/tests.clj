@@ -473,3 +473,7 @@ N non-resident HIR block
       {:b 2} (-> (lru-cache-factory {:a thing, :b 2}) (evict :a) (.cache))
       {:b 2} (-> (lu-cache-factory {:a thing, :b 2}) (evict :a) (.cache))
       {:b 2} (-> (fifo-cache-factory {:a thing, :b 2}) (evict :a) (.cache)))))
+
+(deftest test-cache-iterable
+  (let [c (fifo-cache-factory {:a 1 :b 2} :threshold 10)]
+	  (is (= #{:a :b} (set (iterator-seq (.iterator (keys c))))))))
