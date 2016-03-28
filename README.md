@@ -25,7 +25,7 @@ core.cache is based on an old library named Clache that has been thouroughly dep
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.6.4
+Latest stable release: 0.6.5
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -33,14 +33,14 @@ Latest stable release: 0.6.4
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "0.6.4"]
+    [org.clojure/core.cache "0.6.5"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>0.6.4</version>
+      <version>0.6.5</version>
     </dependency>
 
 
@@ -84,6 +84,11 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.6.5 on 2016.03.28
+  * Bump tools.priority-map dependency to 0.0.7
+  * [CCACHE-41](http://dev.clojure.org/jira/browse/CCACHE-41) Implement Iterable in defcache
+  * [CCACHE-44](http://dev.clojure.org/jira/browse/CCACHE-44) Avoid equals comparison on cache miss
+  * [CCACHE-37](http://dev.clojure.org/jira/browse/CCACHE-37) Fix typo in docstring
 * Release 0.6.4 on 2014.08.06
   * Thanks to Paul Stadig and Nicola Mometto who contributed patches for this release
   * [CCACHE-34](http://dev.clojure.org/jira/browse/CCACHE-34) bump tools.priority-map dependency to 0.0.4
