@@ -2,8 +2,7 @@
  ({:doc "A caching library for Clojure.",
    :author "Fogus",
    :name "clojure.core.cache",
-   :wiki-url
-   "http://clojure.github.io/core.cache/clojure.core.cache-api.html",
+   :wiki-url "http://clojure.github.io/core.cache/index.html",
    :source-url
    "https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj"}),
  :vars
