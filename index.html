@@ -141,6 +141,9 @@ namespace.
       <a href="#clojure.core.cache/ttl-cache-factory" class="toc-entry-anchor">ttl-cache-factory</a>
       
     </div>
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#"></a>
+    
   </div>
 </div>
 </div>
@@ -174,6 +177,7 @@ namespace.
       <pre id="var-usage">Usage: (evict cache e)
 </pre>
       <pre id="var-docstr">Removes an entry from the cache</pre>
+      <pre id="var-specs"></pre>
       
       
       
@@ -184,6 +188,7 @@ namespace.
       <pre id="var-usage">Usage: (has? cache e)
 </pre>
       <pre id="var-docstr">Checks if the cache contains a value associated with `e`</pre>
+      <pre id="var-specs"></pre>
       
       
       
@@ -195,6 +200,7 @@ namespace.
 </pre>
       <pre id="var-docstr">Is meant to be called if the cache is determined to contain a value
 associated with `e`</pre>
+      <pre id="var-specs"></pre>
       
       
       
@@ -208,6 +214,7 @@ associated with `e`</pre>
       <pre id="var-docstr">Retrieve the value associated with `e` if it exists, else `nil` in
 the 2-arg case.  Retrieve the value associated with `e` if it exists,
 else `not-found` in the 3-arg case.</pre>
+      <pre id="var-specs"></pre>
       
       
       
@@ -219,6 +226,7 @@ else `not-found` in the 3-arg case.</pre>
 </pre>
       <pre id="var-docstr">Is meant to be called if the cache is determined to **not** contain a
 value associated with `e`</pre>
+      <pre id="var-specs"></pre>
       
       
       
@@ -231,6 +239,7 @@ value associated with `e`</pre>
       <pre id="var-docstr">Is used to signal that the cache should be created with a seed.
 The contract is that said cache should return an instance of its
 own type.</pre>
+      <pre id="var-specs"></pre>
       
       
       
@@ -328,6 +337,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;BasicCache cache)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.BasicCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L105">Source</a>
@@ -339,6 +349,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;FIFOCache cache q limit)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.FIFOCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L165">Source</a>
@@ -350,6 +361,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;FnCache cache f)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.FnCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L125">Source</a>
@@ -361,6 +373,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;LIRSCache cache lruS lruQ tick limitS limitQ)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.LIRSCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L414">Source</a>
@@ -372,6 +385,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;LRUCache cache lru tick limit)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.LRUCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L206">Source</a>
@@ -383,6 +397,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;LUCache cache lu limit)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.LUCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L293">Source</a>
@@ -394,6 +409,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;SoftCache cache rcache rq)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.SoftCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L498">Source</a>
@@ -405,6 +421,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (-&gt;TTLCache cache ttl ttl-ms)
 </pre>
     <pre id="var-docstr">Positional factory function for class clojure.core.cache.TTLCache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L258">Source</a>
@@ -416,6 +433,7 @@ own type.</pre>
     <pre id="var-usage">Usage: (basic-cache-factory base)
 </pre>
     <pre id="var-docstr">Returns a pluggable basic cache initialied to `base`</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L556">Source</a>
@@ -440,6 +458,7 @@ in `base` will be dropped from the resulting cache.  If the associative
 structure used as `base` can guarantee sorting, then the last `limit` elements
 will be used as the cache seed values.  Otherwise, there are no guarantees about
 the elements in the resulting cache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L562">Source</a>
@@ -452,6 +471,7 @@ the elements in the resulting cache.</pre>
 </pre>
     <pre id="var-docstr">Returns an LIRS cache with the S &amp; R LRU lists set to the indicated
 limits.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L615">Source</a>
@@ -467,6 +487,7 @@ each entry is initialized with the same usage value.
 
 This function takes an optional `:threshold` argument that defines the maximum number
 of elements in the cache before the LRU semantics apply (default is 32).</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L583">Source</a>
@@ -481,6 +502,7 @@ of elements in the cache before the LRU semantics apply (default is 32).</pre>
 
 This function takes an optional `:threshold` argument that defines the maximum number
 of elements in the cache before the LU semantics apply (default is 32).</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L605">Source</a>
@@ -497,6 +519,7 @@ memory pressure on the JVM.
 
 SoftCache is a mutable cache, since it is always based on a
 ConcurrentHashMap.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L626">Source</a>
@@ -514,6 +537,7 @@ value function.  The wrap function takes the value function and the item in ques
 and is expected to run the value function with the item whenever a cache
 miss occurs.  The intent is to hide any cache-specific cells from leaking
 into the cache logic itelf.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L44">Source</a>
@@ -529,6 +553,7 @@ each with the same time-to-live.
 
 This function also allows an optional `:ttl` argument that defines the default
 time in milliseconds that entries are allowed to reside in the cache.</pre>
+    <pre id="var-specs"></pre>
     
     
     <a id="var-source" href="https://github.com/clojure/core.cache/blob/fe6f587cedb6b8f3723e7dcda972093be03d35d6/src/main/clojure/clojure/core/cache.clj#L594">Source</a>
