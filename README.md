@@ -19,7 +19,7 @@ core.cache is a new Clojure contrib library providing the following features:
 
 * Factory functions for each existing cache type
 
-core.cache is based on an old library named Clache that has been thouroughly deprecated.
+core.cache is based on an old library named Clache that has been thoroughly deprecated.
 
 
 Releases and Dependency Information
