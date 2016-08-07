@@ -128,7 +128,14 @@
     (let [C (fifo-cache-factory (sorted-map :a 1, :b 2) :threshold 3)]
       (are [x y] (= x y)
            {:a 1, :b 2, :c 3} (.cache (assoc C :c 3))
-           {:d 4, :b 2, :c 3} (.cache (assoc C :c 3 :d 4))))))
+           {:d 4, :b 2, :c 3} (.cache (assoc C :c 3 :d 4))))
+    ;; Test to make sure cache can take in many values without
+    ;; throwing a StackOverflow exception.
+    ;; See http://dev.clojure.org/jira/browse/CCACHE-40
+    (let [C (atom (fifo-cache-factory {} :threshold 1E6))]
+      (doseq [i (range 5E5)]
+        (swap! C miss i i))
+      (is (= (int 5E5) (count @C))))))
 
 (deftest test-lru-cache-ilookup
   (testing "that the LRUCache can lookup via keywords"
