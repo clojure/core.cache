@@ -645,16 +645,16 @@
     ...)
   
   (def cached-really-expensive-fn 
-    (cache-fn
+    (cache/cache-fn
       (cache/ttl-cache-factory {} :ttl 120000) 
       really-expensive-fn))"
   [cache-init fn-to-cache]
   (let [cache (atom cache-init)]
     (fn [& args]
       (get (swap! cache
-                  #(if (cache/has? % args)
-                    (cache/hit % args)
-                    (cache/miss % args (apply fn-to-cache args)))) args))))
+                  #(if (has? % args)
+                    (hit % args)
+                    (miss % args (apply fn-to-cache args)))) args))))
 
 (comment
 
