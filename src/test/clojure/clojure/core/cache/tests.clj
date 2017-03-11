@@ -223,7 +223,11 @@
            {:c 3} (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3) .cache))))
   (testing "TTL cache does not return a value that has expired."
     (let [C (ttl-cache-factory {} :ttl 500)]
-      (is (nil? (-> C (assoc :a 1) (sleepy 700) (lookup :a)))))))
+      (is (nil? (-> C (assoc :a 1) (sleepy 700) (lookup :a))))))
+  (testing "TTL cache does not contain a value that was removed from underlying cache."
+    (let [underlying-cache (lru-cache-factory {} :threshold 1)
+          C (ttl-cache-factory underlying-cache :ttl 360000)]
+      (is (not (-> C (assoc :a 1) (assoc :b 2) (has? :a)))))))
 
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"

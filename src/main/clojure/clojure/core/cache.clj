@@ -265,10 +265,11 @@
       (get cache item)
       not-found))
   (has? [_ item]
-    (let [t (get ttl item (- ttl-ms))]
-      (< (- (System/currentTimeMillis)
-            t)
-         ttl-ms)))
+    (and (let [t (get ttl item (- ttl-ms))]
+           (< (- (System/currentTimeMillis)
+                 t)
+              ttl-ms))
+         (contains? cache item)))
   (hit [this item] this)
   (miss [this item result]
     (let [now  (System/currentTimeMillis)
