@@ -150,9 +150,9 @@
         [dropping keeping] (split-at (- (count ks) limit) ks)]
     {:dropping dropping
      :keeping  keeping
-     :queue
-     (concat (repeat (- limit (count keeping)) ::free)
-             (take limit keeping))}))
+     :queue (-> (clojure.lang.PersistentQueue/EMPTY)
+                (into (repeat (- limit (count keeping)) ::free))
+                (into (take limit keeping))) }))
 
 (defn- dissoc-keys [m ks]
   (if ks
@@ -175,10 +175,10 @@
   (miss [_ item result]
     (let [[kache qq] (let [k (first q)]
                        (if (>= (count cache) limit)
-                         [(dissoc cache k) (rest q)]
-                         [cache (rest q)]))]
+                         [(dissoc cache k) (pop q)]
+                         [cache (pop q)]))]
       (FIFOCache. (assoc kache item result)
-                  (concat qq [item])
+                  (conj  qq item)
                   limit)))
   (evict [this key]
     (if (contains? cache key)
