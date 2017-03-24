@@ -635,6 +635,27 @@
   (seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
         base))
 
+(defn cache-fn
+  "Returns with a wrapper function that caches the calls of the 
+  fn-to-cache. The initial state of the cache is specified as the first 
+  argument. The cache keys are the args of the function calls.
+  
+  Example usage:
+  (defn really-expensive-fn [arg1 arg2 arg3]
+    ...)
+  
+  (def cached-really-expensive-fn 
+    (cache/cache-fn
+      (cache/ttl-cache-factory {} :ttl 120000) 
+      really-expensive-fn))"
+  [cache-init fn-to-cache]
+  (let [cache (atom cache-init)]
+    (fn [& args]
+      (get (swap! cache
+                  #(if (has? % args)
+                    (hit % args)
+                    (miss % args (apply fn-to-cache args)))) args))))
+
 (comment
 
   (def C (-> {:a 1 :b 2}
