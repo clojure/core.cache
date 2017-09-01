@@ -64,7 +64,7 @@ There are a few reasons why you might want to use a LRU cache:
 
 ### Disadvantages to using an LRU cache
 
- * Tends to perform poorly when elements files are accessed occassionally but consistently while other elements are accessed very frequently for a short duration and never accessed again
+ * Tends to perform poorly when elements files are accessed occasionally but consistently while other elements are accessed very frequently for a short duration and never accessed again
  * It requires more historical data to operate
  * It requires a larger cache to increase efficiency
  
