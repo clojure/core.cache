@@ -223,7 +223,19 @@
            {:c 3} (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3) .cache))))
   (testing "TTL cache does not return a value that has expired."
     (let [C (ttl-cache-factory {} :ttl 500)]
-      (is (nil? (-> C (assoc :a 1) (sleepy 700) (lookup :a)))))))
+      (is (nil? (-> C (assoc :a 1) (sleepy 700) (lookup :a))))))
+
+  (testing "TTL cache checks both composed cache for a key and the TTL-ness of a key"
+    (let [single-item-cache (lru-cache-factory {} :threshold 1)
+          one-day           (* 1000 60 60 24)
+          one-day-cache     (ttl-cache-factory single-item-cache :ttl one-day)]
+      (is
+        (false?
+          (->
+            one-day-cache
+            (miss "a" "a-value")
+            (miss "b" "b-value")
+            (has? "a")))))))
 
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"

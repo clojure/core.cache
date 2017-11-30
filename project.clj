@@ -9,7 +9,8 @@
              :1.5   {:dependencies [[org.clojure/clojure "1.5.0"]]}
              :1.5.1 {:dependencies [[org.clojure/clojure "1.5.1"]]}
              :1.6   {:dependencies [[org.clojure/clojure "1.6.0"]]}
-             :1.7 {:dependencies [[org.clojure/clojure "1.7.0"]]}}
+             :1.7   {:dependencies [[org.clojure/clojure "1.7.0"]]}
+             :dev   {:plugins [[com.jakemccrary/lein-test-refresh "0.21.1"]]}}
   :plugins [[lein-swank "1.4.4"]
             [lein-marginalia "0.7.1"]]
   :repositories {"sonatype-oss-public" "https://oss.sonatype.org/content/groups/public/"}
