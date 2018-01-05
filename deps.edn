@@ -1,0 +1,2 @@
+{:paths ["src/main/clojure"]
+ :deps {org.clojure/data.priority-map {:mvn/version "0.0.7"}}}
