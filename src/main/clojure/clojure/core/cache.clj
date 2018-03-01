@@ -151,16 +151,14 @@
     {:dropping dropping
      :keeping  keeping
      :queue
-     (concat (repeat (- limit (count keeping)) ::free)
-             (take limit keeping))}))
-
-(defn- dissoc-keys [m ks]
-  (if ks
-    (recur (dissoc m (first ks)) (next ks))
-    m))
+     (-> clojure.lang.PersistentQueue/EMPTY
+         (into (repeat (- limit (count keeping)) ::free))
+         (into (take limit keeping)))}))
 
 (defn- prune-queue [q k]
-  (cons ::free (remove #{k} q)))
+  (reduce (fn [q e] (if (#{k} e) q (conj q e)))
+          (conj clojure.lang.PersistentQueue/EMPTY ::free)
+          q))
 
 (defcache FIFOCache [cache q limit]
   CacheProtocol
@@ -173,12 +171,12 @@
   (hit [this item]
     this)
   (miss [_ item result]
-    (let [[kache qq] (let [k (first q)]
+    (let [[kache qq] (let [k (peek q)]
                        (if (>= (count cache) limit)
-                         [(dissoc cache k) (rest q)]
-                         [cache (rest q)]))]
+                         [(dissoc cache k) (pop q)]
+                         [cache (pop q)]))]
       (FIFOCache. (assoc kache item result)
-                  (concat qq [item])
+                  (conj qq item)
                   limit)))
   (evict [this key]
     (if (contains? cache key)
