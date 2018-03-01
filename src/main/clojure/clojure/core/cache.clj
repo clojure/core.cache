@@ -630,7 +630,7 @@
   {:pre [(number? s-history-limit) (< 0 s-history-limit)
          (number? q-history-limit) (< 0 q-history-limit)
          (map? base)]}
-  (seed (LIRSCache. {} {} {} 0 s-history-limit q-history-limit) base))
+  (clojure.core.cache/seed (LIRSCache. {} {} {} 0 s-history-limit q-history-limit) base))
 
 (defn soft-cache-factory
   "Returns a SoftReference cache.  Cached values will be referred to with
@@ -641,7 +641,7 @@
   ConcurrentHashMap."
   [base]
   {:pre [(map? base)]}
-  (seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
+  (clojure.core.cache/seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
         base))
 
 (comment
