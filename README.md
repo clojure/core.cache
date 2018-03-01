@@ -86,6 +86,7 @@ Change Log
 
 * Release next in progress
   * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
+  * [CCACHE-43](http://dev.clojure.org/jira/browse/CCACHE-43) Add `through-cache` to provide a version of `through` that plays nice with `swap!` etc.
   * [CCACHE-40](http://dev.clojure.org/jira/browse/CCACHE-40) Fix FIFOCache stack overflow on large threshold (uses PersistentQueue now instead of concat and list)
   * [CCACHE-39](http://dev.clojure.org/jira/browse/CCACHE-39) Fix FIFOCache evict/miss queue handling
 * Release 0.6.5 on 2016.03.28

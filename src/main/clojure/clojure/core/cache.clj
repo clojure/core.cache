@@ -54,6 +54,16 @@
      (clojure.core.cache/hit cache item)
      (clojure.core.cache/miss cache item (wrap-fn #(value-fn %) item)))))
 
+(defn through-cache
+  "The basic hit/miss logic for the cache system.  Like through but always has
+  the cache argument in the first position for easier use with swap! etc."
+  ([cache item] (through-cache cache item default-wrapper-fn identity))
+  ([cache item value-fn] (through-cache cache item default-wrapper-fn value-fn))
+  ([cache item wrap-fn value-fn]
+   (if (clojure.core.cache/has? cache item)
+     (clojure.core.cache/hit cache item)
+     (clojure.core.cache/miss cache item (wrap-fn #(value-fn %) item)))))
+
 (defmacro defcache
   [type-name fields & specifics]
   (let [[base & _] fields
