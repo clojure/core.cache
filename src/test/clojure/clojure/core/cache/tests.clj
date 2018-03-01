@@ -53,7 +53,7 @@
        (get c :e 0) 0
        (get c :b 0) 2
        (get c :f 0) nil
-       
+
        (get-in c [:c :e]) 4
        (get-in c '(:c :e)) 4
        (get-in c [:c :x]) nil
@@ -62,7 +62,7 @@
        (get-in c [:h]) nil
        (get-in c []) c
        (get-in c nil) c
-       
+
        (get-in c [:c :e] 0) 4
        (get-in c '(:c :e) 0) 4
        (get-in c [:c :x] 0) 0
@@ -480,4 +480,9 @@ N non-resident HIR block
 
 (deftest test-cache-iterable
   (let [c (fifo-cache-factory {:a 1 :b 2} :threshold 10)]
-	  (is (= #{:a :b} (set (iterator-seq (.iterator (keys c))))))))
+    (is (= #{:a :b} (set (iterator-seq (.iterator (keys c))))))))
+
+(deftest test-fifo-miss-does-not-drop-ccache-39
+  (let [c (fifo-cache-factory {:a 1 :b 2} :threshold 2)]
+    (is (= #{:a :c} (set (-> c (evict :b) (miss :c 42) (.q)))))
+    (is (= #{:c :d} (set (-> c (evict :b) (miss :c 42) (miss :d 43) (.q)))))))

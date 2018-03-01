@@ -86,6 +86,7 @@ Change Log
 
 * Release next in progress
   * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
+  * [CCACHE-39](http://dev.clojure.org/jira/browse/CCACHE-39) Fix FIFOCache evict/miss queue handling
 * Release 0.6.5 on 2016.03.28
   * Bump tools.priority-map dependency to 0.0.7
   * [CCACHE-41](http://dev.clojure.org/jira/browse/CCACHE-41) Implement Iterable in defcache

@@ -50,9 +50,9 @@
   ([cache item] (through default-wrapper-fn identity cache item))
   ([value-fn cache item] (through default-wrapper-fn value-fn cache item))
   ([wrap-fn value-fn cache item]
-    (if (clojure.core.cache/has? cache item)
-      (clojure.core.cache/hit cache item)
-      (clojure.core.cache/miss cache item (wrap-fn #(value-fn %) item)))))
+   (if (clojure.core.cache/has? cache item)
+     (clojure.core.cache/hit cache item)
+     (clojure.core.cache/miss cache item (wrap-fn #(value-fn %) item)))))
 
 (defmacro defcache
   [type-name fields & specifics]
@@ -160,7 +160,7 @@
     m))
 
 (defn- prune-queue [q k]
-  (remove #{k} q))
+  (cons ::free (remove #{k} q)))
 
 (defcache FIFOCache [cache q limit]
   CacheProtocol
@@ -304,8 +304,8 @@
   (miss [_ item result]
     (if (>= (count lu) limit) ;; need to evict?
       (let [min-key (if (contains? lu item)
-                    ::nope
-                    (first (peek lu))) ;; maybe evict case
+                      ::nope
+                      (first (peek lu))) ;; maybe evict case
             c (-> cache (dissoc min-key) (assoc item result))
             l (-> lu (dissoc min-key) (update-in [item] (fnil inc 0)))]
         (LUCache. c l limit))
@@ -647,7 +647,5 @@
 
   ;; wait 5 seconds
 
-  (assoc C :d 138)
+  (assoc C :d 138))
   ;;=> {:d 138}
-
-)
