@@ -50,17 +50,17 @@ Example Usage
 
 ```clojure
     (require '[clojure.core.cache :as cache])
-	
+
     (def C (cache/fifo-cache-factory {:a 1, :b 2}))
-	
+
     (if (cache/has? C :c)
       (cache/hit C :c)
       (cache/miss C :c 42))
-	
+
     ;=> {:a 1, :b 2, :c 42}
-	
+
     (cache/evict C :b)
-	
+
     ;=> {:a 1}
 ```
 
@@ -84,6 +84,8 @@ Developer Information
 Change Log
 ====================
 
+* Release next in progress
+  * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
 * Release 0.6.5 on 2016.03.28
   * Bump tools.priority-map dependency to 0.0.7
   * [CCACHE-41](http://dev.clojure.org/jira/browse/CCACHE-41) Implement Iterable in defcache
