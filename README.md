@@ -11,7 +11,7 @@ core.cache is a Clojure contrib library providing the following features:
   - First-in-first-out (FIFOCache)
   - Least-recently-used (LRUCache)
   - Least-used (LUCache -- sometimes called Least Frequently Used)
-  - Time-to-live (TTLCache)
+  - Time-to-live (TTLCacheQ)
   - Naive cache (BasicCache)
   - Naive cache backed with soft references (SoftCache)
 
@@ -117,6 +117,8 @@ Change Log
   * [CCACHE-40](http://dev.clojure.org/jira/browse/CCACHE-40) Fix FIFOCache stack overflow on large threshold (uses PersistentQueue now instead of concat and list)
   * [CCACHE-39](http://dev.clojure.org/jira/browse/CCACHE-39) Fix FIFOCache evict/miss queue handling
   * [CCACHE-20](http://dev.clojure.org/jira/browse/CCACHE-20) Updated README to clarify that caches are immutable and provide examples of use with `atom` etc
+  * [CCACHE-15](http://dev.clojure.org/jira/browse/CCACHE-15) Added queue and generation logic to reduce `miss` cost and make `evict` O(1) (Kevin Downey)
+  * Drop support for Clojure 1.3/1.4/1.5
 * Release 0.6.5 on 2016.03.28
   * Bump tools.priority-map dependency to 0.0.7
   * [CCACHE-41](http://dev.clojure.org/jira/browse/CCACHE-41) Implement Iterable in defcache

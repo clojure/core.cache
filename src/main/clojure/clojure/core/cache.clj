@@ -257,13 +257,19 @@
     (str cache \, \space lru \, \space tick \, \space limit)))
 
 
-(defn- key-killer
-  [ttl expiry now]
-  (let [ks (map key (filter #(> (- now (val %)) expiry) ttl))]
-    #(apply dissoc % ks)))
+(defn- key-killer-q
+  [ttl q expiry now]
+  (let [[ks q'] (reduce (fn [[ks q] [k g t]]
+                          (if (> (- now t) expiry)
+                            (if (= g (first (get ttl k)))
+                              [(conj ks k) (pop q)]
+                              [ks (pop q)])
+                            (reduced [ks q])))
+                        [[] q]
+                        q)]
+    [#(apply dissoc % ks) q']))
 
-
-(defcache TTLCache [cache ttl ttl-ms]
+(defcache TTLCacheQ [cache ttl q gen ttl-ms]
   CacheProtocol
   (lookup [this item]
     (let [ret (lookup this item ::nope)]
@@ -273,7 +279,7 @@
       (get cache item)
       not-found))
   (has? [_ item]
-    (and (let [t (get ttl item (- ttl-ms))]
+    (and (let [[_ t] (get ttl item [0 (- ttl-ms)])]
            (< (- (System/currentTimeMillis)
                  t)
               ttl-ms))
@@ -281,19 +287,25 @@
   (hit [this item] this)
   (miss [this item result]
     (let [now  (System/currentTimeMillis)
-          kill-old (key-killer ttl ttl-ms now)]
-      (TTLCache. (assoc (kill-old cache) item result)
-                 (assoc (kill-old ttl) item now)
-                 ttl-ms)))
+          [kill-old q'] (key-killer-q ttl q ttl-ms now)]
+      (TTLCacheQ. (assoc (kill-old cache) item result)
+                  (assoc (kill-old ttl) item [gen now])
+                  (conj q' [item gen now])
+                  (unchecked-inc gen)
+                  ttl-ms)))
   (seed [_ base]
     (let [now (System/currentTimeMillis)]
-      (TTLCache. base
-                 (into {} (for [x base] [(key x) now]))
-                 ttl-ms)))
+      (TTLCacheQ. base
+                  (into {} (for [x base] [(key x) [gen now]]))
+                  q
+                  gen
+                  ttl-ms)))
   (evict [_ key]
-    (TTLCache. (dissoc cache key)
-               (dissoc ttl key)
-               ttl-ms))
+    (TTLCacheQ. (dissoc cache key)
+                (dissoc ttl key)
+                q
+                gen
+                ttl-ms))
   Object
   (toString [_]
     (str cache \, \space ttl \, \space ttl-ms)))
@@ -609,7 +621,7 @@
   [base & {ttl :ttl :or {ttl 2000}}]
   {:pre [(number? ttl) (<= 0 ttl)
          (map? base)]}
-  (clojure.core.cache/seed (TTLCache. {} {} ttl) base))
+  (clojure.core.cache/seed (TTLCacheQ. {} {} clojure.lang.PersistentQueue/EMPTY 0 ttl) base))
 
 (defn lu-cache-factory
   "Returns an LU cache with the cache and usage-table initialied to `base`.

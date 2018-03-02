@@ -11,7 +11,7 @@
   clojure.core.cache.tests
   (:use [clojure.core.cache] :reload-all)
   (:use [clojure.test])
-  (:import (clojure.core.cache BasicCache FIFOCache LRUCache TTLCache LUCache
+  (:import (clojure.core.cache BasicCache FIFOCache LRUCache TTLCacheQ LUCache
                                LIRSCache)
            (java.lang.ref ReferenceQueue SoftReference)
            (java.util.concurrent ConcurrentHashMap)))
@@ -198,22 +198,19 @@
 (defn sleepy [e t] (Thread/sleep t) e)
 
 (deftest test-ttl-cache-ilookup
-  (let [five-secs (+ 5000 (System/currentTimeMillis))
-        big-time   (into {} (for [[k _] big-map] [k five-secs]))
-        small-time (into {} (for [[k _] small-map] [k five-secs]))]
-    (testing "that the TTLCache can lookup via keywords"
-      (do-ilookup-tests (TTLCache. small-map small-time 2000)))
-    (testing "that the TTLCache can lookup via keywords"
-      (do-dot-lookup-tests (TTLCache. small-map small-time 2000)))
-    (testing "assoc and dissoc for TTLCache"
-      (do-assoc (TTLCache. {} {} 2000))
-      (do-dissoc (TTLCache. {:a 1 :b 2} {:a five-secs :b five-secs} 2000)))
-    (testing "that get and cascading gets work for TTLCache"
-      (do-getting (TTLCache. big-map big-time 2000)))
-    (testing "that finding works for TTLCache"
-        (do-finding (TTLCache. small-map small-time 2000)))
-    (testing "that contains? works for TTLCache"
-        (do-contains (TTLCache. small-map small-time 2000)))))
+  (testing "that the TTLCacheQ can lookup via keywords"
+    (do-ilookup-tests (ttl-cache-factory small-map)))
+  (testing "that the TTLCacheQ can lookup via keywords"
+    (do-dot-lookup-tests (ttl-cache-factory small-map)))
+  (testing "assoc and dissoc for TTLCacheQ"
+    (do-assoc (ttl-cache-factory {}))
+    (do-dissoc (ttl-cache-factory {:a 1 :b 2})))
+  (testing "that get and cascading gets work for TTLCacheQ"
+    (do-getting (ttl-cache-factory big-map)))
+  (testing "that finding works for TTLCacheQ"
+    (do-finding (ttl-cache-factory small-map)))
+  (testing "that contains? works for TTLCacheQ"
+    (do-contains (ttl-cache-factory small-map))))
 
 (deftest test-ttl-cache
   (testing "TTL-ness with empty cache"
@@ -429,13 +426,13 @@ N non-resident HIR block
                 (.put :foo ref))
         rcache (doto (ConcurrentHashMap.)
                  (.put ref :foo))
-        soft-cache (clear-soft-cache! cache rcache rq)]
+        _ (clear-soft-cache! cache rcache rq)]
     (is (contains? cache :foo) (str cache))
     (is (contains? rcache ref) (str rcache))
     (.clear ref)
     (.enqueue ref)
     (is (not (.get ref)))
-    (let [soft-cache (clear-soft-cache! cache rcache rq)]
+    (let [_ (clear-soft-cache! cache rcache rq)]
       (is (not (contains? cache :foo)))
       (is (not (contains? rcache ref))))))
 

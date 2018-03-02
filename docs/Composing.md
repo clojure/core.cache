@@ -8,14 +8,14 @@ Put in simpler terms, to create a cache instance composed of the seed data `{:a 
        (ttl-cache-factory  :ttl 5000)))
 
 ;; used right away
-  
+
 (assoc C :c 42)
 ;;=> {:b 2, :c 42}                                                                                   
-  
+
 ;; used after 5 seconds                                              
 
 (assoc C :d 138)
 ;;=> {:d 138}
 ```
 
-What the code above does is to simply use a `FIFOCache` instance, seeded with `{:a 1, :b 2}` as the seed for a `TTLCache` instance.  As shown, within the TTL window, the cache evicts its elements using a FIFO policy.  However, once a TTL window has expired the expired elements are also evicted.
+What the code above does is to simply use a `FIFOCache` instance, seeded with `{:a 1, :b 2}` as the seed for a `TTLCacheQ` instance.  As shown, within the TTL window, the cache evicts its elements using a FIFO policy.  However, once a TTL window has expired the expired elements are also evicted.

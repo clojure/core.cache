@@ -8,14 +8,14 @@ The time-to-live cache is one that evicts items that are older than a time-to-li
 General usage
 -------------
 
-To create a core.cache `TTLCache` instance you should *always* use its associated constructor function `ttl-cache-factory` with an optional `:ttl` parameter:
+To create a core.cache `TTLCacheQ` instance you should *always* use its associated constructor function `ttl-cache-factory` with an optional `:ttl` parameter:
 
 ```clojure
-    (ns your.lib 
+    (ns your.lib
       (:require [clojure.core.cache :as cache]))
-	
+
     (def C (cache/ttl-cache-factory {} :ttl 1000))
-    
+
     (-> C (assoc :a 1) (assoc :b 2))
 	;=> {:a 1, :b 2}
 ```
@@ -26,8 +26,8 @@ At this point the cache is fresh and younger than one second (that is, depending
 
 ```clojure
     (def sleepy #(do (Thread/sleep %2) %))
-    
-    (-> C (assoc :a 1) 
+
+    (-> C (assoc :a 1)
 	      (assoc :b 2)
 		  (sleepy 1500)
 	      (assoc :c 3))
@@ -55,5 +55,5 @@ There are a few reasons why you might want to use a TTL cache:
 
  * It requires more historical data to operate
  * Cache size does not generally help its efficiency
- 
+
 As always, you should measure your system's characteristics to determine the best eviction strategy for your purposes.
