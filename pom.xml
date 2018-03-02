@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <artifactId>core.cache</artifactId>
-  <version>0.7.0</version>
+  <version>0.7.1-SNAPSHOT</version>
   <name>core.cache</name>
   <description>Cache library for Clojure.</description>
 
   <scm>
     <connection>scm:git:git://github.com/clojure/core.cache.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/clojure/core.cache.git</developerConnection>
-    <tag>core.cache-0.7.0</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/clojure/core.cache</url>
   </scm>
 
