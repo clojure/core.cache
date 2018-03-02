@@ -27,7 +27,7 @@ core.cache is based on an old library named Clache that has been thoroughly depr
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.7.0
+Latest stable release: 0.7.1
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -35,14 +35,14 @@ Latest stable release: 0.7.0
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "0.7.0"]
+    [org.clojure/core.cache "0.7.1"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>0.7.0</version>
+      <version>0.7.1</version>
     </dependency>
 
 
@@ -111,15 +111,15 @@ Developer Information
 Change Log
 ====================
 
-* Release 0.7.1 in progress
-  * To fix bug in TTL cache with seed
+* Release 0.7.1 on 2018.03.02
+  * [CCACHE-49](http://dev.clojure.org/jira/browse/CCACHE-49) Fix TTLCacheQ `seed` function and expand tests on TTLCacheQ
 * Release 0.7.0 on 2018.03.01
   * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
   * [CCACHE-43](http://dev.clojure.org/jira/browse/CCACHE-43) Add `through-cache` to provide a version of `through` that plays nice with `swap!` etc
   * [CCACHE-40](http://dev.clojure.org/jira/browse/CCACHE-40) Fix FIFOCache stack overflow on large threshold (uses PersistentQueue now instead of concat and list)
   * [CCACHE-39](http://dev.clojure.org/jira/browse/CCACHE-39) Fix FIFOCache evict/miss queue handling
   * [CCACHE-20](http://dev.clojure.org/jira/browse/CCACHE-20) Updated README to clarify that caches are immutable and provide examples of use with `atom` etc
-  * [CCACHE-15](http://dev.clojure.org/jira/browse/CCACHE-15) Added queue and generation logic to reduce `miss` cost and make `evict` O(1) (Kevin Downey)
+  * [CCACHE-15](http://dev.clojure.org/jira/browse/CCACHE-15) Added queue and generation logic to reduce `miss` cost and make `evict` O(1); rename TTLCache -> TTLCacheQ (Kevin Downey)
   * Drop support for Clojure 1.3/1.4/1.5
 * Release 0.6.5 on 2016.03.28
   * Bump tools.priority-map dependency to 0.0.7

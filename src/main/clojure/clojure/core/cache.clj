@@ -296,9 +296,11 @@
   (seed [_ base]
     (let [now (System/currentTimeMillis)]
       (TTLCacheQ. base
+                  ;; we seed the cache all at gen, but subsequent entries
+                  ;; will get gen+1, gen+2 etc
                   (into {} (for [x base] [(key x) [gen now]]))
-                  q
-                  gen
+                  (into q  (for [x base] [(key x) gen now]))
+                  (unchecked-inc gen)
                   ttl-ms)))
   (evict [_ key]
     (TTLCacheQ. (dissoc cache key)

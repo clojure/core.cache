@@ -198,26 +198,52 @@
 (defn sleepy [e t] (Thread/sleep t) e)
 
 (deftest test-ttl-cache-ilookup
-  (testing "that the TTLCacheQ can lookup via keywords"
-    (do-ilookup-tests (ttl-cache-factory small-map)))
-  (testing "that the TTLCacheQ can lookup via keywords"
-    (do-dot-lookup-tests (ttl-cache-factory small-map)))
-  (testing "assoc and dissoc for TTLCacheQ"
-    (do-assoc (ttl-cache-factory {}))
-    (do-dissoc (ttl-cache-factory {:a 1 :b 2})))
-  (testing "that get and cascading gets work for TTLCacheQ"
-    (do-getting (ttl-cache-factory big-map)))
-  (testing "that finding works for TTLCacheQ"
-    (do-finding (ttl-cache-factory small-map)))
-  (testing "that contains? works for TTLCacheQ"
-    (do-contains (ttl-cache-factory small-map))))
+  (let [five-secs  (+ 5000 (System/currentTimeMillis))
+        big-time   (into {} (for [[k _] big-map] [k [0 five-secs]]))
+        big-q      (into clojure.lang.PersistentQueue/EMPTY
+                         (for [[k _] big-map] [k 0 five-secs]))
+        small-time (into {} (for [[k _] small-map] [k [0 five-secs]]))
+        small-q    (into clojure.lang.PersistentQueue/EMPTY
+                         (for [[k _] small-map] [k 0 five-secs]))]
+    (testing "that the TTLCacheQ can lookup via keywords"
+      (do-ilookup-tests (TTLCacheQ. small-map small-time small-q 1 2000)))
+    (testing "that the TTLCacheQ can lookup via keywords"
+      (do-dot-lookup-tests (TTLCacheQ. small-map small-time small-q 1 2000)))
+    (testing "assoc and dissocQ for TTLCacheQ"
+      (do-assoc (TTLCacheQ. {} {} clojure.lang.PersistentQueue/EMPTY 1 2000))
+      (do-dissoc (TTLCacheQ. {:a 1 :b 2}
+                             {:a [0 five-secs] :b [0 five-secs]}
+                             (into clojure.lang.PersistentQueue/EMPTY
+                                   [[:a 0 five-secs] [:b 0 five-secs]])
+                             1
+                             2000)))
+    (testing "that get and cascading gets work for TTLCacheQ"
+      (do-getting (TTLCacheQ. big-map big-time big-q 1 2000)))
+    (testing "that finding works for TTLCacheQ"
+        (do-finding (TTLCacheQ. small-map small-time small-q 1 2000)))
+    (testing "that contains? works for TTLCacheQ"
+        (do-contains (TTLCacheQ. small-map small-time small-q 1 2000)))))
+
+(defn- ttl-q-check
+  [start nap [k g t]]
+  [k g (<= start (+ start nap) t (+ start nap 10))])
 
 (deftest test-ttl-cache
   (testing "TTL-ness with empty cache"
-    (let [C (ttl-cache-factory {} :ttl 500)]
+    (let [start (System/currentTimeMillis)
+          C     (ttl-cache-factory {} :ttl 500)
+          C'    (-> C (assoc :a 1) (assoc :b 2))]
       (are [x y] (= x y)
-           {:a 1, :b 2} (-> C (assoc :a 1) (assoc :b 2) .cache)
-           {:c 3} (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3) .cache))))
+           [[:a 1 true], [:b 2 true]] (map (partial ttl-q-check start 0) (.q C'))
+           {:a 1, :b 2}               (.cache C')
+           3                          (.gen C')))
+    (let [start (System/currentTimeMillis)
+          C     (ttl-cache-factory {} :ttl 500)
+          C'    (-> C (assoc :a 1) (assoc :b 2) (sleepy 700) (assoc :c 3))]
+      (are [x y] (= x y)
+           [[:c 3 true]] (map (partial ttl-q-check start 700) (.q C'))
+           {:c 3}        (.cache C')
+           4             (.gen C'))))
   (testing "TTL cache does not return a value that has expired."
     (let [C (ttl-cache-factory {} :ttl 500)]
       (is (nil? (-> C (assoc :a 1) (sleepy 700) (lookup :a))))))
