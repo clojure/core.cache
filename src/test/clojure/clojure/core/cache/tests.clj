@@ -226,7 +226,7 @@
 
 (defn- ttl-q-check
   [start nap [k g t]]
-  [k g (<= start (+ start nap) t (+ start nap 10))])
+  [k g (<= start (+ start nap) t (+ start nap 100))])
 
 (deftest test-ttl-cache
   (testing "TTL-ness with empty cache"
