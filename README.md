@@ -111,6 +111,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.7.1 in progress
+  * To fix bug in TTL cache with seed
 * Release 0.7.0 on 2018.03.01
   * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
   * [CCACHE-43](http://dev.clojure.org/jira/browse/CCACHE-43) Add `through-cache` to provide a version of `through` that plays nice with `swap!` etc
