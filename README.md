@@ -27,7 +27,7 @@ core.cache is based on an old library named Clache that has been thoroughly depr
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.6.5
+Latest stable release: 0.7.0
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -35,14 +35,14 @@ Latest stable release: 0.6.5
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "0.6.5"]
+    [org.clojure/core.cache "0.7.0"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>0.6.5</version>
+      <version>0.7.0</version>
     </dependency>
 
 
@@ -111,7 +111,7 @@ Developer Information
 Change Log
 ====================
 
-* Release next in progress
+* Release 0.7.0 on 2018.03.01
   * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
   * [CCACHE-43](http://dev.clojure.org/jira/browse/CCACHE-43) Add `through-cache` to provide a version of `through` that plays nice with `swap!` etc
   * [CCACHE-40](http://dev.clojure.org/jira/browse/CCACHE-40) Fix FIFOCache stack overflow on large threshold (uses PersistentQueue now instead of concat and list)
