@@ -8,13 +8,15 @@
 
 (ns ^{:doc "A caching library for Clojure."
       :author "Fogus"}
-  clojure.core.cache.tests
+  clojure.core.cache-test
   (:use [clojure.core.cache] :reload-all)
   (:use [clojure.test])
   (:import (clojure.core.cache BasicCache FIFOCache LRUCache TTLCacheQ LUCache
                                LIRSCache)
            (java.lang.ref ReferenceQueue SoftReference)
            (java.util.concurrent ConcurrentHashMap)))
+
+(println "\nTesting with Clojure" (clojure-version))
 
 (deftest test-basic-cache-lookup
   (testing "that the BasicCache can lookup as expected"
