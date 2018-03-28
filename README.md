@@ -55,18 +55,22 @@ Example Usage
 
     (def C1 (cache/fifo-cache-factory {:a 1, :b 2}))
 
-    (if (cache/has? C1 :c)
-      (cache/hit C1 :c)
-      (cache/miss C1 :c 42))
+    (def C1' (if (cache/has? C1 :c)
+               (cache/hit C1 :c)
+               (cache/miss C1 :c 42)))
 
     ;=> {:a 1, :b 2, :c 42}
 
-    (cache/get C1 :c)
+    (cache/lookup C1' :c)
+
+    ;=> 42
+
+    (get C1' :c) ; cache/lookup is implemented as get
 
     ;=> 42
 
     ;; a shorthand for the above conditional...
-    (cache/through-cache C1 :c (constantly 42))
+    (def C1' (cache/through-cache C1 :c (constantly 42)))
     ;; ...which uses a value to compute the result from the key...
     (cache/through-cache C1 my-key (partial jdbc/get-by-id db-spec :storage))
     ;; ...so you could fetch values from a database if they're not in cache...
