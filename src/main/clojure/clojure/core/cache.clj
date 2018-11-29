@@ -522,9 +522,10 @@
   CacheProtocol
   (lookup [_ item]
     (when-let [^SoftReference r (get cache (or item ::nil))]
-      (if (= ::nil (.get r))
-        nil
-        (.get r))))
+      (let [v (.get r)]
+        (if (= ::nil v)
+          nil
+          v))))
   (lookup [_ item not-found]
     (if-let [^SoftReference r (get cache (or item ::nil))]
       (if-let [v (.get r)]
