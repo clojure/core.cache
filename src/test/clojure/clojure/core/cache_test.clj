@@ -485,6 +485,17 @@ N non-resident HIR block
         (is (not (.has? soft-cache :foo1)))
         (is (not (.has? old-soft-cache :foo1)))))))
 
+(deftest test-soft-cache-eviction-handling
+  (let [ref (atom nil)
+        old-make-reference make-reference]
+    (with-redefs [make-reference (fn [& args]
+                                   (reset! ref (apply old-make-reference args))
+                                   @ref)]
+      (let [cache (soft-cache-factory {})]
+        (miss cache :foo "foo")
+        (.enqueue @ref)
+        (evict cache :foo)))))
+
 (deftest test-equiv
   (is (= (fifo-cache-factory {:a 1 :c 3} :threshold 3)
          (fifo-cache-factory {:a 1 :c 3} :threshold 3))))

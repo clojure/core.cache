@@ -509,7 +509,8 @@
 (defn clear-soft-cache! [^java.util.Map cache ^java.util.Map rcache ^ReferenceQueue rq]
   (loop [r (.poll rq)]
     (when r
-      (.remove cache (get rcache r))
+      (when-let [item (get rcache r)]
+        (.remove cache item))
       (.remove rcache r)
       (recur (.poll rq)))))
 
