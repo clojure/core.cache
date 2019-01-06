@@ -27,7 +27,7 @@ core.cache is based on an old library named Clache that has been thoroughly depr
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.7.1
+Latest stable release: 0.7.2
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -35,7 +35,7 @@ Latest stable release: 0.7.1
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "0.7.1"]
+    [org.clojure/core.cache "0.7.2"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
@@ -115,6 +115,9 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.7.2 on 2019-01-06
+  * [CCACHE-53](http://dev.clojure.org/jira/browse/CCACHE-53) Remove unnecessary/additional `.get` call (Neil Prosser)
+  * [CCACHE-52](http://dev.clojure.org/jira/browse/CCACHE-52) Fix NPE in SoftCache (Neil Prosser)
 * Release 0.7.1 on 2018.03.02
   * [CCACHE-49](http://dev.clojure.org/jira/browse/CCACHE-49) Fix TTLCacheQ `seed` function and expand tests on TTLCacheQ
 * Release 0.7.0 on 2018.03.01
