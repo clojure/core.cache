@@ -104,7 +104,7 @@ Developer Information
 
 * [GitHub project](https://github.com/clojure/core.cache)
 
-* [Bug Tracker](http://dev.clojure.org/jira/browse/CCACHE)
+* [Bug Tracker](http://clojure.atlassian.net/browse/CCACHE)
 
 * [Continuous Integration](http://build.clojure.org/job/core.cache/)
 
@@ -116,30 +116,30 @@ Change Log
 ====================
 
 * Release 0.7.2 on 2019-01-06
-  * [CCACHE-53](http://dev.clojure.org/jira/browse/CCACHE-53) Remove unnecessary/additional `.get` call (Neil Prosser)
-  * [CCACHE-52](http://dev.clojure.org/jira/browse/CCACHE-52) Fix NPE in SoftCache (Neil Prosser)
+  * [CCACHE-53](http://clojure.atlassian.net/browse/CCACHE-53) Remove unnecessary/additional `.get` call (Neil Prosser)
+  * [CCACHE-52](http://clojure.atlassian.net/browse/CCACHE-52) Fix NPE in SoftCache (Neil Prosser)
 * Release 0.7.1 on 2018.03.02
-  * [CCACHE-49](http://dev.clojure.org/jira/browse/CCACHE-49) Fix TTLCacheQ `seed` function and expand tests on TTLCacheQ
+  * [CCACHE-49](http://clojure.atlassian.net/browse/CCACHE-49) Fix TTLCacheQ `seed` function and expand tests on TTLCacheQ
 * Release 0.7.0 on 2018.03.01
-  * [CCACHE-46](http://dev.clojure.org/jira/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
-  * [CCACHE-43](http://dev.clojure.org/jira/browse/CCACHE-43) Add `through-cache` to provide a version of `through` that plays nice with `swap!` etc
-  * [CCACHE-40](http://dev.clojure.org/jira/browse/CCACHE-40) Fix FIFOCache stack overflow on large threshold (uses PersistentQueue now instead of concat and list)
-  * [CCACHE-39](http://dev.clojure.org/jira/browse/CCACHE-39) Fix FIFOCache evict/miss queue handling
-  * [CCACHE-20](http://dev.clojure.org/jira/browse/CCACHE-20) Updated README to clarify that caches are immutable and provide examples of use with `atom` etc
-  * [CCACHE-15](http://dev.clojure.org/jira/browse/CCACHE-15) Added queue and generation logic to reduce `miss` cost and make `evict` O(1); rename TTLCache -> TTLCacheQ (Kevin Downey)
+  * [CCACHE-46](http://clojure.atlassian.net/browse/CCACHE-46) Fix TTLCache when wrapped around another cache (Ivan Kryvoruchko)
+  * [CCACHE-43](http://clojure.atlassian.net/browse/CCACHE-43) Add `through-cache` to provide a version of `through` that plays nice with `swap!` etc
+  * [CCACHE-40](http://clojure.atlassian.net/browse/CCACHE-40) Fix FIFOCache stack overflow on large threshold (uses PersistentQueue now instead of concat and list)
+  * [CCACHE-39](http://clojure.atlassian.net/browse/CCACHE-39) Fix FIFOCache evict/miss queue handling
+  * [CCACHE-20](http://clojure.atlassian.net/browse/CCACHE-20) Updated README to clarify that caches are immutable and provide examples of use with `atom` etc
+  * [CCACHE-15](http://clojure.atlassian.net/browse/CCACHE-15) Added queue and generation logic to reduce `miss` cost and make `evict` O(1); rename TTLCache -> TTLCacheQ (Kevin Downey)
   * Drop support for Clojure 1.3/1.4/1.5
 * Release 0.6.5 on 2016.03.28
   * Bump tools.priority-map dependency to 0.0.7
-  * [CCACHE-41](http://dev.clojure.org/jira/browse/CCACHE-41) Implement Iterable in defcache
-  * [CCACHE-44](http://dev.clojure.org/jira/browse/CCACHE-44) Avoid equals comparison on cache miss
-  * [CCACHE-37](http://dev.clojure.org/jira/browse/CCACHE-37) Fix typo in docstring
+  * [CCACHE-41](http://clojure.atlassian.net/browse/CCACHE-41) Implement Iterable in defcache
+  * [CCACHE-44](http://clojure.atlassian.net/browse/CCACHE-44) Avoid equals comparison on cache miss
+  * [CCACHE-37](http://clojure.atlassian.net/browse/CCACHE-37) Fix typo in docstring
 * Release 0.6.4 on 2014.08.06
   * Thanks to Paul Stadig and Nicola Mometto who contributed patches for this release
-  * [CCACHE-34](http://dev.clojure.org/jira/browse/CCACHE-34) bump tools.priority-map dependency to 0.0.4
-  * [CCACHE-28](http://dev.clojure.org/jira/browse/CCACHE-28) concurrency bug in has? for SoftCache
-  * [CCACHE-29](http://dev.clojure.org/jira/browse/CCACHE-29) fix conj implementation for caches
-  * [CCACHE-30](http://dev.clojure.org/jira/browse/CCACHE-30) make-reference need not be dynamic
-  * [CCACHE-26](http://dev.clojure.org/jira/browse/CCACHE-26) hit function in LRU cache can give funny results
+  * [CCACHE-34](http://clojure.atlassian.net/browse/CCACHE-34) bump tools.priority-map dependency to 0.0.4
+  * [CCACHE-28](http://clojure.atlassian.net/browse/CCACHE-28) concurrency bug in has? for SoftCache
+  * [CCACHE-29](http://clojure.atlassian.net/browse/CCACHE-29) fix conj implementation for caches
+  * [CCACHE-30](http://clojure.atlassian.net/browse/CCACHE-30) make-reference need not be dynamic
+  * [CCACHE-26](http://clojure.atlassian.net/browse/CCACHE-26) hit function in LRU cache can give funny results
 * Release 0.6.3 on 2013.03.15
   * Added through to encapsulate check logic
 * Release 0.6.2 on 2012.08.07 [more information](http://blog.fogus.me/?p=4527)
