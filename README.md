@@ -88,7 +88,7 @@ Example Usage
 
     (swap! C2 cache/evict :b)
 
-    ;=> {:a 1, :d}
+    ;=> {:a 1, :d 13}
 
     (get @C2 :a)
 
