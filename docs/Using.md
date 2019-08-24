@@ -32,17 +32,17 @@ To ensure the proper cache policies are followed for each specific type, the fol
 (if (cache/has? C :c)     ;; has? checks that the cache contains an item
   (cache/hit C :c)        ;; hit returns a cache with any relevant internal information updated
   (cache/miss C :c 42))   ;; miss returns a new cache with the new item and without evicted entries
-	
+
 ;=> {:a 1, :b 2, :c 42}
 ```
 
-Using the `has?/hit/miss` pattern ensures that the thresholding and eviction logic for each implementation works properly.  **Avoid this pattern at your own risk.**
+Using the `has?/hit/miss` pattern ensures that the thresholding and eviction logic for each implementation works properly. It is built into the `through` and `through-cache` functions, as well as `clojure.core.cache.wrapped/lookup-or-miss`.  **Avoid this pattern at your own risk.**
 
 Finally, to explicitly evict an element in a cache, use the `evict` function:
 
 ```clojure
 (cache/evict C :b)
-	
+
 ;=> {:a 1}
 ```
 
