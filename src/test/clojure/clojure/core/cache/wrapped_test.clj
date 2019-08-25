@@ -25,3 +25,18 @@
     (c/evict cache :a)
     (is (= nil (c/lookup cache :a)))
     (is (= ::missing (c/lookup cache :a ::missing)))))
+
+(deftest wrapped-ttl-test
+  ;; TTL lookup-or-miss can expire on the lookup so this test verifies
+  ;; that bug (in 0.8.0) so I can fix it in 0.8.1!
+  (let [cache (c/ttl-cache-factory {} :ttl 1)
+        limit 2000000
+        start (System/currentTimeMillis)]
+    (loop [n 0]
+      (if-not (c/lookup-or-miss cache :a (constantly 42))
+        (do
+          (is false (str  "Failure on call " n)))
+        (if (< n limit)
+          (recur (+ 1 n)))))
+    (println "ttl test completed" limit "calls in"
+             (- (System/currentTimeMillis) start) "ms")))

@@ -143,6 +143,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.8.1 on 2019-08-24
+  * [CCACHE-56](http://clojure.atlassian.net/browse/CCACHE-56) Fix TTL cache and fix `clojure.core.cache.wrapped/lookup-or-miss` for caches that can invalidate on `lookup`
 * Release 0.8.0 on 2019-08-24
   * [CCACHE-50](http://clojure.atlassian.net/browse/CCACHE-50) Add `clojure.core.cache.wrapped` namespace with atom-wrapped caches for a more convenient API that adds `lookup-or-miss` which avoids the possibility of cache stampede
 * Release 0.7.2 on 2019-01-06

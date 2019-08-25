@@ -41,14 +41,33 @@
   and then perform the lookup again.
 
   value-fn (and wrap-fn) will only be called (at most) once even in the
-  case of retries, so there is no risk of cache stampede."
+  case of retries, so there is no risk of cache stampede.
+
+  Since lookup can cause invalidation in some caches (such as TTL), we
+  trap that case and retry (a maximum of ten times)."
   ([cache-atom e value-fn]
    (lookup-or-miss cache-atom e default-wrapper-fn value-fn))
   ([cache-atom e wrap-fn value-fn]
    (let [d-new-value (delay (wrap-fn value-fn e))]
-     (c/lookup (swap! cache-atom
-                      c/through-cache e default-wrapper-fn (fn [_] @d-new-value))
-               e))))
+     (loop [n 0
+            v (c/lookup (swap! cache-atom
+                               c/through-cache
+                               e
+                               default-wrapper-fn
+                               (fn [_] @d-new-value))
+                        e
+                        ::expired)]
+       (when (< n 10)
+         (if (= ::expired v)
+           (recur (inc n)
+                  (c/lookup (swap! cache-atom
+                                   c/through-cache
+                                   e
+                                   default-wrapper-fn
+                                   (fn [_] @d-new-value))
+                            e
+                            ::expired))
+           v))))))
 
 (defn has?
   "Checks if the cache contains a value associated with `e`.
@@ -147,7 +166,7 @@
    This function also allows an optional `:ttl` argument that defines the default
    time in milliseconds that entries are allowed to reside in the cache."
   [base & {ttl :ttl :or {ttl 2000}}]
-  (atom (c/ttl-cache-factory :ttl ttl)))
+  (atom (c/ttl-cache-factory base :ttl ttl)))
 
 (defn lu-cache-factory
   "Returns an LU cache with the cache and usage-table initialied to `base`.
