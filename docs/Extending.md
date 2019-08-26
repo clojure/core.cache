@@ -100,7 +100,7 @@ The `hit` method in this case is trivial, it just returns the instance itself.  
                       threshold)))))
 ```
 
-The `miss` method is where all the action takes place.  That is, if the size of the base `cache` is less than the `threshold` then the cached value is staored in the base `cache` and its key in the `ks` set.  However, if the threshold was breached then the first key in the `ks` set is removed from the base `cache` and `ks` and a new `LameCache` instance is returned with the new key and value added to `cache` and `ks`.
+The `miss` method is where all the action takes place.  That is, if the size of the base `cache` is less than the `threshold` then the cached value is stored in the base `cache` and its key in the `ks` set.  However, if the threshold was breached then the first key in the `ks` set is removed from the base `cache` and `ks` and a new `LameCache` instance is returned with the new key and value added to `cache` and `ks`.
 
 ```clojure
   (evict [_ key]
