@@ -30,7 +30,7 @@ core.cache is based on an old library named Clache that has been thoroughly depr
 Releases and Dependency Information
 ========================================
 
-Latest stable release: 0.8.1
+Latest stable release: 0.8.2
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -38,14 +38,14 @@ Latest stable release: 0.8.1
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "0.8.1"]
+    [org.clojure/core.cache "0.8.2"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>0.8.1</version>
+      <version>0.8.2</version>
     </dependency>
 
 
@@ -143,6 +143,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 0.8.2 on 2019-09-30
+  * [CCACHE-57](http://clojure.atlassian.net/browse/CCACHE-57) Fix wrapped cache `miss` function
 * Release 0.8.1 on 2019-08-24
   * [CCACHE-56](http://clojure.atlassian.net/browse/CCACHE-56) Fix wrapped TTL cache and fix `clojure.core.cache.wrapped/lookup-or-miss` for caches that can invalidate on `lookup`
 * Release 0.8.0 on 2019-08-24

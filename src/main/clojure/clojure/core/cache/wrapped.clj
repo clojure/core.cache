@@ -90,7 +90,7 @@
 
   Returns the updated cache from the atom. Provided for completeness."
   [cache-atom e ret]
-  (swap! cache-atom c/miss cache-atom e ret))
+  (swap! cache-atom c/miss e ret))
 
 (defn evict
   "Removes an entry from the cache.
