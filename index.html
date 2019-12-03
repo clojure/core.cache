@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>clojure.core.cache - core.cache 0.7.2-SNAPSHOT API documentation</title>
+    <title>clojure.core.cache - core.cache 0.8.3-SNAPSHOT API documentation</title>
     <link rel="icon" href="static/favicon.png" />
     <link rel="shortcut icon" href="static/favicon.png" />
     <link rel="stylesheet" href="static/clojure.css" type="text/css" media="all" />
@@ -25,7 +25,7 @@ namespace.
       <div id="leftcolumn"><div style="text-align: center;"></div>
 <div class="menu">
   <div class="WikiCustomNav WikiElement wiki">
-    <span class="toc-header"><span id="project-name">core.cache</span> <span id="version">0.7.2-SNAPSHOT</span> API</span><br />
+    <span class="toc-header"><span id="project-name">core.cache</span> <span id="version">0.8.3-SNAPSHOT</span> API</span><br />
     <ul>
       <li><a href="index.html" class="wiki_link">Overview</a></li>
       <li><a href="api-index.html" class="wiki_link">API Index</a></li>
@@ -147,11 +147,62 @@ namespace.
   </div><div class="toc-section" style="margin-left: 1em;">
     <a style="margin-top: 3px;" href="#"></a>
     
+  </div><div class="toc-section" style="margin-left: 1em;">
+    <a style="margin-top: 3px;" href="#clojure.core.cache.wrapped">clojure.core.cache.wrapped</a>
+    <div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/basic-cache-factory" class="toc-entry-anchor">basic-cache-factory</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/evict" class="toc-entry-anchor">evict</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/fifo-cache-factory" class="toc-entry-anchor">fifo-cache-factory</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/has?" class="toc-entry-anchor">has?</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/hit" class="toc-entry-anchor">hit</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/lirs-cache-factory" class="toc-entry-anchor">lirs-cache-factory</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/lookup" class="toc-entry-anchor">lookup</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/lookup-or-miss" class="toc-entry-anchor">lookup-or-miss</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/lru-cache-factory" class="toc-entry-anchor">lru-cache-factory</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/lu-cache-factory" class="toc-entry-anchor">lu-cache-factory</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/miss" class="toc-entry-anchor">miss</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/seed" class="toc-entry-anchor">seed</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/soft-cache-factory" class="toc-entry-anchor">soft-cache-factory</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/through" class="toc-entry-anchor">through</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/through-cache" class="toc-entry-anchor">through-cache</a>
+      
+    </div><div class="toc-entry" style="margin-left: 1em;">
+      <a href="#clojure.core.cache.wrapped/ttl-cache-factory" class="toc-entry-anchor">ttl-cache-factory</a>
+      
+    </div>
   </div>
 </div>
 </div>
                 <div id="content-tag"><h1 id="overview">API for <span id="clojure.core.cache">clojure.core.cache</span>
-  - <span id="header-project">core.cache</span> <span id="header-version">0.7.2-SNAPSHOT</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
+  - <span id="header-project">core.cache</span> <span id="header-version">0.8.3-SNAPSHOT</span><span id="header-status-block"> (<span id="header-status">in development</span>)</span>
   </h1>
 <span id="author-line">by <span id="author-name">Fogus</span><br /></span>
 <br />Full namespace name: <span id="long-name">clojure.core.cache</span>
@@ -249,7 +300,7 @@ own type.</pre>
     </div>
     
     
-    <a id="proto-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L20">Source</a>
+    <a id="proto-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L20">Source</a>
   </div>
 </div>
 <div id="type-section">
@@ -343,7 +394,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L115">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L115">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -355,7 +406,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L173">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L173">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -367,7 +418,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L135">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L135">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -379,7 +430,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L437">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L437">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -391,7 +442,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L214">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L214">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -403,7 +454,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L316">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L316">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -415,7 +466,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L521">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L522">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -427,7 +478,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L272">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L272">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -439,7 +490,7 @@ own type.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L579">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L581">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -464,7 +515,7 @@ the elements in the resulting cache.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L585">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L587">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -477,7 +528,7 @@ limits.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L638">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L640">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -493,7 +544,7 @@ of elements in the cache before the LRU semantics apply (default is 32).</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L606">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L608">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -508,7 +559,7 @@ of elements in the cache before the LU semantics apply (default is 32).</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L628">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L630">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -525,7 +576,7 @@ ConcurrentHashMap.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L649">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L651">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -543,7 +594,7 @@ into the cache logic itelf.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L44">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L44">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -558,7 +609,7 @@ the cache argument in the first position for easier use with swap! etc.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L57">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L57">Source</a>
   </div><div id="var-entry">
     <br />
     <hr />
@@ -574,7 +625,290 @@ time in milliseconds that entries are allowed to reside in the cache.</pre>
     <pre id="var-specs"></pre>
     
     
-    <a id="var-source" href="https://github.com/clojure/core.cache/blob/9ac1a304c8b1839a3b3edafc7ac3c63641ad3a18/src/main/clojure/clojure/core/cache.clj#L617">Source</a>
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/5b8474a532a7f12ca1a1fbbf8f82a6f816c16b29/src/main/clojure/clojure/core/cache.clj#L619">Source</a>
+  </div>
+</div>
+
+<br />
+<h2 id="clojure.core.cache.wrapped">clojure.core.cache.wrapped</h2>
+<pre id="namespace-docstr">A higher level way to use clojure.core.cache that assumes the immutable
+cache is wrapped in an atom.
+
+The API is (almost) the same as clojure.core.cache -- including the factory
+functions -- but instead of accepting immutable caches, the functions
+here accept atoms containing those caches. The factory functions return
+new atoms containing the newly created cache.
+
+In addition, lookup-or-miss provides a safe, atomic way to retrieve a
+value from a cache or compute it if it is missing, without risking a
+cache stampede.</pre>
+
+
+<br />
+
+
+<div id="var-section">
+  <p></p>
+  <h2>Public Variables and Functions</h2>
+  <div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/basic-cache-factory">basic-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (basic-cache-factory base)
+</pre>
+    <pre id="var-docstr">Returns a pluggable basic cache initialied to `base`</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L130">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/evict">evict</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (evict cache-atom e)
+</pre>
+    <pre id="var-docstr">Removes an entry from the cache.
+
+Returns the updated cache from the atom.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L95">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/fifo-cache-factory">fifo-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (fifo-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
+</pre>
+    <pre id="var-docstr">Returns a FIFO cache with the cache and FIFO queue initialized to `base` --
+the queue is filled as the values are pulled out of `base`.  If the associative
+structure can guarantee ordering, then the said ordering will define the
+eventual eviction order.  Otherwise, there are no guarantees for the eventual
+eviction ordering.
+
+This function takes an optional `:threshold` argument that defines the maximum number
+of elements in the cache before the FIFO semantics apply (default is 32).
+
+If the number of elements in `base` is greater than the limit then some items
+in `base` will be dropped from the resulting cache.  If the associative
+structure used as `base` can guarantee sorting, then the last `limit` elements
+will be used as the cache seed values.  Otherwise, there are no guarantees about
+the elements in the resulting cache.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L135">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/has?">has?</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (has? cache-atom e)
+</pre>
+    <pre id="var-docstr">Checks if the cache contains a value associated with `e`.
+
+Reads from the current version of the atom.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L72">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/hit">hit</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (hit cache-atom e)
+</pre>
+    <pre id="var-docstr">Is meant to be called if the cache is determined to contain a value
+associated with `e`.
+
+Returns the updated cache from the atom. Provided for completeness.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L79">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/lirs-cache-factory">lirs-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lirs-cache-factory base &amp; {:keys [s-history-limit q-history-limit], :or {s-history-limit 32, q-history-limit 32}})
+</pre>
+    <pre id="var-docstr">Returns an LIRS cache with the S &amp; R LRU lists set to the indicated
+limits.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L179">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/lookup">lookup</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lookup cache-atom e)
+       (lookup cache-atom e not-found)
+</pre>
+    <pre id="var-docstr">Retrieve the value associated with `e` if it exists, else `nil` in
+the 2-arg case.  Retrieve the value associated with `e` if it exists,
+else `not-found` in the 3-arg case.
+
+Reads from the current version of the atom.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L25">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/lookup-or-miss">lookup-or-miss</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lookup-or-miss cache-atom e value-fn)
+       (lookup-or-miss cache-atom e wrap-fn value-fn)
+</pre>
+    <pre id="var-docstr">Retrieve the value associated with `e` if it exists, else compute the
+value (using value-fn, and optionally wrap-fn), update the cache for `e`
+and then perform the lookup again.
+
+value-fn (and wrap-fn) will only be called (at most) once even in the
+case of retries, so there is no risk of cache stampede.
+
+Since lookup can cause invalidation in some caches (such as TTL), we
+trap that case and retry (a maximum of ten times).</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L38">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/lru-cache-factory">lru-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lru-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
+</pre>
+    <pre id="var-docstr">Returns an LRU cache with the cache and usage-table initialied to `base` --
+each entry is initialized with the same usage value.
+
+This function takes an optional `:threshold` argument that defines the maximum number
+of elements in the cache before the LRU semantics apply (default is 32).</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L153">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/lu-cache-factory">lu-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (lu-cache-factory base &amp; {threshold :threshold, :or {threshold 32}})
+</pre>
+    <pre id="var-docstr">Returns an LU cache with the cache and usage-table initialied to `base`.
+
+This function takes an optional `:threshold` argument that defines the maximum number
+of elements in the cache before the LU semantics apply (default is 32).</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L171">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/miss">miss</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (miss cache-atom e ret)
+</pre>
+    <pre id="var-docstr">Is meant to be called if the cache is determined to **not** contain a
+value associated with `e`.
+
+Returns the updated cache from the atom. Provided for completeness.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L87">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/seed">seed</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (seed cache-atom base)
+</pre>
+    <pre id="var-docstr">Is used to signal that the cache should be created with a seed.
+The contract is that said cache should return an instance of its
+own type.
+
+Returns the updated cache from the atom. Provided for completeness.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L102">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/soft-cache-factory">soft-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (soft-cache-factory base)
+</pre>
+    <pre id="var-docstr">Returns a SoftReference cache.  Cached values will be referred to with
+SoftReferences, allowing the values to be garbage collected when there is
+memory pressure on the JVM.
+
+SoftCache is a mutable cache, since it is always based on a
+ConcurrentHashMap.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L189">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/through">through</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (through cache-atom item)
+       (through value-fn cache-atom item)
+       (through wrap-fn value-fn cache-atom item)
+</pre>
+    <pre id="var-docstr">The basic hit/miss logic for the cache system.  Expects a wrap function and
+value function.  The wrap function takes the value function and the item in question
+and is expected to run the value function with the item whenever a cache
+miss occurs.  The intent is to hide any cache-specific cells from leaking
+into the cache logic itelf.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L111">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/through-cache">through-cache</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (through-cache cache-atom item)
+       (through-cache cache-atom item value-fn)
+       (through-cache cache-atom item wrap-fn value-fn)
+</pre>
+    <pre id="var-docstr">The basic hit/miss logic for the cache system.  Like through but always has
+the cache argument in the first position.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L122">Source</a>
+  </div><div id="var-entry">
+    <br />
+    <hr />
+    <h2 id="clojure.core.cache.wrapped/ttl-cache-factory">ttl-cache-factory</h2>
+    <span id="var-type">function</span><br />
+    <pre id="var-usage">Usage: (ttl-cache-factory base &amp; {ttl :ttl, :or {ttl 2000}})
+</pre>
+    <pre id="var-docstr">Returns a TTL cache with the cache and expiration-table initialized to `base` --
+each with the same time-to-live.
+
+This function also allows an optional `:ttl` argument that defines the default
+time in milliseconds that entries are allowed to reside in the cache.</pre>
+    <pre id="var-specs"></pre>
+    
+    
+    <a id="var-source" href="https://github.com/clojure/core.cache/blob/68c317bad2706267a63d024fe3bb5aaf5c1b7b75/src/main/clojure/clojure/core/cache/wrapped.clj#L162">Source</a>
   </div>
 </div>
 
@@ -585,7 +919,7 @@ time in milliseconds that entries are allowed to reside in the cache.</pre>
           </div>
 	</div>
 	<div id="foot">
-	  <div id="copyright" style="text-align: center;">Copyright 2007-2018 by Rich Hickey and the various contributors</div>
+	  <div id="copyright" style="text-align: center;">Copyright 2007-2019 by Rich Hickey and the various contributors</div>
 	</div>
       </div>
       <div id="DesignedBy">Logo &amp; site design by <a href="http://www.tomhickey.com" title="Visit Tom Hickey's website.">Tom Hickey</a>.<br />
