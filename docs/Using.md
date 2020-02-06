@@ -48,6 +48,21 @@ Finally, to explicitly evict an element in a cache, use the `evict` function:
 
 For specific information about eviction policies and thresholds, view the specific documentation for each cache type listed in the next section.
 
+Sometimes you may wish to cache a function except when it returns certain values,
+such as a resource-loading function that may return `nil` if the resource is
+(temporarily) unavailable. Because of the edge cases that can arise with doing
+multiple lookups on a cache -- protections from which are baked into `through`,
+`through-cache`, and `lookup-or-miss` -- it is better to write your code to
+simply cache all results and then, post-retrieval, `evict` the key if the
+result is something you don't want cached:
+
+```clojure
+(let [result (wrapped/lookup-or-miss C :c load-my-resource)]
+  (when (nil? result)
+    (wrapped/evict C :c))
+  result)
+```
+
 ## Builtin cache implementations
 
 core.cache comes with a number of builtin immutable cache implementations, including (*click through for specific information*):
