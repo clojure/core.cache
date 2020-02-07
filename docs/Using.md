@@ -58,7 +58,7 @@ result is something you don't want cached:
 
 ```clojure
 (let [result (wrapped/lookup-or-miss C :c load-my-resource)]
-  (when (nil? result)
+  (when (nil? result) ; or seq or whatever condition should exclude this result
     (wrapped/evict C :c))
   result)
 ```
