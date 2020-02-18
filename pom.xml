@@ -43,7 +43,7 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>data.priority-map</artifactId>
-      <version>0.0.7</version>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 </project>
