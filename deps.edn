@@ -3,7 +3,7 @@
 ;; against: :1.6 :1.7 :1.8 :1.9 :1.10 :master
 
 {:paths ["src/main/clojure"]
- :deps {org.clojure/data.priority-map {:mvn/version "0.0.7"}}
+ :deps {org.clojure/data.priority-map {:mvn/version "1.0.0"}}
  :aliases {:test
            {:extra-paths ["src/test/clojure"]
             :extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}}}
