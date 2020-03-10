@@ -30,6 +30,8 @@ core.cache is based on an old library named Clache that has been thoroughly depr
 Releases and Dependency Information
 ========================================
 
+This project follows the version scheme MAJOR.MINOR.PATCH where each component provides some relative indication of the size of the change, but does not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names).
+
 Latest stable release: 1.0.0
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
@@ -143,6 +145,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 1.0.0 on 2020-03-11
+  * Update data.priority-map to 1.0.0
 * Release 0.8.2 on 2019-09-30
   * [CCACHE-57](http://clojure.atlassian.net/browse/CCACHE-57) Fix wrapped cache `miss` function
 * Release 0.8.1 on 2019-08-24
@@ -193,4 +197,4 @@ Change Log
 Copyright and License
 ========================================
 
-Copyright (c) Rich Hickey, Michael Fogus and contributors, 2012. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.
+Copyright (c) Rich Hickey, Michael Fogus and contributors, 2012-2020. All rights reserved.  The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php) which can be found in the file epl-v10.html at the root of this distribution. By using this software in any fashion, you are agreeing to be bound bythe terms of this license.  You must not remove this notice, or any other, from this software.

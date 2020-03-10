@@ -6,16 +6,16 @@
  :deps {org.clojure/data.priority-map {:mvn/version "1.0.0"}}
  :aliases {:test
            {:extra-paths ["src/test/clojure"]
-            :extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}}}
+            :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}}}
            :1.6 {:override-deps {org.clojure/clojure {:mvn/version "1.6.0"}}}
            :1.7 {:override-deps {org.clojure/clojure {:mvn/version "1.7.0"}}}
            :1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
            :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
-           :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
+           :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
            :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
            :runner
            {:extra-deps {com.cognitect/test-runner
                          {:git/url "https://github.com/cognitect-labs/test-runner"
-                          :sha "76568540e7f40268ad2b646110f237a60295fa3c"}}
+                          :sha "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
             :main-opts ["-m" "cognitect.test-runner"
                         "-d" "src/test/clojure"]}}}
