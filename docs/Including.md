@@ -10,7 +10,7 @@ The core.cache releases and snapshots are stored in the following repositories:
 
 You can use core.cache in your [Leiningen](https://github.com/technomancy/leiningen) projects with the following `:dependencies` directive in your `project.clj` file:
 
-    [org.clojure/core.cache "1.0.0"]
+    [org.clojure/core.cache "1.0.207"]
 
 ## Maven
 
@@ -19,7 +19,7 @@ For Maven-driven projects, use the following slice of XML in your `pom.xml`'s `<
     <dependency>
 	  <groupId>org.clojure</groupId>
 	  <artifactId>core.cache</artifactId>
-	  <version>1.0.0</version>
+	  <version>1.0.207</version>
 	</dependency>
 
 Enjoy!

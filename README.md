@@ -30,9 +30,9 @@ core.cache is based on an old library named Clache that has been thoroughly depr
 Releases and Dependency Information
 ========================================
 
-This project follows the version scheme MAJOR.MINOR.PATCH where each component provides some relative indication of the size of the change, but does not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names).
+This project follows the version scheme MAJOR.MINOR.COMMITS where MAJOR and MINOR provide some relative indication of the size of the change, but do not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names). COMMITS is an ever-increasing counter of commits since the beginning of this repository.
 
-Latest stable release: 1.0.0
+Latest stable release: 1.0.207
 
 * [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 
@@ -40,14 +40,14 @@ Latest stable release: 1.0.0
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "1.0.0"]
+    [org.clojure/core.cache "1.0.207"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.207</version>
     </dependency>
 
 
@@ -145,8 +145,9 @@ Developer Information
 Change Log
 ====================
 
-* Release 1.0.0 on 2020-03-11
-  * Update data.priority-map to 1.0.0
+* Release 1.0.207 on 2020-04-10
+  * Switch to 1.0.x versioning.
+  * Update `data.priority-map` to 1.0.0
 * Release 0.8.2 on 2019-09-30
   * [CCACHE-57](http://clojure.atlassian.net/browse/CCACHE-57) Fix wrapped cache `miss` function
 * Release 0.8.1 on 2019-08-24
