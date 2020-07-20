@@ -26,6 +26,7 @@ The `clojure.core.cache.wrapped` namespace contains the same API operating on ca
 
 core.cache is based on an old library named Clache that has been thoroughly deprecated.
 
+The `core.cache` API is hard to use correctly. That's why `clojure.core.cache.wrapped/lookup-or-miss` exists: it encapsulates all the best practices around using the API _and_ wraps it in an `atom` from the get-go. Read this article about [the `core.cache` API](https://dev.to/dpsutton/exploring-the-core-cache-api-57al) by Dan Sutton for why it is important to use the API correctly!
 
 Releases and Dependency Information
 ========================================
