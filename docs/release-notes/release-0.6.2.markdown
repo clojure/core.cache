@@ -43,7 +43,7 @@ Places
 * [Source code](https://github.com/clojure/core.cache)
 * [Ticket system](http://clojure.atlassian.net/browse/CCACHE)
 * [Announcement](http://groups.google.com/group/clojure/browse_frm/thread/69d08572ab265dc7)
-* [API Reference](https://clojure.github.com/core.cache)
+* [API Reference](https://clojure.github.io/core.cache)
 * [Examples and documentation](https://github.com/clojure/core.cache/wiki) (work in progress)
 
 Changes from v0.6.1
