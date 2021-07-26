@@ -128,7 +128,7 @@
    (swap! cache-atom c/through-cache item wrap-fn value-fn)))
 
 (defn basic-cache-factory
-  "Returns a pluggable basic cache initialied to `base`"
+  "Returns a pluggable basic cache initialized to `base`"
   [base]
   (atom (c/basic-cache-factory base)))
 
@@ -151,7 +151,7 @@
   (atom (c/fifo-cache-factory base :threshold threshold)))
 
 (defn lru-cache-factory
-  "Returns an LRU cache with the cache and usage-table initialied to `base` --
+  "Returns an LRU cache with the cache and usage-table initialized to `base` --
    each entry is initialized with the same usage value.
 
    This function takes an optional `:threshold` argument that defines the maximum number
@@ -169,7 +169,7 @@
   (atom (c/ttl-cache-factory base :ttl ttl)))
 
 (defn lu-cache-factory
-  "Returns an LU cache with the cache and usage-table initialied to `base`.
+  "Returns an LU cache with the cache and usage-table initialized to `base`.
 
    This function takes an optional `:threshold` argument that defines the maximum number
    of elements in the cache before the LU semantics apply (default is 32)."

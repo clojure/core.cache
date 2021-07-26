@@ -579,7 +579,7 @@
 ;; Factories
 
 (defn basic-cache-factory
-  "Returns a pluggable basic cache initialied to `base`"
+  "Returns a pluggable basic cache initialized to `base`"
   [base]
   {:pre [(map? base)]}
   (BasicCache. base))
@@ -606,7 +606,7 @@
   (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY threshold) base))
 
 (defn lru-cache-factory
-  "Returns an LRU cache with the cache and usage-table initialied to `base` --
+  "Returns an LRU cache with the cache and usage-table initialized to `base` --
    each entry is initialized with the same usage value.
 
    This function takes an optional `:threshold` argument that defines the maximum number
@@ -628,7 +628,7 @@
   (clojure.core.cache/seed (TTLCacheQ. {} {} clojure.lang.PersistentQueue/EMPTY 0 ttl) base))
 
 (defn lu-cache-factory
-  "Returns an LU cache with the cache and usage-table initialied to `base`.
+  "Returns an LU cache with the cache and usage-table initialized to `base`.
 
    This function takes an optional `:threshold` argument that defines the maximum number
    of elements in the cache before the LU semantics apply (default is 32)."
@@ -659,4 +659,3 @@
   {:pre [(map? base)]}
   (clojure.core.cache/seed (SoftCache. (ConcurrentHashMap.) (ConcurrentHashMap.) (ReferenceQueue.))
         base))
-

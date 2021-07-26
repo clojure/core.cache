@@ -1,8 +1,12 @@
-target
+.classpath
+.cpcache/
+.idea
 .lein*
+.lsp/sqlite.db
+.nrepl-port
+.project
+.settings
+/build.boot
 lib
 multi-lib
-.nrepl-port
-.idea
-.cpcache/
-/build.boot
+target
