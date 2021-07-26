@@ -606,7 +606,7 @@
   (clojure.core.cache/seed (FIFOCache. {} clojure.lang.PersistentQueue/EMPTY threshold) base))
 
 (defn lru-cache-factory
-  "Returns an LRU cache with the cache and usage-table initialied to `base` --
+  "Returns an LRU cache with the cache and usage-table initialized to `base` --
    each entry is initialized with the same usage value.
 
    This function takes an optional `:threshold` argument that defines the maximum number
