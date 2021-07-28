@@ -205,11 +205,8 @@
     (str cache \, \space (pr-str q))))
 
 (defn- build-leastness-queue
-  [base limit start-at]
-  (into (clojure.data.priority-map/priority-map)
-        (concat (take (- limit (count base)) (for [k (range (- limit) 0)] [k k]))
-                (for [[k _] base] [k start-at]))))
-
+  [base start-at]
+  (into (clojure.data.priority-map/priority-map) (for [[k _] base] [k start-at])))
 
 (defcache LRUCache [cache lru tick limit]
   CacheProtocol
@@ -249,7 +246,7 @@
       this))
   (seed [_ base]
     (LRUCache. base
-               (build-leastness-queue base limit 0)
+               (build-leastness-queue base 0)
                0
                limit))
   Object
@@ -332,7 +329,7 @@
             l (-> lu (dissoc min-key) (update-in [item] (fnil inc 0)))]
         (LUCache. c l limit))
       (LUCache. (assoc cache item result)  ;; no change case
-                (assoc lu item 0)
+                (update-in lu [item] (fnil inc 0))
                 limit)))
   (evict [this key]
     (if (contains? this key)
@@ -342,7 +339,7 @@
       this))
   (seed [_ base]
     (LUCache. base
-              (build-leastness-queue base limit 0)
+              (build-leastness-queue base 0)
               limit))
   Object
   (toString [_]

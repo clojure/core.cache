@@ -276,7 +276,7 @@
            {:a 1, :b 2, :c 3, :d 4} (-> C (assoc :c 3) (assoc :d 4) .cache)
            {:a 1, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4) (.hit :a) (assoc :e 5) .cache)
            {:b 2, :c 3, :d 4, :e 5} (-> C (assoc :c 3) (assoc :d 4)  (.hit :b) (.hit :c) (.hit :d) (assoc :e 5) .cache))))
-  (testing "regressions against LRU eviction before threshold met"
+  (testing "regressions against LU eviction before threshold met"
     (is (= (-> (clojure.core.cache/lu-cache-factory {} :threshold 2)
                (assoc :a 1)
                (assoc :b 2)
@@ -301,6 +301,13 @@
                (assoc :a 1)
                (assoc :b 2)
                (assoc :b 3)
+               .cache)))
+
+    (is (= {:c 3 :d 4}
+           (-> (clojure.core.cache/lu-cache-factory {:a 1 :b 2} :threshold 2)
+               (dissoc :a)
+               (assoc :c 3)
+               (assoc :d 4)
                .cache)))))
 
 ;; # LIRS
