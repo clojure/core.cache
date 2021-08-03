@@ -1,21 +1,17 @@
 ;; You can run clojure.core.cache tests with: clj -A:test:runner
 ;; You can also specify an alias to select which version of Clojure to test
-;; against: :1.6 :1.7 :1.8 :1.9 :1.10 :master
+;; against: :1.8 :1.9 :1.10 :master
 
 {:paths ["src/main/clojure"]
  :deps {org.clojure/data.priority-map {:mvn/version "1.0.0"}}
- :aliases {:test
-           {:extra-paths ["src/test/clojure"]
-            :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}}}
-           :1.6 {:override-deps {org.clojure/clojure {:mvn/version "1.6.0"}}}
-           :1.7 {:override-deps {org.clojure/clojure {:mvn/version "1.7.0"}}}
-           :1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
+ :aliases {:1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
            :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
-           :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
+           :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
            :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
-           :runner
-           {:extra-deps {com.cognitect/test-runner
-                         {:git/url "https://github.com/cognitect-labs/test-runner"
-                          :sha "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
+           :test
+           {:extra-paths ["src/test/clojure"]
+            :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}
+                         io.github.cognitect-labs/test-runner
+                         {:git/tag "v0.4.0" :git/sha "334f2e2"}}
             :main-opts ["-m" "cognitect.test-runner"
                         "-d" "src/test/clojure"]}}}
