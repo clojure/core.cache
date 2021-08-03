@@ -6,6 +6,7 @@
 .nrepl-port
 .project
 .settings
+.vscode
 /build.boot
 lib
 multi-lib
