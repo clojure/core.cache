@@ -1,7 +1,7 @@
 LRU cache
 ==========
 
-The least-recently-used cache is one that evicts items that are accessed least frequently once its threshold has been exceeded.
+The least-recently-used cache is one that evicts items that are accessed least recently once its threshold has been exceeded.
 
 > In simple terms, the LRU cache will remove the element in the cache that has not been accessed in the longest time.
 
@@ -13,11 +13,11 @@ General usage
 To create a core.cache `LRUCache` instance you should *always* use its associated constructor function `lru-cache-factory` with an optional `:threshold` parameter:
 
 ```clojure
-    (ns your.lib 
+    (ns your.lib
       (:require [clojure.core.cache :as cache]))
-	
+
     (def C (cache/lru-cache-factory {} :threshold 2))
-    
+
     (-> C (assoc :a 1) (assoc :b 2))
 	;=> {:a 1, :b 2}
 ```
@@ -34,11 +34,11 @@ At this point the cache has not yet crossed the set threshold of `2`, but if you
 At this point the operation of the LRU cache looks exactly the same at the FIFO cache.  However, the difference becomes apparent when a given cache item is "touched":
 
 ```clojure
-    (-> C (assoc :a 1) 
-          (assoc :b 2) 
+    (-> C (assoc :a 1)
+          (assoc :b 2)
           (.hit :a)       ;; ensure :a is used most recently
           (assoc :c 3))
-    
+
     ;=> {:a 1, :c 3}
 ```
 
@@ -67,5 +67,5 @@ There are a few reasons why you might want to use a LRU cache:
  * Tends to perform poorly when elements files are accessed occasionally but consistently while other elements are accessed very frequently for a short duration and never accessed again
  * It requires more historical data to operate
  * It requires a larger cache to increase efficiency
- 
+
 As always, you should measure your system's characteristics to determine the best eviction strategy for your purposes.
