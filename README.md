@@ -152,6 +152,8 @@ Developer Information
 Change Log
 ====================
 
+* next
+  * Update `data.priority-map` to 1.1.0
 * Release 1.0.217 on 2021-08-02
   * [CCACHE-63](http://clojure.atlassian.net/browse/CCACHE-63) Improve cache initialization for LU/LRU; fix LU miss logic when not full.
 * Release 1.0.207 on 2020-04-10
