@@ -10,9 +10,9 @@ Put in simpler terms, to create a cache instance composed of the seed data `{:a 
 ;; used right away
 
 (assoc C :c 42)
-;;=> {:b 2, :c 42}                                                                                   
+;;=> {:b 2, :c 42}
 
-;; used after 5 seconds                                              
+;; used after 5 seconds
 
 (assoc C :d 138)
 ;;=> {:d 138}

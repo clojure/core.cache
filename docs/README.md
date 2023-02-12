@@ -1,6 +1,8 @@
 core.cache
 ==========
 
+> Note: the documentation here is for the `clojure.core.cache` namespace. See also the documentation for the [`clojure.core.cache.wrapped` namespace](https://cljdoc.org/d/org.clojure/core.cache/CURRENT/api/clojure.core.cache.wrapped) on cljdoc.org.
+
 ## Table of Topics
 
 * Overview (this page)

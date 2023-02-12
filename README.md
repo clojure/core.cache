@@ -62,9 +62,26 @@ org.clojure/core.cache {:mvn/version "1.0.225"}
 Example Usage
 ========================================
 
+The [`clojure.core.cache` namespace](https://cljdoc.org/d/org.clojure/core.cache/CURRENT/api/clojure.core.cache)
+provides an API for immutable caches where
+it is expected that you would manage storage of these data structures.
+
+The [`clojure.core.cache.wrapped` namespace](https://cljdoc.org/d/org.clojure/core.cache/CURRENT/api/clojure.core.cache.wrapped)
+provides the same API but over
+immutable caches already wrapped in an atom, which is generally a more
+intuitive API for straightforward use cases. In particular, this namespace
+adds a `lookup-or-miss` function which encapsulates the `has?`/`hit`/`miss`
+logic for the underlying cache as well as edge cases such as `lookup`
+returning `nil` if a cache item expires on fetch (e.g., TTL), and guaranteeing
+the value computing function is only called at most once.
+
+The expectation is that you use _either_ `clojure.core.cache` _or_
+`clojure.core.cache.wrapped` and you do not try to mix them.
+
 ```clojure
     (require '[clojure.core.cache :as cache])
 
+    ;; C1 is an immutable cache:
     (def C1 (cache/fifo-cache-factory {:a 1, :b 2}))
 
     (def C1' (if (cache/has? C1 :c)
@@ -107,24 +124,28 @@ Example Usage
     ;=> 1
 
     ;; or use the wrapped API instead:
-    (require '[clojure.core.cache.wrapped :as c])
+    (require '[clojure.core.cache.wrapped :as w])
 
-    (def C3 (c/fifo-cache-factory {:a 1, :b 2}))
+    ;; in this case C3 is an atom containing a cache:
+    (def C3 (w/fifo-cache-factory {:a 1, :b 2}))
 
-    (c/through-cache C3 :d (constantly 13)) ; returns updated cache
+    ;; operations modify the atom and return the updated cache:
+    (w/through-cache C3 :d (constantly 13))
 
     ;=> {:a 1, :b 3, :d 13}
 
-    (c/evict C3 :b)
+    ;; modifies the atom and returns the updated cache:
+    (w/evict C3 :b)
 
     ;=> {:a 1, :d 13}
 
-    (c/lookup C3 :a) ; or (get @C3 :a)
+    ;; for some caches this is a mutating operation (e.g., TTL):
+    (w/lookup C3 :a) ; or (get @C3 :a)
 
     ;=> 1
 
     ;; unique to the wrapped API:
-    (c/lookup-or-miss C3 :b (constantly 42))
+    (w/lookup-or-miss C3 :b (constantly 42))
 
     ;=> 42
 

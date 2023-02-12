@@ -5,6 +5,7 @@
 .lein*
 .lsp/.cache
 .nrepl-port
+.portal/vs-code.edn
 .project
 .settings
 .vscode
