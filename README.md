@@ -144,8 +144,12 @@ The expectation is that you use _either_ `clojure.core.cache` _or_
 
     ;=> 1
 
-    ;; unique to the wrapped API:
+    ;; unique to the wrapped API, this combines through-cache and lookup
+    ;; to return the looked up value, possibly after calling the passed in
+    ;; function with the key to populate the cache if the key wasn't present:
     (w/lookup-or-miss C3 :b (constantly 42))
+    ;; calls (jdbc/get-by-id :storage my-key) in the event of a cache miss:
+    (w/lookup-or-miss C3 my-key (partial jdbc/get-by-id db-spec :storage))
 
     ;=> 42
 
