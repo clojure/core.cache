@@ -3,14 +3,14 @@
 ;; against: :1.8 :1.9 :1.10 :master
 
 {:paths ["src/main/clojure"]
- :deps {org.clojure/data.priority-map {:mvn/version "1.1.0"}}
+ :deps {org.clojure/data.priority-map {:mvn/version "1.2.0"}}
  :aliases {:1.8 {:override-deps {org.clojure/clojure {:mvn/version "1.8.0"}}}
            :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
            :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
            :master {:override-deps {org.clojure/clojure {:mvn/version "1.11.0-master-SNAPSHOT"}}}
            :test
            {:extra-paths ["src/test/clojure"]
-            :extra-deps {org.clojure/test.check {:mvn/version "1.0.0"}
+            :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
                          io.github.cognitect-labs/test-runner
                          {:git/tag "v0.4.0" :git/sha "334f2e2"}}
             :main-opts ["-m" "cognitect.test-runner"
