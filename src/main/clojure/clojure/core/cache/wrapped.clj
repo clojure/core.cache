@@ -40,7 +40,6 @@
   value (using value-fn, and optionally wrap-fn), update the cache for `e`
   and then perform the lookup again.
 
-  For any given invocation of lookup-or-miss, it is guaranteed that
   value-fn (and wrap-fn) will only be called (at most) once even in the
   case of retries, so there is no risk of cache stampede.
 
