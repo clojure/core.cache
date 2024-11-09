@@ -8,6 +8,7 @@
 
 (ns clojure.core.cache.wrapped-test
   (:require [clojure.core.cache.wrapped :as c]
+            [clojure.core.cache :as cache]
             [clojure.test :refer [deftest is]]))
 
 (deftest basic-wrapped-test
@@ -40,3 +41,27 @@
           (recur (+ 1 n)))))
     (println "ttl test completed" limit "calls in"
              (- (System/currentTimeMillis) start) "ms")))
+
+(deftest cache-stampede
+  (let [thread-count 100
+        cache-atom (-> {}
+                       (cache/ttl-cache-factory :ttl 120000)
+                       (cache/lu-cache-factory :threshold 100)
+                       (atom))
+        latch (java.util.concurrent.CountDownLatch. thread-count)
+        invocations-counter (atom 0)
+        values (atom [])]
+    (dotimes [_ thread-count]
+      (.start (Thread. (fn []
+                         (swap! values conj
+                                (c/lookup-or-miss cache-atom "my-key"
+                                                  (fn [_]
+                                                    (swap! invocations-counter inc)
+                                                    (Thread/sleep 3000)
+                                                    "some value")))
+                         (.countDown latch)))))
+
+    (.await latch)
+    (is (= 1 (deref invocations-counter)))
+    (doseq [v @values]
+      (is (= "some value" v)))))

@@ -173,6 +173,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 1.2.next in progress
+  * [CCACHE-65](http://clojure.atlassian.net/browse/CCACHE-65) Use `delay` in `lookup-or-miss` to avoid cache-stampede.
 * Release 1.1.234 on 2024-02-19
   * Update parent pom and `data.priority-map` versions
 * Release 1.0.225 on 2021-12-06

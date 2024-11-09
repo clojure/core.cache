@@ -1,0 +1,1 @@
+{:lint-as {clojure.core.cache/defcache clojure.core/defrecord}}

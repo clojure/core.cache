@@ -29,9 +29,9 @@
 
   Reads from the current version of the atom."
   ([cache-atom e]
-   (c/lookup @cache-atom e))
+   (force (c/lookup @cache-atom e)))
   ([cache-atom e not-found]
-   (c/lookup @cache-atom e not-found)))
+   (force (c/lookup @cache-atom e not-found))))
 
 (def ^{:private true} default-wrapper-fn #(%1 %2))
 
@@ -51,23 +51,23 @@
   ([cache-atom e wrap-fn value-fn]
    (let [d-new-value (delay (wrap-fn value-fn e))]
      (loop [n 0
-            v (c/lookup (swap! cache-atom
-                               c/through-cache
+            v (force (c/lookup (swap! cache-atom
+                                      c/through-cache
+                                      e
+                                      default-wrapper-fn
+                                      (fn [_] d-new-value))
                                e
-                               default-wrapper-fn
-                               (fn [_] @d-new-value))
-                        e
-                        ::expired)]
+                               ::expired))]
        (when (< n 10)
          (if (= ::expired v)
            (recur (inc n)
-                  (c/lookup (swap! cache-atom
-                                   c/through-cache
+                  (force (c/lookup (swap! cache-atom
+                                          c/through-cache
+                                          e
+                                          default-wrapper-fn
+                                          (fn [_] d-new-value))
                                    e
-                                   default-wrapper-fn
-                                   (fn [_] @d-new-value))
-                            e
-                            ::expired))
+                                   ::expired)))
            v))))))
 
 (defn has?
