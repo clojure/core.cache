@@ -7,7 +7,7 @@ core.cache is a Clojure contrib library providing the following features:
 
 * A `defcache` macro for hooking your `CacheProtocol` implementations into the Clojure associative data capabilities.
 
-* Implementations of some basic caching strategies
+* Implementations of some basic in-memory caching strategies
   - First-in-first-out (FIFOCache)
   - Least-recently-used (LRUCache)
   - Least-used (LUCache -- sometimes called Least Frequently Used)
@@ -19,9 +19,9 @@ core.cache is a Clojure contrib library providing the following features:
 
 * Factory functions for each existing cache type
 
-* Caches are generally immutable and should be used in conjunction with Clojure's state management, such as `atom`. SoftCache is the exception here, built on top of mutable Java collections, but it can be treated as an immutable cache as well.
+* Caches are generally in-memory and immutable and should be used in conjunction with Clojure's state management, such as `atom`. SoftCache is the exception here, an in-memory cache built on top of mutable Java collections, but it can be treated as an immutable cache as well.
 
-The `clojure.core.cache` namespace contains the immutable caches themselves.
+The `clojure.core.cache` namespace contains the immutable in-memory caches themselves.
 The `clojure.core.cache.wrapped` namespace contains the same API operating on caches wrapped in atoms, which is the "normal" use in the wild (introduced in 0.8.0).
 
 core.cache is based on an old library named Clache that has been thoroughly deprecated.
