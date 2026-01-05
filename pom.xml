@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.clojure</groupId>
     <artifactId>pom.contrib</artifactId>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
   </parent>
 
   <developers>
@@ -36,14 +36,14 @@
   </developers>
 
   <properties>
-    <clojure.version>1.9.0</clojure.version>
+    <clojure.version>1.11.4</clojure.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>data.priority-map</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.1</version>
     </dependency>
   </dependencies>
 </project>
