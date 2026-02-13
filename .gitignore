@@ -14,3 +14,4 @@ lib
 multi-lib
 target
 .calva/repl.calva-repl
+.calva/mcp-server/port
