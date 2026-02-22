@@ -33,7 +33,7 @@ Releases and Dependency Information
 
 This project follows the version scheme MAJOR.MINOR.COMMITS where MAJOR and MINOR provide some relative indication of the size of the change, but do not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names). COMMITS is an ever-increasing counter of commits since the beginning of this repository.
 
-Latest stable release: 1.1.234
+Latest stable release: 1.2.254
 
 * [All Released Versions](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 * [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.cache~~~)
@@ -41,19 +41,19 @@ Latest stable release: 1.1.234
 [CLI/`deps.edn`](https://clojure.org/reference/deps_edn) dependency information:
 
 ```clojure
-org.clojure/core.cache {:mvn/version "1.1.234"}
+org.clojure/core.cache {:mvn/version "1.2.254"}
 ```
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "1.1.234"]
+    [org.clojure/core.cache "1.2.254"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>1.1.234</version>
+      <version>1.2.254</version>
     </dependency>
 
 
@@ -173,7 +173,7 @@ Developer Information
 Change Log
 ====================
 
-* Release 1.2.next in progress
+* Release 1.2.254 on 2026-02-21
   * [CCACHE-67](http://clojure.atlassian.net/browse/CCACHE-67) Add `clojure.core.cache.wrapped/size` function to get the size of the cache without dereferencing the atom. (via [@dharrigan](https://github.com/dharrigan)).
   * [CCACHE-65](http://clojure.atlassian.net/browse/CCACHE-65) Use `delay` in `lookup-or-miss` to avoid cache-stampede.
 * Release 1.1.234 on 2024-02-19
