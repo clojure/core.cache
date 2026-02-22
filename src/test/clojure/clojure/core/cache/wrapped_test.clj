@@ -14,17 +14,25 @@
 (deftest basic-wrapped-test
   (let [cache (c/basic-cache-factory {})]
     (is (= nil (c/lookup cache :a)))
+    ;; the size of the cache is zero
+    (is (= 0 (c/size cache)))
     (is (= ::missing (c/lookup cache :a ::missing)))
     ;; mutating operation
     (is (= 42 (c/lookup-or-miss cache :a (constantly 42))))
     ;; cache now contains :a
     (is (= 42 (c/lookup cache :a)))
+    ;; and it now has a size of one
+    (is (= 1 (c/size cache)))
     ;; :a is present, does not call value-fn
     (is (= 42 (c/lookup-or-miss cache :a #(throw (ex-info "bad" {:key %})))))
     ;; cache still contains :a as 42
     (is (= 42 (c/lookup cache :a)))
+    ;; and it still has a size of one
+    (is (= 1 (c/size cache)))
     (c/evict cache :a)
     (is (= nil (c/lookup cache :a)))
+    ;; and the cache now has a size of zero
+    (is (= 0 (c/size cache)))
     (is (= ::missing (c/lookup cache :a ::missing)))))
 
 (deftest wrapped-ttl-test

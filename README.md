@@ -174,6 +174,7 @@ Change Log
 ====================
 
 * Release 1.2.next in progress
+  * [CCACHE-67](http://clojure.atlassian.net/browse/CCACHE-67) Add `clojure.core.cache.wrapped/size` function to get the size of the cache without dereferencing the atom. (via [@dharrigan](https://github.com/dharrigan)).
   * [CCACHE-65](http://clojure.atlassian.net/browse/CCACHE-65) Use `delay` in `lookup-or-miss` to avoid cache-stampede.
 * Release 1.1.234 on 2024-02-19
   * Update parent pom and `data.priority-map` versions

@@ -76,6 +76,21 @@
   [cache-atom e]
   (c/has? @cache-atom e))
 
+(defn size
+  "Obtain the approximate size/count of the wrapped cache.
+
+  The value returned is a point-in-time approximate count/size as the nature
+  of certain caches don't reflect their true size until a 'lookup-or-miss'
+  operation is invoked - such as the TTL cache.
+
+  Whilst it is an approximate value, the returned result can be useful for
+  metric tracking or decision making.
+
+  Returns an approximate count/size of the wrapped cache.
+  "
+  [cache-atom]
+  (count @cache-atom))
+
 (defn hit
   "Is meant to be called if the cache is determined to contain a value
   associated with `e`.
