@@ -85,17 +85,18 @@
    (let [d-new-value (d-lay #(wrap-fn value-fn e))
          hit-or-miss
          (fn []
-           (try
-             (r-force (c/lookup (swap! cache-atom
-                                       c/through-cache
-                                       e
-                                       default-wrapper-fn
-                                       (fn [_] d-new-value))
-                                e
-                                ::expired))
-             (catch Throwable t
-               (swap! cache-atom c/evict e)
-               (throw t))))]
+           (locking cache-atom ; I really do not like this... :(
+             (try
+               (r-force (c/lookup (swap! cache-atom
+                                         c/through-cache
+                                         e
+                                         default-wrapper-fn
+                                         (fn [_] d-new-value))
+                                  e
+                                  ::expired))
+               (catch Throwable t
+                 (swap! cache-atom c/evict e)
+                 (throw t)))))]
      (loop [n 0 v (hit-or-miss)]
        (when (< n 10)
          (if (= ::expired v)
