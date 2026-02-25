@@ -15,3 +15,4 @@ multi-lib
 target
 .calva/repl.calva-repl
 .calva/mcp-server/port
+.rebel_readline_history
