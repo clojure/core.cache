@@ -24,40 +24,6 @@
 
 (def ^{:private true} default-wrapper-fn #(%1 %2))
 
-;; Similar to clojure.lang.Delay, but will not memoize an exception and will
-;; instead retry.
-;;   fun - the function, never nil
-;;   available? - indicates a memoized value is available, volatile for visibility
-;;   value - the value (if available) - volatile for visibility
-(deftype RetryingDelay [fun ^:volatile-mutable available? ^:volatile-mutable value]
-  clojure.lang.IDeref
-  (deref [this]
-    ;; first check (safe with volatile flag)
-    (if available?
-      value
-      (locking fun
-        ;; second check (race condition with locking)
-        (if available?
-          value
-          ;; fun may throw - will retry on next deref
-          (let [v (fun)]
-            ;; this ordering is important - MUST set value before setting available?
-            ;; or you have a race with the first check above
-            (set! value v)
-            (set! available? true)
-            v)))))
-  clojure.lang.IPending
-  (isRealized [this]
-    available?))
-
-(defn- d-lay [fun]
-  (->RetryingDelay fun false nil))
-
-(defn- r-force [maybe-d-lay]
-  (if (instance? RetryingDelay maybe-d-lay)
-    (deref maybe-d-lay)
-    maybe-d-lay))
-
 (defn lookup
   "Retrieve the value associated with `e` if it exists, else `nil` in
   the 2-arg case.  Retrieve the value associated with `e` if it exists,
@@ -65,9 +31,9 @@
 
   Reads from the current version of the atom."
   ([cache-atom e]
-   (r-force (c/lookup @cache-atom e)))
+   (force (c/lookup @cache-atom e)))
   ([cache-atom e not-found]
-   (r-force (c/lookup @cache-atom e not-found))))
+   (force (c/lookup @cache-atom e not-found))))
 
 (defn lookup-or-miss
   "Retrieve the value associated with `e` if it exists, else compute the
@@ -82,25 +48,41 @@
   ([cache-atom e value-fn]
    (lookup-or-miss cache-atom e default-wrapper-fn value-fn))
   ([cache-atom e wrap-fn value-fn]
-   (let [d-new-value (d-lay #(wrap-fn value-fn e))
-         hit-or-miss
+   (let [my-delay (delay (wrap-fn value-fn e))
+         attempt
          (fn []
-           (locking cache-atom ; I really do not like this... :(
-             (try
-               (r-force (c/lookup (swap! cache-atom
-                                         c/through-cache
-                                         e
-                                         default-wrapper-fn
-                                         (fn [_] d-new-value))
-                                  e
-                                  ::expired))
-               (catch Throwable t
-                 (swap! cache-atom c/evict e)
-                 (throw t)))))]
-     (loop [n 0 v (hit-or-miss)]
+           (let [v (c/lookup (swap! cache-atom
+                                    c/through-cache
+                                    e
+                                    default-wrapper-fn
+                                    (fn [_] my-delay))
+                             e
+                             ::expired)]
+             (cond
+               ;; TTL expiration race — retry
+               (= ::expired v) ::expired
+               ;; not a delay — return directly
+               (not (delay? v)) v
+               :else
+               (try
+                 (force v)
+                 (catch Throwable t
+                   ;; only evict if the failed delay is still in the cache
+                   ;; (another thread may have already replaced it)
+                   (swap! cache-atom
+                          (fn [cache]
+                            (if (identical? v (c/lookup cache e))
+                              (c/evict cache e)
+                              cache)))
+                   ;; our own delay failed — rethrow
+                   (when (realized? my-delay)
+                     (throw t))
+                   ;; another thread's delay failed — retry
+                   ::retry)))))]
+     (loop [n 0 v (attempt)]
        (when (< n 10)
-         (if (= ::expired v)
-           (recur (inc n) (hit-or-miss))
+         (case v
+           (::expired ::retry) (recur (inc n) (attempt))
            v))))))
 
 (defn has?
