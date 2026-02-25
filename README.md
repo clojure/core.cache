@@ -33,7 +33,7 @@ Releases and Dependency Information
 
 This project follows the version scheme MAJOR.MINOR.COMMITS where MAJOR and MINOR provide some relative indication of the size of the change, but do not follow semantic versioning. In general, all changes endeavor to be non-breaking (by moving to new names rather than by breaking existing names). COMMITS is an ever-increasing counter of commits since the beginning of this repository.
 
-Latest stable release: 1.2.259
+Latest stable release: 1.2.263
 
 * [All Released Versions](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22core.cache%22)
 * [Development Snapshot Versions](https://oss.sonatype.org/index.html#nexus-search;gav~org.clojure~core.cache~~~)
@@ -41,19 +41,19 @@ Latest stable release: 1.2.259
 [CLI/`deps.edn`](https://clojure.org/reference/deps_edn) dependency information:
 
 ```clojure
-org.clojure/core.cache {:mvn/version "1.2.259"}
+org.clojure/core.cache {:mvn/version "1.2.263"}
 ```
 
 [Leiningen](https://github.com/technomancy/leiningen) dependency information:
 
-    [org.clojure/core.cache "1.2.259"]
+    [org.clojure/core.cache "1.2.263"]
 
 [Maven](http://maven.apache.org/) dependency information:
 
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>core.cache</artifactId>
-      <version>1.2.259</version>
+      <version>1.2.263</version>
     </dependency>
 
 
@@ -173,6 +173,8 @@ Developer Information
 Change Log
 ====================
 
+* Release 1.2.263 on 2026-02-25
+  * [CCACHE-65](http://clojure.atlassian.net/browse/CCACHE-65) again! This removes `locking` and reverts to regular `delay`/`force` but now has custom evict-on-exception logic. Credit to Claude Opus 4.6 (several iterations).
 * Release 1.2.259 on 2026-02-23
   * [CCACHE-65](http://clojure.atlassian.net/browse/CCACHE-65) again! Avoids caching exceptions but currently relies on `locking` to avoid an edge case race condition if the `value-fn` throws an exception under heavy load on `lookup-or-miss`. This is a temporary solution until we can implement a more robust solution that doesn't rely on `locking`.
 * Release 1.2.254 on 2026-02-21
