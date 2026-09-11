@@ -252,7 +252,15 @@
   (testing "TTL cache does not contain a value that was removed from underlying cache."
     (let [underlying-cache (lru-cache-factory {} :threshold 1)
           C (ttl-cache-factory underlying-cache :ttl 360000)]
-      (is (not (-> C (assoc :a 1) (assoc :b 2) (has? :a)))))))
+      (is (not (-> C (assoc :a 1) (assoc :b 2) (has? :a))))))
+  (testing "TTL cache propagates hits to the underlying cache's recency tracking."
+    (let [underlying-cache (lru-cache-factory {} :threshold 2)
+          C  (-> (ttl-cache-factory underlying-cache :ttl 360000)
+                 (assoc :a 1)
+                 (assoc :b 2))
+          C' (-> C (hit :a) (hit :a) (assoc :c 3))]
+      (is (has? C' :a)
+          ":a was hit twice and should not have been evicted in favor of :b"))))
 
 (deftest test-lu-cache-ilookup
   (testing "that the LUCache can lookup via keywords"
@@ -529,3 +537,13 @@ N non-resident HIR block
   (let [c (fifo-cache-factory {:a 1 :b 2} :threshold 2)]
     (is (= #{:a :c} (set (-> c (evict :b) (miss :c 42) (.q)))))
     (is (= #{:c :d} (set (-> c (evict :b) (miss :c 42) (miss :d 43) (.q)))))))
+
+(deftest propagation-to-composed-cache70
+  (testing "hits on a composed cache (TTL wrapping LRU) propagate to the wrapped cache's recency tracking"
+    (let [c-cache  (-> {:a 10 :b 20}
+                        (lru-cache-factory :threshold 3)
+                        (ttl-cache-factory :ttl 30000))
+          c-cache2 (miss c-cache :c 30)
+          c-cache3 (-> c-cache2 (hit :b) (hit :b) (hit :b))
+          c-cache4 (miss c-cache3 :d 40)]
+      (is (has? c-cache4 :b) ":b was hit 3 times and should not have been evicted in favor of :a or :c"))))

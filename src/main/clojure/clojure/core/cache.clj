@@ -39,6 +39,10 @@
    The contract is that said cache should return an instance of its
    own type."))
 
+(extend-protocol CacheProtocol
+  clojure.lang.IPersistentMap
+  (hit [this _] this))
+
 (def ^{:private true} default-wrapper-fn #(%1 %2))
 
 (defn through
@@ -281,7 +285,8 @@
                  t)
               ttl-ms))
          (contains? cache item)))
-  (hit [this item] this)
+  (hit [this item]
+    (TTLCacheQ. (hit cache item) ttl q gen ttl-ms))
   (miss [this item result]
     (let [now  (System/currentTimeMillis)
           [kill-old q'] (key-killer-q ttl q ttl-ms now)]
